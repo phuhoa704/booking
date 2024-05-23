@@ -2,6 +2,8 @@ import React from 'react'
 import { renderToPipeableStream } from 'react-dom/server'
 import App from './App'
 import { StaticRouter } from "react-router-dom/server";
+import { store } from "./redux/store";
+import { Provider } from "react-redux";
 
 /**
  * @param {string} url
@@ -11,9 +13,11 @@ import { StaticRouter } from "react-router-dom/server";
 export function render(url, ssrManifest, options) {
   return renderToPipeableStream(
     <React.StrictMode>
-      <StaticRouter location={url}>
-        <App />
-      </StaticRouter>
+      <Provider store={store}>
+        <StaticRouter location={url}>
+          <App />
+        </StaticRouter>
+      </Provider>
     </React.StrictMode>,
     options
   )

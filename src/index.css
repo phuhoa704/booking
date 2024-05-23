@@ -8,7 +8,7 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  /* color: rgba(255, 255, 255, 0.87); */
+  color: rgba(0, 0, 0, 0.87);
   background-color: #fff;
 
   font-synthesis: none;
@@ -16,4 +16,27 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+
+body::-webkit-scrollbar-track {
+  background: #F5F5F5;
+}
+
+body::-webkit-scrollbar-thumb {
+  @apply bg-primary;
+  /* background-image: -webkit-gradient(linear, 0 0, 0 100%,
+          color-stop(.5, rgba(255, 255, 255, .2)),
+          color-stop(.5, transparent), to(transparent)); */
+}
+
+::-webkit-scrollbar {
+  /* Customize the scrollbar width */
+  @apply w-1
+}
+::-webkit-scrollbar-track {
+  @apply bg-[#c9c8c3] ml-3
+}
+::-webkit-scrollbar-thumb {
+  /* Customize the scrollbar width */
+  @apply bg-primary rounded
 }
