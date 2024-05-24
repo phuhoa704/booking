@@ -7,8 +7,8 @@ import sv4 from '../../assets/services/service4.png';
 const Services = () => {
     const [data] = useState([
         { id: 1, title: 'Thuê xe 4 chỗ, 7 chỗ từ Sân bay Nội Bài đi Nội thành Hà Nội', img: sv1 },
-        { id: 2, title: 'Thuê xe du lịch: limousine, ghế ngồi, cabin, giường nằm tại Vexere', img: sv2 },
-        { id: 3, title: 'Thuê xe máy giá rẻ, chất lượng tại Vexere', img: sv3 },
+        { id: 2, title: 'Thuê xe du lịch: limousine, ghế ngồi, cabin, giường nằm tại Hagiangbusticket', img: sv2 },
+        { id: 3, title: 'Thuê xe máy giá rẻ, chất lượng tại Hagiangbusticket', img: sv3 },
         { id: 3, title: 'Xe buýt Hop On Hop Off ở Thành phố Hồ Chí Minh', img: sv4 }
     ])
     return (

@@ -15,7 +15,7 @@ const Evaluation = () => {
                 <div className="col-span-4">
                     <div className="grid grid-cols-2 gap-4">
                         <div className="col-span-1 flex flex-col">
-                            <p className="text-lg font-semibold text-center">Tải ngay ứng dụng Vexere để trải nghiệm tính năng này</p>
+                            <p className="text-lg font-semibold text-center">Tải ngay ứng dụng Hagiangbusticket để trải nghiệm tính năng này</p>
                             <div className="flex gap-6 justify-center">
                                 <img src={appstore} alt="" className="w-1/3" />
                                 <img src={chplay} alt="" className="w-1/3" />

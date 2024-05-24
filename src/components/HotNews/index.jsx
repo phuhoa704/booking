@@ -7,15 +7,15 @@ import hotnews5 from '../../assets/hotnews/hotnews5.jpg';
 
 const HotNews = () => {
     const [data] = useState([
-        { id: 1, title: 'Tận hưởng nhiều ưu đãi và các tính năng mới cùng Siêu ứng dụng Vexere', img: hotnews1 },
-        { id: 2, title: 'Vexere chính thức ra mắt dịch vụ đặt vé tàu hỏa', img: hotnews2 },
-        { id: 3, title: '“Bảo hiểm chuyến đi” chính thức ra mắt tại Vexere', img: hotnews3 },
+        { id: 1, title: 'Tận hưởng nhiều ưu đãi và các tính năng mới cùng Siêu ứng dụng Hagiangbusticket', img: hotnews1 },
+        { id: 2, title: 'Hagiangbusticket chính thức ra mắt dịch vụ đặt vé tàu hỏa', img: hotnews2 },
+        { id: 3, title: '“Bảo hiểm chuyến đi” chính thức ra mắt tại Hagiangbusticket', img: hotnews3 },
         { id: 3, title: 'Chủ động và an tâm hơn trong mọi hành trình với tính năng GPS định vị xe khách', img: hotnews4 },
-        { id: 3, title: 'Chương trình tích điểm đổi quà tại Vexere', img: hotnews5 },
+        { id: 3, title: 'Chương trình tích điểm đổi quà tại Hagiangbusticket', img: hotnews5 },
     ])
     return (
         <section className="my-4">
-            <p className="font-semibold text-2xl text-[#3d3d3b] py-2.5">Vexere có gì mới?</p>
+            <p className="font-semibold text-2xl text-[#3d3d3b] py-2.5">Hagiangbusticket có gì mới?</p>
             <div className="w-full overflow-x-auto scroll-horizontal pb-2">
                 <div className="flex gap-4 w-max">
                     {data.map(d => (

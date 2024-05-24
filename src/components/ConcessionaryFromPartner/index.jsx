@@ -5,13 +5,13 @@ import uudai3 from '../../assets/partner/uudai3.jpg';
 
 const ConcessionaryFromPartner = () => {
     const [data] = useState([
-        { id: 1, title: 'Giảm 10K khi thanh toán đơn hàng Vexere từ 100K tại ví ShopeePay', img: uudai1 },
-        { id: 2, title: 'Giảm đến 150K khi thanh toán dịch vụ Vexere tại ví VNPAY', img: uudai2 },
+        { id: 1, title: 'Giảm 10K khi thanh toán đơn hàng Hagiangbusticket từ 100K tại ví ShopeePay', img: uudai1 },
+        { id: 2, title: 'Giảm đến 150K khi thanh toán dịch vụ Hagiangbusticket tại ví VNPAY', img: uudai2 },
         { id: 3, title: 'Nhận ưu đãi vé xe 400K và hoàn đến 15% mỗi tháng khi mở thẻ và chi tiêu cùng thẻ tín dụng VPBank', img: uudai3 },
     ])
     return (
         <section className="my-4">
-            <p className="font-semibold text-2xl text-[#3d3d3b] py-2.5">Ưu đãi từ đối tác của Vexere</p>
+            <p className="font-semibold text-2xl text-[#3d3d3b] py-2.5">Ưu đãi từ đối tác của Hagiangbusticket</p>
             <div className="w-full overflow-x-auto scroll-horizontal pb-2">
                 <div className="flex gap-4 w-max">
                     {data.map(d => (

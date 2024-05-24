@@ -7,13 +7,13 @@ import partner4 from '../../assets/partners/partner4.jpg';
 const ForPartner = () => {
     const [data] = useState([
         { id: 1, title: 'Xe Hà Lan giảm ngay 50% nhân dịp khai trương tuyến xe chất lượng cao', img: partner1 },
-        { id: 2, title: 'Nhận ngay tiền thường khi giới thiệu Phần mềm Nhà xe Vexere', img: partner2 },
-        { id: 3, title: 'Vexere đồng hành cùng nhà xe Vie Limousine chuyển đổi số thành công', img: partner3 },
-        { id: 4, title: 'Vexere đồng hành cùng nhà xe An Anh Limousine chuyển đổi số thành công', img: partner4 }
+        { id: 2, title: 'Nhận ngay tiền thường khi giới thiệu Phần mềm Nhà xe Hagiangbusticket', img: partner2 },
+        { id: 3, title: 'Hagiangbusticket đồng hành cùng nhà xe Vie Limousine chuyển đổi số thành công', img: partner3 },
+        { id: 4, title: 'Hagiangbusticket đồng hành cùng nhà xe An Anh Limousine chuyển đổi số thành công', img: partner4 }
     ])
     return (
         <section className="my-4">
-            <p className="font-semibold text-2xl text-[#3d3d3b] py-2.5">Dành cho đối tác của Vexere</p>
+            <p className="font-semibold text-2xl text-[#3d3d3b] py-2.5">Dành cho đối tác của Hagiangbusticket</p>
             <div className="w-full overflow-x-auto scroll-horizontal pb-2">
                 <div className="flex gap-4 w-max">
                     {data.map(d => (

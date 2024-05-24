@@ -78,7 +78,7 @@ const Flatforms = () => {
                     </div>
                     <div>
                         <p className="text-black font-semibold">Nhiều ưu đãi</p>
-                        <p className="text-sm text-[#858585]">Hàng ngàn ưu đãi cực chất độc quyền tại Vexere.</p>
+                        <p className="text-sm text-[#858585]">Hàng ngàn ưu đãi cực chất độc quyền tại Hagiangbusticket.</p>
                     </div>
                 </div>
             </div>

@@ -6,10 +6,10 @@ import news4 from '../../assets/news/news4.png';
 
 const News = () => {
     const [data] = useState([
-        { id: 1, title: '[Phóng sự HTV9] Vexere và công cuộc cách mạng hoá ngành vận tải hành khách', img: news1 },
-        { id: 2, title: '[Phóng sự VTV9] Đặt dịch vụ xe khách nhanh chóng, tiện lợi, nhiều ưu đãi tại Vexere', img: news2 },
-        { id: 3, title: 'Bộ Thông tin - Truyền thông công nhận Vexere là Nền tảng số phục vụ người dân 2022', img: news3 },
-        { id: 4, title: 'Vexere - G8 Open Tour đồng hành cùng chương trình Tết Đong Đầy, Trao Yêu Thương 2023', img: news4 }
+        { id: 1, title: '[Phóng sự HTV9] Hagiangbusticket và công cuộc cách mạng hoá ngành vận tải hành khách', img: news1 },
+        { id: 2, title: '[Phóng sự VTV9] Đặt dịch vụ xe khách nhanh chóng, tiện lợi, nhiều ưu đãi tại Hagiangbusticket', img: news2 },
+        { id: 3, title: 'Bộ Thông tin - Truyền thông công nhận Hagiangbusticket là Nền tảng số phục vụ người dân 2022', img: news3 },
+        { id: 4, title: 'Hagiangbusticket - G8 Open Tour đồng hành cùng chương trình Tết Đong Đầy, Trao Yêu Thương 2023', img: news4 }
     ])
     return (
         <section className="my-4">

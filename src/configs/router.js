@@ -3,6 +3,7 @@ export const ROUTER = {
     TICKETINFO: '/ticketinfo',
     USER: '/user',
     RENT: '/rent',
+    SEARCH: '/search',
     //USER ROUTES
     INFO: 'info',
     MEMBER: 'member',

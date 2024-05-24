@@ -25,7 +25,7 @@ const TicketInfo = () => {
                 </form>
                 <div className="bg-[#dddddd] p-4">
                     <p className="font-semibold">Lưu ý</p>
-                    <p>Trường hợp bạn không thể hủy đơn hàng qua mạng hoặc muốn đổi chuyến khác vui lòng liên hệ Vexere qua số điện thoại 1900 888684.</p>
+                    <p>Trường hợp bạn không thể hủy đơn hàng qua mạng hoặc muốn đổi chuyến khác vui lòng liên hệ Hagiangbusticket qua số điện thoại 1900 888684.</p>
                 </div>
             </div>
         </div>

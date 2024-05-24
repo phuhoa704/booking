@@ -8,7 +8,7 @@ const CustomerCard = (Props) => {
                 <p className="text-sm font-semibold text-[#474747]">{position}</p>
             </div>
             <div className="col-span-3">
-                <p>{descr}</p>
+                <p className="text-sm">{descr}</p>
             </div>
         </div>
     );

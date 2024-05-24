@@ -70,7 +70,7 @@ const Home = () => {
         <>
             <section className='w-full bg-center bg-cover flex justify-center items-center relative' style={{ backgroundImage: `url(${background})`, height: `calc(90vh - 180px)` }}>
                 <div className="w-8/12 text-center">
-                    <p className='text-3xl text-white font-semibold my-4'>Vexere - Cam kết hoàn 150% nếu nhà xe không giữ chỗ</p>
+                    <p className='text-3xl text-white font-semibold my-4'>Hagiangbusticket - Cam kết hoàn 150% nếu nhà xe không giữ chỗ</p>
                     <div className="w-full bg-white rounded-lg shadow-secondary">
                         <div className="flex justify-center py-3">
                             <div className="flex pt-3 md:pt-0">
@@ -190,7 +190,7 @@ const Home = () => {
                 </div>
             </section>
             <div className="w-full py-2">
-                <div className="w-7/12 m-auto">
+                <div className="w-8/12 m-auto">
                     <PopularRoad />
                     <Concessionary />
                     <ConcessionaryFromPartner />
@@ -201,7 +201,7 @@ const Home = () => {
                     <ForPartner />
                     <News />
                     <section className='my-4'>
-                        <p className="font-semibold text-2xl text-[#3d3d3b] py-2.5">Khách hàng nói gì về Vexere</p>
+                        <p className="font-semibold text-2xl text-[#3d3d3b] py-2.5">Khách hàng nói gì về Hagiangbusticket</p>
                         <Swiper {...swiperParams} modules={[Pagination]} className="mySwiper">
                             {dataTestimonial.map(dt => (
                                 <SwiperSlide key={dt.id}>

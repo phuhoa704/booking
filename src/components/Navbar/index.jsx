@@ -1,4 +1,4 @@
-import logo from '../../assets/icon_vxr_full_2.svg';
+import logo from '../../assets/logo-01.svg';
 import uk from '../../assets/uk.png';
 import vietnam from '../../assets/vietnam.png';
 import { useState } from 'react';
@@ -52,10 +52,10 @@ const Navbar = () => {
             />
             <div className="w-full bg-primary py-4 px-3.5 flex justify-between items-center">
                 <div className="flex gap-4">
-                    <Link to="/">
-                        <img src={logo} alt="" />
+                    <Link to="/" style={{ backgroundImage: `url(${logo})`}} className='w-[148px] h-10 bg-center bg-no-repeat bg-contain'>
+                        {/* <img src={logo} alt="" /> */}
                     </Link>
-                    <a href="https://vexere.com/vi-VN/nhung-cau-hoi-thuong-gap.html" className='whitespace-pre text-sm font-bold text-white'>
+                    <a href="https://Hagiangbusticket.com/vi-VN/nhung-cau-hoi-thuong-gap.html" className='whitespace-pre text-sm font-bold text-white'>
                         Cam kết hoàn 150% nếu <br />
                         nhà xe không giữ vé
                     </a>
@@ -66,7 +66,7 @@ const Navbar = () => {
                             <Link to={ROUTER.TICKETINFO} className='text-white font-semibold text-sm'>Quản lý đơn hàng</Link>
                         </li>
                         <li>
-                            <a href="/" className='text-white font-semibold text-sm'>Mở bán vé trên Vexere</a>
+                            <a href="/" className='text-white font-semibold text-sm'>Mở bán vé trên Hagiangbusticket</a>
                         </li>
                         <li>
                             <a href="/" className='text-white font-semibold text-sm'>Trở thành đối tác</a>

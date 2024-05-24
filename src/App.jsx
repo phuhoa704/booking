@@ -13,6 +13,7 @@ import Preferential from "./views/User/Preferential";
 import Credits from "./views/User/Credits";
 import Evaluation from "./views/User/Evaluation";
 import Rent from "./views/Rent";
+import Search from "./views/Search";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path={ROUTER.EVALUATION} element={<Evaluation />}/>
         </Route>
         <Route path={ROUTER.RENT} element={<Rent />}/>
+        <Route path={ROUTER.SEARCH} element={<Search />} />
       </Routes>
       {/* <Footer /> */}
     </div>

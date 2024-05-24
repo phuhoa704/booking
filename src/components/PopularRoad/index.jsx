@@ -11,8 +11,11 @@ import third from '../../assets/popular/3.png';
 import fourth from '../../assets/popular/4.png';
 import fifth from '../../assets/popular/5.png';
 import sixth from '../../assets/popular/6.png';
+import { useNavigate } from "react-router-dom";
+import { ROUTER } from "../../configs/router";
 
 const PopularRoad = () => {
+    const navigate = useNavigate();
     const [data] = useState([
         { id: 1, name: 'Sài Gòn - Nha Trang', price: 'Từ 200.000đ', img: first, color: '#9E947C' },
         { id: 2, name: 'Hà Nội - Hải Phòng', price: 'Từ 100.000đ', img: third, color: '#585279' },
@@ -43,7 +46,7 @@ const PopularRoad = () => {
             <Swiper {...swiperParams} navigation={true} modules={[Navigation, Autoplay]} className="mySwiper">
                 {data.map(d => (
                     <SwiperSlide key={d.id}>
-                        <div className="w-11/12 shadow-primary rounded">
+                        <div className="w-11/12 shadow-primary rounded cursor-pointer" onClick={() => navigate(ROUTER.SEARCH)}>
                             <img className="w-full h-32 rounded-tl rounded-tr" src={d.img} alt="" />
                             <div className={"p-2.5 rounded-bl rounded-br"} style={{ backgroundColor: d.color }}>
                                 <p className="text-white font-semibold">{d.name}</p>

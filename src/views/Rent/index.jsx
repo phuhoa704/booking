@@ -159,20 +159,20 @@ const Rent = () => {
                 </div>
             </div>
             <div className="w-10/12 m-auto py-8">
-                <p className='text-2xl font-semibold text-center py-5'>Thuê xe du lịch cùng Vexere trong 3 bước</p>
+                <p className='text-2xl font-semibold text-center py-5'>Thuê xe du lịch cùng Hagiangbusticket trong 3 bước</p>
                 <div className="grid grid-cols-3 gap-4">
                     <div className="col-span-1 flex flex-col items-center gap-5">
                         <FaRoute className='text-primary text-6xl' />
                         <div className="text-center">
                             <p className='font-semibold'>Mô tả lịch trình</p>
-                            <p className='text-sm'>Mô tả chi tiết lịch trình theo từng gói dịch vụ sẽ giúp Vexere tính toán và báo giá cho bạn tốt hơn.</p>
+                            <p className='text-sm'>Mô tả chi tiết lịch trình theo từng gói dịch vụ sẽ giúp Hagiangbusticket tính toán và báo giá cho bạn tốt hơn.</p>
                         </div>
                     </div>
                     <div className="col-span-1 flex flex-col items-center gap-5">
                         <FaRegClipboard className='text-primary text-6xl' />
                         <div className="text-center">
                             <p className='font-semibold'>Nhận báo giá chi tiết</p>
-                            <p className='text-sm'>Giá thuê xe tại Vexere là giá trọn gói dịch vụ, bạn sẽ không phải trả thêm bất cứ chi phí gì.</p>
+                            <p className='text-sm'>Giá thuê xe tại Hagiangbusticket là giá trọn gói dịch vụ, bạn sẽ không phải trả thêm bất cứ chi phí gì.</p>
                         </div>
                     </div>
                     <div className="col-span-1 flex flex-col items-center gap-5">
@@ -199,7 +199,7 @@ const Rent = () => {
                 </div>
             </div>
             <div className="w-10/12 m-auto py-8">
-                <p className='text-2xl font-semibold text-center py-5'>Trải nghiệm của khách hàng thuê xe du lịch tại Vexere</p>
+                <p className='text-2xl font-semibold text-center py-5'>Trải nghiệm của khách hàng thuê xe du lịch tại Hagiangbusticket</p>
                 <div className="grid grid-cols-3 gap-4">
                     {experiences.map(e => (
                         <div className="col-span-1 border border-[#d9d9d9] rounded-lg p-4 text-sm flex flex-col justify-between" key={e.id}>
@@ -213,12 +213,12 @@ const Rent = () => {
                 </div>
             </div>
             <div className="w-full bg-[#001c38] py-8 text-center text-white">
-                <p className='text-xl font-semibold'>Công ty TNHH Thương mại Dịch vụ Vexere</p>
+                <p className='text-xl font-semibold'>Công ty TNHH Thương mại Dịch vụ Hagiangbusticket</p>
                 <p className='text-sm'>Miền Nam: Lầu 2, tòa nhà H3 Circo Hoàng Diệu, 384 Hoàng Diệu, Phường 6, Quận 4, TP.HCM</p>
                 <p className='text-sm'>Miền Bắc: Tầng 3, số 101 Láng Hạ, Đống Đa, Hà Nội</p>
                 <p className='text-sm'>Hotline: <a href="tel:1900545541" className='font-semibold'>1900 545541</a> (7h-21h, T2-CN)</p>
-                <p className='text-sm'>Facebook: <a href="https://www.facebook.com/vexerethuexe/" className='font-semibold'>Vexere Thuê xe</a></p>
-                <p className='text-sm'>Bản quyền ©2020 thuộc Vexere.com</p>
+                <p className='text-sm'>Facebook: <a href="https://www.facebook.com/Hagiangbusticketthuexe/" className='font-semibold'>Hagiangbusticket Thuê xe</a></p>
+                <p className='text-sm'>Bản quyền ©2020 thuộc Hagiangbusticket.com</p>
             </div>
         </div>
     );

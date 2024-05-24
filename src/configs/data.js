@@ -19,21 +19,23 @@ import vehicle1 from '../assets/rentvehicle/vehicle1.jpg';
 import vehicle2 from '../assets/rentvehicle/vehicle2.jpg';
 import vehicle3 from '../assets/rentvehicle/vehicle3.jpg';
 import vehicle4 from '../assets/rentvehicle/vehicle4.jpg';
+//
+import sample from '../assets/search/sample.jpeg';
 
 
 export const dataTestimonial = [
-    { id: 1, name: 'Anh Nguyễn Tuấn Quỳnh', position: 'CEO Saigon Books', descr: 'Lần trước tôi có việc gấp phải đi công tác, lên mạng tìm đặt vé xe thì tình cờ tìm thấy Vexere. Sau khi tham khảo, tôi quyết định đặt vé và thanh toán. Công nhận rất tiện và nhanh chóng. Chỉ một lúc sau, nhà xe liên hệ xác nhận vé ngay và thông báo thời gian xe dự kiến đón để tôi chuẩn bị. Tôi khá bất ngờ vì nhà xe có thông tin của mình nhanh đến vậy. Chuyến đi hôm đó rất tuyệt. Tôi nhất định sẽ tiếp tục ủng hộ Vexere.', img: tuanquynh },
-    { id: 2, name: 'Shark Phi', position: 'Giám đốc BSSC', descr: 'Các đối tác của Vexere đều là những hãng xe lớn, có uy tín nên tôi hoàn toàn yên tâm khi lựa chọn đặt vé cho bản thân và gia đình. Nhờ hiển thị rõ nhà xe và vị trí chỗ trống trên xe, tôi rất dễ dàng tìm chuyến mình muốn và chỗ mình muốn ngồi. Còn hình thức thanh toán có cả thẻ, ví, tại nhà xe và tốc độ thanh toán thì siêu nhanh, tiết kiệm cho tôi rất nhiều thời gian.', img: phi },
-    { id: 3, name: 'Chị Tú Ngô', position: 'YOLA Co-Founder', descr: 'Vexere là ứng dụng đầu tiên tôi nghĩ tới khi cần đặt vé xe. Vì không những Vexere có nhiều ưu đãi lớn mà còn có nhiều hãng xe chất lượng, tôi được tuỳ chọn chỗ yêu thích nên tôi rất hài lòng.', img: tungo },
-    { id: 4, name: 'Bữu Vi Vu', position: 'Travel tiktoker', descr: 'Tôi thường chọn đặt vé tại Vexere mỗi khi du lịch cùng người thân, bạn bè. Bên cạnh việc đặt vé nhanh chóng, thuận tiện, Vexere còn có các đợt Flashsale định kỳ lên đến 50%. Săn vé thành công vào các dịp này giúp tôi tiết kiệm đáng kể chi phí đi lại cho mỗi chuyến đi.', img: vivu },
+    { id: 1, name: 'Anh Nguyễn Tuấn Quỳnh', position: 'CEO Saigon Books', descr: 'Lần trước tôi có việc gấp phải đi công tác, lên mạng tìm đặt vé xe thì tình cờ tìm thấy Hagiangbusticket. Sau khi tham khảo, tôi quyết định đặt vé và thanh toán. Công nhận rất tiện và nhanh chóng. Chỉ một lúc sau, nhà xe liên hệ xác nhận vé ngay và thông báo thời gian xe dự kiến đón để tôi chuẩn bị. Tôi khá bất ngờ vì nhà xe có thông tin của mình nhanh đến vậy. Chuyến đi hôm đó rất tuyệt. Tôi nhất định sẽ tiếp tục ủng hộ Hagiangbusticket.', img: tuanquynh },
+    { id: 2, name: 'Shark Phi', position: 'Giám đốc BSSC', descr: 'Các đối tác của Hagiangbusticket đều là những hãng xe lớn, có uy tín nên tôi hoàn toàn yên tâm khi lựa chọn đặt vé cho bản thân và gia đình. Nhờ hiển thị rõ nhà xe và vị trí chỗ trống trên xe, tôi rất dễ dàng tìm chuyến mình muốn và chỗ mình muốn ngồi. Còn hình thức thanh toán có cả thẻ, ví, tại nhà xe và tốc độ thanh toán thì siêu nhanh, tiết kiệm cho tôi rất nhiều thời gian.', img: phi },
+    { id: 3, name: 'Chị Tú Ngô', position: 'YOLA Co-Founder', descr: 'Hagiangbusticket là ứng dụng đầu tiên tôi nghĩ tới khi cần đặt vé xe. Vì không những Hagiangbusticket có nhiều ưu đãi lớn mà còn có nhiều hãng xe chất lượng, tôi được tuỳ chọn chỗ yêu thích nên tôi rất hài lòng.', img: tungo },
+    { id: 4, name: 'Bữu Vi Vu', position: 'Travel tiktoker', descr: 'Tôi thường chọn đặt vé tại Hagiangbusticket mỗi khi du lịch cùng người thân, bạn bè. Bên cạnh việc đặt vé nhanh chóng, thuận tiện, Hagiangbusticket còn có các đợt Flashsale định kỳ lên đến 50%. Săn vé thành công vào các dịp này giúp tôi tiết kiệm đáng kể chi phí đi lại cho mỗi chuyến đi.', img: vivu },
 ]
 
 export const dataSocials = [
-    { id: 1, url: 'https://vnexpress.net/vexere-ho-tro-5-000-ve-tet-2021-cho-sinh-vien-4211920.html', img: vne },
+    { id: 1, url: 'https://vnexpress.net/Hagiangbusticket-ho-tro-5-000-ve-tet-2021-cho-sinh-vien-4211920.html', img: vne },
     { id: 2, url: 'https://www.youtube.com/watch?v=du_TpvYVNg0', img: vtv },
     { id: 3, url: 'http://cesti.gov.vn/chi-tiet/3403/doi-moi-sang-tao/khoi-nghiep-voi-he-thong-ban-ve-xe-truc-tuyen', img: cesti },
     { id: 4, url: 'https://dantri.com.vn/kinh-doanh/cong-ty-co-phan-ve-xe-re-goi-von-thanh-cong-tu-cac-nha-dau-tu-uy-tin-20191225100127703.htm', img: dantri },
-    { id: 5, url: 'https://tuoitre.vn/blog/quy-dau-tu-nhat-va-singapore-tiep-suc-vexerecom-767367.htm', img: tuoitre },
+    { id: 5, url: 'https://tuoitre.vn/blog/quy-dau-tu-nhat-va-singapore-tiep-suc-Hagiangbusticketcom-767367.htm', img: tuoitre },
     { id: 6, url: 'https://www.youtube.com/watch?v=qT30wzsFKGw', img: fbnc },
 ]
 
@@ -98,7 +100,7 @@ export const footerSuggestions = [
 
 export const footerSupport = [
     { id: 1, title: 'Hướng dẫn thanh toán' },
-    { id: 2, title: 'Quy chế Vexere.com' },
+    { id: 2, title: 'Quy chế Hagiangbusticket.com' },
     { id: 3, title: 'Chính sách bảo mật thông tin' },
     { id: 4, title: 'Chính sách bảo mật thanh toán' },
     { id: 5, title: 'Chính sách và quy trình giải quyết tranh chấp, khiếu nại' },
@@ -108,7 +110,7 @@ export const footerSupport = [
 
 export const footerAbout = [
     { id: 1, title: 'Phần mềm đại lý' },
-    { id: 1, title: 'Giới Thiệu Vexere.com' },
+    { id: 1, title: 'Giới Thiệu Hagiangbusticket.com' },
     { id: 1, title: 'Tuyển dụng' },
     { id: 1, title: 'Tin tức' },
     { id: 1, title: 'Liên hệ' },
@@ -132,13 +134,13 @@ export const vehicles = [
 export const experiences = [
     {
         id: 1,
-        content: 'Mình thuê 1 xe 29 chỗ trong 2 ngày cho công ty đi du lịch ở Vũng Tàu. Bạn nhân viên tư vấn rất nhiệt tình. Do sếp yêu cầu có hợp đồng mới chuyển tiền cọc nên giữa trưa nắng bạn cầm hợp đồng qua tận công ty mình cách mấy cây số lận.\r\nXe khá mới và sạch sẽ. Bác tài xế rất vui tính và lịch sự. Lần tới cần thuê xe đi đâu nhất định sẽ tiếp tục ủng hộ Vexere.',
+        content: 'Mình thuê 1 xe 29 chỗ trong 2 ngày cho công ty đi du lịch ở Vũng Tàu. Bạn nhân viên tư vấn rất nhiệt tình. Do sếp yêu cầu có hợp đồng mới chuyển tiền cọc nên giữa trưa nắng bạn cầm hợp đồng qua tận công ty mình cách mấy cây số lận.\r\nXe khá mới và sạch sẽ. Bác tài xế rất vui tính và lịch sự. Lần tới cần thuê xe đi đâu nhất định sẽ tiếp tục ủng hộ Hagiangbusticket.',
         author: 'Anh Thuận',
         to: 'Thuê xe du lịch đi Vũng Tàu'
     },
     {
         id: 2,
-        content: 'Mình có thuê 1 xe Limousine 9 chỗ từ Hà Nội đi Mộc Châu vào đúng dịp có giải chạy marathon nên giá hơi cao một chút.\r\nMình từ Sài Gòn ra nên nhiều thứ ko rành nhưng được các bạn nhân viên Vexere tư vấn rất cẩn thận. Hôm từ Mộc Châu về dù trước có hẹn đón 7r nhưng vì sợ trễ chuyến bay trưa nên mình đề nghị xe đón từ 5h sáng. Dù vậy không phải phụ thu thêm. Rất cảm ơn team nhé.',
+        content: 'Mình có thuê 1 xe Limousine 9 chỗ từ Hà Nội đi Mộc Châu vào đúng dịp có giải chạy marathon nên giá hơi cao một chút.\r\nMình từ Sài Gòn ra nên nhiều thứ ko rành nhưng được các bạn nhân viên Hagiangbusticket tư vấn rất cẩn thận. Hôm từ Mộc Châu về dù trước có hẹn đón 7r nhưng vì sợ trễ chuyến bay trưa nên mình đề nghị xe đón từ 5h sáng. Dù vậy không phải phụ thu thêm. Rất cảm ơn team nhé.',
         author: 'Chị Linh',
         to: 'Thuê xe du lịch đi Mộc Châu'
     },
@@ -148,4 +150,11 @@ export const experiences = [
         author: 'Anh Ngọc Anh',
         to: 'Thuê xe du lịch đi Nha Trang'
     },
+]
+
+export const searchResult = [
+    { id: 1, img: sample, title: 'Hải Phòng Travel (Đất Cảng)', descr: 'Limousine 11 chỗ', rating: '4.5 (556)', discount: 'Giảm 50%', pickupTime: '07:01', arrivalTime: '08:31', pickupPlace: 'Hà Nội', arrivalPlace: 'Hải Phòng', totalTime: '1h30m', minPrice: 'Từ 230.000đ', availableSeats: 9, note: 'KHÔNG CẦN THANH TOÁN TRƯỚC' },
+    { id: 2, img: sample, title: 'Hải Phòng Travel (Đất Cảng)', descr: 'Limousine 11 chỗ', rating: '4.5 (556)', discount: 'Giảm 50%', pickupTime: '07:01', arrivalTime: '08:31', pickupPlace: 'Hà Nội', arrivalPlace: 'Hải Phòng', totalTime: '1h30m', minPrice: 'Từ 230.000đ', availableSeats: 9, note: 'KHÔNG CẦN THANH TOÁN TRƯỚC' },
+    { id: 3, img: sample, title: 'Hải Phòng Travel (Đất Cảng)', descr: 'Limousine 11 chỗ', rating: '4.5 (556)', discount: 'Giảm 50%', pickupTime: '07:01', arrivalTime: '08:31', pickupPlace: 'Hà Nội', arrivalPlace: 'Hải Phòng', totalTime: '1h30m', minPrice: 'Từ 230.000đ', availableSeats: 9, note: 'KHÔNG CẦN THANH TOÁN TRƯỚC' },
+    { id: 4, img: sample, title: 'Hải Phòng Travel (Đất Cảng)', descr: 'Limousine 11 chỗ', rating: '4.5 (556)', discount: 'Giảm 50%', pickupTime: '07:01', arrivalTime: '08:31', pickupPlace: 'Hà Nội', arrivalPlace: 'Hải Phòng', totalTime: '1h30m', minPrice: 'Từ 230.000đ', availableSeats: 9, note: 'KHÔNG CẦN THANH TOÁN TRƯỚC' },
 ]

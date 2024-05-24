@@ -7,11 +7,11 @@ import uudai5 from '../../assets/concessionary/uudai5.png';
 
 const Concessionary = () => {
     const [data] = useState([
-        { id: 1, title: 'Ưu đãi khi đặt xe Hải Phòng Travel dành cho tất cả khách hàng khi đặt tại Vexere', img: uudai1 },
+        { id: 1, title: 'Ưu đãi khi đặt xe Hải Phòng Travel dành cho tất cả khách hàng khi đặt tại Hagiangbusticket', img: uudai1 },
         { id: 2, title: 'Nhận ưu đãi x2 khi đặt dịch vụ xe khách khứ hồi', img: uudai2 },
         { id: 3, title: 'Tổng hợp chương trình khuyến mãi trong tháng', img: uudai3 },
-        { id: 4, title: 'Giới thiệu bạn mới - Nhận quà khủng từ Vexere', img: uudai4 },
-        { id: 5, title: 'Ưu đãi bất ngờ khi đặt Vexere', img: uudai5 },
+        { id: 4, title: 'Giới thiệu bạn mới - Nhận quà khủng từ Hagiangbusticket', img: uudai4 },
+        { id: 5, title: 'Ưu đãi bất ngờ khi đặt Hagiangbusticket', img: uudai5 },
     ])
     return (
         <section className="my-4">

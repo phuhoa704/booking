@@ -85,7 +85,7 @@ const Footer = () => {
                         <img src={partner} alt="" />
                     </div>
                     <div className="col-span-1">
-                        <p className="font-semibold text-xl mb-1.5 mt-8">Tải ứng dụng Vexere</p>
+                        <p className="font-semibold text-xl mb-1.5 mt-8">Tải ứng dụng Hagiangbusticket</p>
                         <div className="flex flex-col gap-4 w-9/12">
                             <img src={qrcode} className="cursor-pointer" alt="" />
                             <div className="flex flex-col gap-2 5">
