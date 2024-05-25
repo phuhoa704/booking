@@ -7,7 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 // react select
 import Select from 'react-select';
 
-import { location, searchResult } from '../../configs/data';
+import { location, searchResult, filters } from '../../configs/data';
 import Collapse from '../../components/Collapse';
 import InputRange from 'react-input-range';
 import 'react-input-range/lib/css/index.css';
@@ -141,7 +141,7 @@ const Search = () => {
                                 <span className='text-primary underline font-semibold'>Xóa lọc</span>
                             </div>
                             <ul>
-                                <li>
+                                <li className='border-b border-[#d9d9d9] mb-3'>
                                     <Collapse
                                         title={'Giờ đi'}
                                         content={
@@ -156,7 +156,7 @@ const Search = () => {
                                         }
                                     />
                                 </li>
-                                <li>
+                                <li className='border-b border-[#d9d9d9] mb-3'>
                                     <Collapse
                                         title={'Nhà xe'}
                                         content={
@@ -201,7 +201,7 @@ const Search = () => {
                                         }
                                     />
                                 </li>
-                                <li>
+                                <li className='border-b border-[#d9d9d9] mb-3'>
                                     <Collapse
                                         title={'Giá vé'}
                                         content={
@@ -217,7 +217,7 @@ const Search = () => {
                                         }
                                     />
                                 </li>
-                                <li>
+                                <li className='border-b border-[#d9d9d9] mb-3'>
                                     <Collapse
                                         title={'Điểm đón'}
                                         content={
@@ -234,7 +234,7 @@ const Search = () => {
                                         }
                                     />
                                 </li>
-                                <li>
+                                <li className='border-b border-[#d9d9d9] mb-3'>
                                     <Collapse
                                         title={'Điểm trả'}
                                         content={
@@ -251,7 +251,7 @@ const Search = () => {
                                         }
                                     />
                                 </li>
-                                <li>
+                                <li className='border-b border-[#d9d9d9] mb-3'>
                                     <Collapse
                                         title={'Vị trí ghế'}
                                         content={
@@ -284,8 +284,23 @@ const Search = () => {
                         </div>
                     </div>
                     <div className="col-span-5">
+                        <div className="my-3 flex items-center overflow-x-auto w-full">
+                            <span>Lọc phổ biến</span>
+                            <div className="w-full overflow-x-auto scroll-horizontal pb-2">
+                                <div className="flex gap-4 w-max">
+                                    {filters.map(f => (
+                                        <div key={f.id} className="rounded w-32 h-16 bg-cover" style={{ backgroundImage: `url(${f.img})` }}></div>
+                                    ))}
+                                </div>
+                            </div>
+                            {/* <div className="overflow-x-auto flex gap-2.5 items-center w-max">
+                                {filters.map(f => (
+                                    <div key={f.id} className="rounded w-32 h-16 bg-cover" style={{ backgroundImage: `url(${f.img})` }}></div>
+                                ))}
+                            </div> */}
+                        </div>
                         {searchResult.map(sr => (
-                            <Card Props={sr}/>
+                            <Card Props={sr} />
                         ))}
                         <div className="w-full text-center">
                             <button className='bg-primary py-2.5 px-2 text-white text-sm rounded'>Xem thêm chuyến</button>

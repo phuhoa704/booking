@@ -27,7 +27,7 @@ const Collapse = ({ title, content }) => {
             </div>
             <div
                 style={{ maxHeight: contentHeight, transition: 'max-height 0.3s ease', overflow: 'hidden' }}
-                className={`accordion-content ${isOpen ? 'pt-3.5' : ''}`}
+                className={`accordion-content px-5 ${isOpen ? 'pt-3.5' : ''}`}
                 ref={contentRef}
             >
                 {content}

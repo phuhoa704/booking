@@ -137,7 +137,7 @@ const Home = () => {
                             </div>
                             <div className="col-span-1">
                                 <button className='bg-[#ffd333] py-2.5 text-center w-full rounded'>
-                                    <span className='font-semibold'>Tìm kiếm</span>
+                                    <span className='font-semibold' onClick={() => navigate(ROUTER.SEARCH)}>Tìm kiếm</span>
                                 </button>
                             </div>
                         </div>

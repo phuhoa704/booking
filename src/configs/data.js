@@ -21,6 +21,13 @@ import vehicle3 from '../assets/rentvehicle/vehicle3.jpg';
 import vehicle4 from '../assets/rentvehicle/vehicle4.jpg';
 //
 import sample from '../assets/search/sample.jpeg';
+//
+import filter1 from '../assets/filter/banner.png';
+import filter2 from '../assets/filter/banner2.jpg'
+import filter3 from '../assets/filter/banner3.jpg'
+import filter4 from '../assets/filter/banner4.jpg'
+import filter5 from '../assets/filter/banner5.jpg'
+import filter6 from '../assets/filter/banner6.jpg'
 
 
 export const dataTestimonial = [
@@ -157,4 +164,13 @@ export const searchResult = [
     { id: 2, img: sample, title: 'Hải Phòng Travel (Đất Cảng)', descr: 'Limousine 11 chỗ', rating: '4.5 (556)', discount: 'Giảm 50%', pickupTime: '07:01', arrivalTime: '08:31', pickupPlace: 'Hà Nội', arrivalPlace: 'Hải Phòng', totalTime: '1h30m', minPrice: 'Từ 230.000đ', availableSeats: 9, note: 'KHÔNG CẦN THANH TOÁN TRƯỚC' },
     { id: 3, img: sample, title: 'Hải Phòng Travel (Đất Cảng)', descr: 'Limousine 11 chỗ', rating: '4.5 (556)', discount: 'Giảm 50%', pickupTime: '07:01', arrivalTime: '08:31', pickupPlace: 'Hà Nội', arrivalPlace: 'Hải Phòng', totalTime: '1h30m', minPrice: 'Từ 230.000đ', availableSeats: 9, note: 'KHÔNG CẦN THANH TOÁN TRƯỚC' },
     { id: 4, img: sample, title: 'Hải Phòng Travel (Đất Cảng)', descr: 'Limousine 11 chỗ', rating: '4.5 (556)', discount: 'Giảm 50%', pickupTime: '07:01', arrivalTime: '08:31', pickupPlace: 'Hà Nội', arrivalPlace: 'Hải Phòng', totalTime: '1h30m', minPrice: 'Từ 230.000đ', availableSeats: 9, note: 'KHÔNG CẦN THANH TOÁN TRƯỚC' },
+]
+
+export const filters = [
+    { id: 1, img: filter1 },
+    { id: 2, img: filter2 },
+    { id: 3, img: filter3 },
+    { id: 4, img: filter4 },
+    { id: 5, img: filter5 },
+    { id: 6, img: filter6 },
 ]
