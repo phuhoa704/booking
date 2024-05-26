@@ -69,3 +69,14 @@ input[type=checkbox] {
     /* Opera */
     /* transform: scale(1.075); */
 }
+
+.title-box-1-line {
+    text-decoration: none;
+    line-height: 20px;
+    max-height: 20px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    --webkit-user-select: none;
+}

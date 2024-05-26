@@ -4,6 +4,7 @@ export const ROUTER = {
     USER: '/user',
     RENT: '/rent',
     SEARCH: '/search',
+    CONFIRMATION: '/confirmation',
     //USER ROUTES
     INFO: 'info',
     MEMBER: 'member',

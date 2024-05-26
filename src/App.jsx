@@ -14,6 +14,7 @@ import Credits from "./views/User/Credits";
 import Evaluation from "./views/User/Evaluation";
 import Rent from "./views/Rent";
 import Search from "./views/Search";
+import Confirmation from "./views/Confirmation";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         </Route>
         <Route path={ROUTER.RENT} element={<Rent />}/>
         <Route path={ROUTER.SEARCH} element={<Search />} />
+        <Route path={ROUTER.CONFIRMATION} element={<Confirmation />}/>
       </Routes>
       {/* <Footer /> */}
     </div>
