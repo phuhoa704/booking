@@ -137,7 +137,7 @@ const Card = (Props) => {
                                 ))}
                             </div>
                             <div className="my-5 grid grid-cols-2 px-10">
-                                <div className="col-span-1 flex flex-col gap-4">
+                                {/* <div className="col-span-1 flex flex-col gap-4">
                                     <p className="font-semibold">Chú thích</p>
                                     <div className="flex items-center">
                                         <svg width="32" height="40" viewBox="0 0 28 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -207,6 +207,10 @@ const Card = (Props) => {
                                             </div>
                                         ))}
                                     </div>
+                                </div> */}
+                                <div className="col-span-1"></div>
+                                <div className="col-span-1">
+                                    <input type="number" className="p-2.5 w-full bg-white border border-[#D9D9D9] rounded my-2" placeholder="Số lượng vé"/>
                                 </div>
                             </div>
                             <hr />

@@ -5,6 +5,8 @@ export const ROUTER = {
     RENT: '/rent',
     SEARCH: '/search',
     CONFIRMATION: '/confirmation',
+    PAYMENT: '/payment',
+    RESULT: '/result',
     //USER ROUTES
     INFO: 'info',
     MEMBER: 'member',

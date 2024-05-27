@@ -181,7 +181,7 @@ const Confirmation = () => {
             <div className="py-5 bg-white w-full">
                 <div className="w-2/3 m-auto">
                     <div className="flex justify-cennter gap-2.5">
-                        <button className="bg-primary text-white py-2.5 w-1/2 rounded-lg">Tiếp tục</button>
+                        <button className="bg-primary text-white py-2.5 w-1/2 rounded-lg" onClick={() => navigate(ROUTER.PAYMENT)}>Tiếp tục</button>
                         <p className="text-sm">Bạn sẽ sớm nhận được biển số xe, số điện thoại tài xế
                             và dễ dàng thay đổi điểm đón trả sau khi đặt.</p>
                     </div>

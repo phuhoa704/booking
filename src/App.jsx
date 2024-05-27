@@ -15,6 +15,8 @@ import Evaluation from "./views/User/Evaluation";
 import Rent from "./views/Rent";
 import Search from "./views/Search";
 import Confirmation from "./views/Confirmation";
+import Payment from "./views/Payment";
+import Result from "./views/Result";
 
 function App() {
   return (
@@ -34,6 +36,8 @@ function App() {
         <Route path={ROUTER.RENT} element={<Rent />}/>
         <Route path={ROUTER.SEARCH} element={<Search />} />
         <Route path={ROUTER.CONFIRMATION} element={<Confirmation />}/>
+        <Route path={ROUTER.PAYMENT} element={<Payment />}/>
+        <Route path={ROUTER.RESULT} element={<Result />}/>
       </Routes>
       {/* <Footer /> */}
     </div>
