@@ -9,11 +9,11 @@ const Member = () => {
         <div>
             <Breadscrum site='Thành viên thưởng' />
             <div className="grid grid-cols-5 gap-4">
-                <div className="col-span-1">
+                <div className="col-span-full xl:col-span-1">
                     <UserSidebar />
                 </div>
-                <div className="col-span-4">
-                    <div className="grid grid-cols-2 gap-4">
+                <div className="col-span-full xl:col-span-4">
+                    <div className="grid grid-cols-2 gap-4 pb-4 xl:pb-0">
                         <div className="col-span-1 flex flex-col">
                             <p className="text-lg font-semibold text-center">Tải ngay ứng dụng Hagiangbusticket để trải nghiệm tính năng này</p>
                             <div className="flex gap-6 justify-center">

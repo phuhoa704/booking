@@ -42,7 +42,7 @@ const PopularRoad = () => {
     };
     return (
         <section className="my-4">
-            <p className="font-semibold text-2xl text-[#3d3d3b] py-2.5">Tuyến đường phổ biến</p>
+            <p className="font-semibold text-base xl:text-2xl text-[#3d3d3b] py-2.5">Tuyến đường phổ biến</p>
             <Swiper {...swiperParams} navigation={true} modules={[Navigation, Autoplay]} className="mySwiper">
                 {data.map(d => (
                     <SwiperSlide key={d.id}>

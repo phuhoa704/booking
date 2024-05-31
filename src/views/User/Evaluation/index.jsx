@@ -9,10 +9,10 @@ const Evaluation = () => {
         <div>
             <Breadscrum site='Nhận xét chuyến đi' />
             <div className="grid grid-cols-5 gap-4">
-                <div className="col-span-1">
+                <div className="col-span-full xl:col-span-1">
                     <UserSidebar />
                 </div>
-                <div className="col-span-4">
+                <div className="col-span-full xl:col-span-4">
                     <div className="grid grid-cols-2 gap-4">
                         <div className="col-span-1 flex flex-col">
                             <p className="text-lg font-semibold text-center">Tải ngay ứng dụng Hagiangbusticket để trải nghiệm tính năng này</p>

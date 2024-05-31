@@ -13,10 +13,10 @@ const Info = () => {
         <div>
             <Breadscrum site='Thông tin cá nhân' />
             <div className="grid grid-cols-5 gap-4">
-                <div className="col-span-1">
+                <div className="col-span-full xl:col-span-1">
                     <UserSidebar />
                 </div>
-                <div className="col-span-4">
+                <div className="col-span-full xl:col-span-4">
                     <form className="text-sm w-full max-h-full" onSubmit={handleSubmit}>
                         <div className="flex flex-col my-3">
                             <label htmlFor="fullname">

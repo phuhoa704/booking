@@ -18,12 +18,12 @@ const LoginAndSignupForm = (Props) => {
                         <small>Số điện thoại</small>
                         <div className="grid grid-cols-3 gap-2.5">
                             <div className="col-span-1">
-                                <select className="w-full border border-[#d9d9d9] focus:border-primary bg-white p-2">
+                                <select className="w-full border border-[#d9d9d9] focus:border-primary bg-white p-4 xl:p-2">
                                     <option>(Viet Nam) +84</option>
                                 </select>
                             </div>
                             <div className="col-span-2">
-                                <input required className="bg-white w-full border border-[#d9d9d9] h-full px-2.5" />
+                                <input required className="bg-white w-full border border-[#d9d9d9] h-full px-2.5 py-2.5" />
                             </div>
                             <div className="col-span-3">
                                 <button type="submit" className="w-full border border-[#d9d9d9] text-base py-2.5 hover:text-primary hover:border-primary">Tiếp tục</button>

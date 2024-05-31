@@ -80,3 +80,7 @@ input[type=checkbox] {
     -webkit-line-clamp: 1;
     --webkit-user-select: none;
 }
+
+.dashed-left-border {
+    border-left: 1px dashed #F2F2F2;
+}

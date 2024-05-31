@@ -15,7 +15,7 @@ const Concessionary = () => {
     ])
     return (
         <section className="my-4">
-            <p className="font-semibold text-2xl text-[#3d3d3b] py-2.5">Ưu đãi nổi bật</p>
+            <p className="font-semibold text-base xl:text-2xl text-[#3d3d3b] py-2.5">Ưu đãi nổi bật</p>
             <div className="w-full overflow-x-auto scroll-horizontal pb-2">
                 <div className="flex gap-4 w-max">
                     {data.map(d => (

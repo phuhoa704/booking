@@ -31,7 +31,15 @@ export default {
       },
       textColor: {
         primary: '#2474E5'
-      }
+      },
+      height: {
+        largeContainer: 'calc(90vh - 180px)',
+        smallContainer: 'calc(85vh - 180px)',
+        rentPageContainer: 'calc(100vh - 72px)'
+      },
+      width: {
+        largeCardContainer: 'calc(100% - 150px)'
+      },
     },
   },
   plugins: [],

@@ -36,15 +36,15 @@ const Card = (Props) => {
     const [currentStep, setCurrentStep] = useState(1);
     return (
         <div className="w-full border border-[#e0e0e0] rounded-lg bg-white hover:shadow-lg p-4 mb-4">
-            <div className="flex gap-2.5">
-                <div className="w-[150px]">
+            <div className="flex gap-2.5 flex-col xl:flex-row">
+                <div className="w-full xl:w-[150px]">
                     <img src={img} alt="" className="object-center object-cover w-full h-full" />
                 </div>
-                <div className="" style={{ width: 'calc(100% - 150px)' }}>
+                <div className="w-full xl:w-largeCardContainer">
                     <div className="flex justify-between mb-1.5">
                         <div className="flex items-center gap-2.5">
                             <span className="font-semibold">{title}</span>
-                            <span className="bg-primary flex items-center text-sm px-1 rounded">
+                            <span className="bg-primary xl:flex items-center text-sm px-1 rounded hidden">
                                 <FaStar className="mr-2 text-white" />
                                 <span className="text-white">{rating}</span>
                             </span>
@@ -117,26 +117,28 @@ const Card = (Props) => {
                     {(currentStep === 1) && (
                         <>
                             <div className="grid grid-cols-2 my-3">
-                                <div className="col-span-1 flex justify-between rounded border border-primary bg-[#ECF4FD] p-2">
+                                <div className="col-span-full xl:col-span-1 flex justify-between rounded border border-primary bg-[#ECF4FD] p-2">
                                     <span className="text-sm">Quy định cần lưu ý khi đi xe</span>
                                     <span className="cursor-pointer text-sm text-primary font-semibold underline">Xem chi tiết</span>
                                 </div>
                             </div>
-                            <div className="my-3 flex items-center gap-4">
-                                {vouchers.map(v => (
-                                    <div className="flex-1 bg-[#e0f2ff] rounded p-2 flex justify-between items-center text-sm" key={v.id}>
-                                        <div className="flex flex-col">
-                                            <span className="text-primary">
-                                                Nhập mã &nbsp;
-                                                <span className="text-primary font-semibold">{v.name}</span>
-                                            </span>
-                                            <span className="title-box-1-line">{v.descr}</span>
+                            <div className="my-3 overflow-x-auto custom-scroll w-full">
+                                <div className="flex items-center gap-4">
+                                    {vouchers.map(v => (
+                                        <div className="flex-1 bg-[#e0f2ff] rounded p-2 flex justify-between items-center text-sm gap-4 xl:gap-0" key={v.id}>
+                                            <div className="flex flex-col">
+                                                <span className="text-primary">
+                                                    Nhập mã &nbsp;
+                                                    <span className="text-primary font-semibold">{v.name}</span>
+                                                </span>
+                                                <span className="title-box-1-line">{v.descr}</span>
+                                            </div>
+                                            <div><FaInfoCircle className="text-primary" /></div>
                                         </div>
-                                        <div><FaInfoCircle className="text-primary" /></div>
-                                    </div>
-                                ))}
+                                    ))}
+                                </div>
                             </div>
-                            <div className="my-5 grid grid-cols-2 px-10">
+                            <div className="my-5 grid grid-cols-2">
                                 {/* <div className="col-span-1 flex flex-col gap-4">
                                     <p className="font-semibold">Chú thích</p>
                                     <div className="flex items-center">
@@ -210,7 +212,7 @@ const Card = (Props) => {
                                 </div> */}
                                 <div className="col-span-1"></div>
                                 <div className="col-span-1">
-                                    <input type="number" className="p-2.5 w-full bg-white border border-[#D9D9D9] rounded my-2" placeholder="Số lượng vé"/>
+                                    <input type="number" className="p-2.5 w-full bg-white border border-[#D9D9D9] rounded my-2" placeholder="Số lượng vé" />
                                 </div>
                             </div>
                             <hr />
@@ -228,8 +230,8 @@ const Card = (Props) => {
                                     <span className="text-sm ml-2">An tâm được đón đúng nơi, trả đúng chỗ đã chọn và dễ dàng thay đổi khi cần.</span>
                                 </div>
                             </div>
-                            <div className="grid grid-cols-2 divide-x">
-                                <div className="col-span-1 p-3">
+                            <div className="grid grid-cols-2 divide-y xl:divide-x">
+                                <div className="col-span-full xl:col-span-1 p-3">
                                     <div className="bg-[#f7f7f7] w-full py-2 px-3">
                                         <p className="text-lg font-semibold">Điểm đón</p>
                                         <div className="flex justify-between">
@@ -263,7 +265,7 @@ const Card = (Props) => {
                                         </div>
                                     </div>
                                 </div>
-                                <div className="col-span-1 p-3">
+                                <div className="col-span-full xl:col-span-1 p-3">
                                     <div className="bg-[#f7f7f7] w-full py-2 px-3">
                                         <p className="text-lg font-semibold">Điểm trả</p>
                                         <div className="flex justify-between">

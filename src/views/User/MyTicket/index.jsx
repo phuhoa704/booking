@@ -13,11 +13,11 @@ const MyTicket = () => {
         <div>
             <Breadscrum site='Vé của tôi' />
             <div className="grid grid-cols-5 gap-4">
-                <div className="col-span-1">
+                <div className="col-span-full xl:col-span-1">
                     <UserSidebar />
                 </div>
-                <div className="col-span-4">
-                    <div className="flex items-end bg-white w-9/12 border border-[#d9d9d9] grid grid-cols-3 rounded">
+                <div className="col-span-full xl:col-span-4">
+                    <div className="items-end bg-white w-full xl:w-9/12 border border-[#d9d9d9] grid grid-cols-3 rounded">
                         {tableList?.map((t) => (
                             <div
                                 onClick={() => {

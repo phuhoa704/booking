@@ -35,29 +35,29 @@ const Search = () => {
         { id: 6, label: 'Giá giảm dần', value: '6' },
     ])
     return (
-        <div className="w-full bg-[#2020200A] py-6">
-            <div className="w-9/12 m-auto mb-6">
+        <div className="w-full bg-[#2020200A] py-6 pt-16 xl:pt-0">
+            <div className="w-full xl:w-9/12 m-auto mb-6 px-2 xl:px-0">
                 <div className="w-full bg-white rounded-lg shadow-secondary mb-4 border border-[#e0e0e0]">
                     <div className="flex justify-center py-3">
-                        <div className="flex pt-3 md:pt-0">
+                        <div className="flex pt-1.5 md:pt-0 xl:pt-3">
                             <div
                                 onClick={() => setActiveTab(1)}
-                                className={`px-3 py-2 mr-3 transition-all duration-300 ease-linear cursor-pointer text-xl font-semibold ${(activeTab === 1) ? 'text-primary border-primary border-b-2' : ''}`}
+                                className={`px-3 py-2 mr-3 transition-all duration-300 ease-linear cursor-pointer text-sm xl:text-xl font-semibold ${(activeTab === 1) ? 'text-primary border-primary border-b-2' : ''}`}
                             >
                                 <i className="fa-solid fa-bus"></i> Xe khách
                             </div>
                             <div
                                 onClick={() => navigate(ROUTER.RENT)}
-                                className={`px-3 py-2 mr-3 transition-all duration-300 ease-linear cursor-pointer text-xl font-semibold ${(activeTab === 2) ? 'text-primary border-primary border-b-2' : ''}`}
+                                className={`px-3 py-2 mr-3 transition-all duration-300 ease-linear cursor-pointer text-sm xl:text-xl font-semibold ${(activeTab === 2) ? 'text-primary border-primary border-b-2' : ''}`}
                             >
                                 <i className="fa-solid fa-taxi"></i> Thuê xe
                             </div>
                         </div>
                     </div>
                     <div className="grid grid-cols-5 gap-2.5 w-full relative border-t border-[#ddd] py-3.5 px-3 dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
-                        <div className="border border-[#e0e0e0] col-span-4">
+                        <div className="border border-[#d9d9d9] col-span-full xl:col-span-4">
                             <div className="grid grid-cols-4 h-full">
-                                <div className="col-span-1 relative">
+                                <div className="col-span-2 xl:col-span-1 relative">
                                     <Select
                                         options={location}
                                         classNames={{
@@ -69,7 +69,7 @@ const Search = () => {
                                         placeholder={<div><i className="fa-solid fa-location-arrow text-primary text-lg"></i> Nơi bắt đầu</div>}
                                         className='hidden-select-border'
                                     />
-                                    {/* <div
+                                    <div
                                         onClick={() => {
                                             let tempFirst = firstPlace;
                                             let tempSecond = secondPlace;
@@ -79,9 +79,9 @@ const Search = () => {
                                         className="absolute w-8 h-8 right-0 top-1/2 translate-x-[50%] translate-y-[-50%] cursor-pointer z-10 rounded-full bg-[#cfd1d0] flex items-center justify-center"
                                     >
                                         <i className="fa-solid fa-arrow-right-arrow-left"></i>
-                                    </div> */}
+                                    </div>
                                 </div>
-                                <div className="col-span-1 border-r border-[#e0e0e0]">
+                                <div className="col-span-2 xl:col-span-1 border-[#d9d9d9] xl:border-r">
                                     <Select
                                         options={location}
                                         classNames={{
@@ -93,23 +93,23 @@ const Search = () => {
                                         className='hidden-select-border'
                                     />
                                 </div>
-                                <div className="col-span-1 border-r border-[#e0e0e0]">
-                                    <DatePicker className="px-2.5 py-2.5 bg-white border border-[#e0e0e0] w-full h-full rounded border-none focus:border-none" placeholderText="Ngày đi" selected={startDate} onChange={(date) => setStartDate(date)} />
+                                <div className="col-span-2 xl:col-span-1 border-t border-r xl:border-t-0 border-[#d9d9d9] ">
+                                    <DatePicker className="px-2.5 py-2.5 bg-white border border-[#d9d9d9] w-full h-full rounded border-none focus:border-none" placeholderText="Ngày đi" selected={startDate} onChange={(date) => setStartDate(date)} />
                                 </div>
-                                <div className="col-span-1">
-                                    <DatePicker className="px-2.5 py-2.5 bg-white border border-[#e0e0e0] w-full h-full rounded border-none focus:border-none" placeholderText="Ngày về" selected={startDate} onChange={(date) => setStartDate(date)} />
+                                <div className="col-span-2 xl:col-span-1 border-t border-[#d9d9d9] xl:border-none">
+                                    <DatePicker className="px-2.5 py-2.5 bg-white border border-[#d9d9d9] w-full h-full rounded border-none focus:border-none" placeholderText="Ngày về" selected={startDate} onChange={(date) => setStartDate(date)} />
                                 </div>
                             </div>
                         </div>
-                        <div className="col-span-1">
+                        <div className="col-span-full xl:col-span-1">
                             <button className='bg-[#ffd333] py-2.5 text-center w-full rounded'>
-                                <span className='font-semibold'>Tìm kiếm</span>
+                                <span className='font-semibold' onClick={() => navigate(ROUTER.SEARCH)}>Tìm kiếm</span>
                             </button>
                         </div>
                     </div>
                 </div>
                 <div className="w-full grid grid-cols-7 gap-4">
-                    <div className="col-span-2">
+                    <div className="col-span-full xl:col-span-2">
                         <div className="w-full bg-white p-2.5 border border-[#e0e0e0] rounded-lg mb-4">
                             <p className='font-semibold mb-2.5'>Sắp xếp</p>
                             <ul>
@@ -283,7 +283,7 @@ const Search = () => {
                             </ul>
                         </div>
                     </div>
-                    <div className="col-span-5">
+                    <div className="col-span-full xl:col-span-5">
                         <div className="my-3 flex items-center overflow-x-auto w-full">
                             <span>Lọc phổ biến</span>
                             <div className="w-full overflow-x-auto scroll-horizontal pb-2">

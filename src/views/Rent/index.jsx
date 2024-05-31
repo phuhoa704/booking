@@ -32,12 +32,12 @@ const Rent = () => {
     }
     return (
         <div className='bg-white'>
-            <div className='w-full bg-center bg-cover' style={{ backgroundImage: `url(${bg})`, height: 'calc(100vh - 72px)' }}>
+            <div className='w-full bg-center bg-cover h-full xl:h-rentPageContainer' style={{ backgroundImage: `url(${bg})` }}>
                 <div className="w-full h-full relative">
                     <div className="absolute w-full h-full bg-[#202020] opacity-50"></div>
-                    <div className="flex items-center relative w-9/12 m-auto h-full gap-4">
-                        <div className='w-1/2'>
-                            <p className='text-white text-4xl font-bold my-5'>Dịch vụ thuê xe du lịch giá rẻ</p>
+                    <div className="flex flex-col xl:flex-row items-center relative w-full xl:w-9/12 m-auto h-full gap-4 pt-16 xl:pt-0 pb-4 xl:pb-0">
+                        <div className='w-full xl:w-1/2 px-4 xl:px-0'>
+                            <p className='text-white text-xl xl:text-4xl font-bold my-5'>Dịch vụ thuê xe du lịch giá rẻ</p>
                             <ul>
                                 <li className='text-white mb-3 font-semibold'>
                                     <i className="fa-solid fa-check mr-2"></i>
@@ -57,7 +57,7 @@ const Rent = () => {
                                 </li>
                             </ul>
                         </div>
-                        <div className='w-1/2'>
+                        <div className='w-full xl:w-1/2 px-4 xl:px-0'>
                             <div className="rounded-lg w-full bg-white shadow-lg px-3 py-4">
                                 <form onSubmit={handleSubmit}>
                                     <p className='text-lg font-semibold text-center my-4'>Đăng ký thuê xe</p>
@@ -159,23 +159,23 @@ const Rent = () => {
                 </div>
             </div>
             <div className="w-10/12 m-auto py-8">
-                <p className='text-2xl font-semibold text-center py-5'>Thuê xe du lịch cùng Hagiangbusticket trong 3 bước</p>
+                <p className='text-xl xl:text-2xl font-semibold text-center py-5'>Thuê xe du lịch cùng Hagiangbusticket trong 3 bước</p>
                 <div className="grid grid-cols-3 gap-4">
-                    <div className="col-span-1 flex flex-col items-center gap-5">
+                    <div className="col-span-full xl:col-span-1 flex flex-col items-center gap-5">
                         <FaRoute className='text-primary text-6xl' />
                         <div className="text-center">
                             <p className='font-semibold'>Mô tả lịch trình</p>
                             <p className='text-sm'>Mô tả chi tiết lịch trình theo từng gói dịch vụ sẽ giúp Hagiangbusticket tính toán và báo giá cho bạn tốt hơn.</p>
                         </div>
                     </div>
-                    <div className="col-span-1 flex flex-col items-center gap-5">
+                    <div className="col-span-full xl:col-span-1 flex flex-col items-center gap-5">
                         <FaRegClipboard className='text-primary text-6xl' />
                         <div className="text-center">
                             <p className='font-semibold'>Nhận báo giá chi tiết</p>
                             <p className='text-sm'>Giá thuê xe tại Hagiangbusticket là giá trọn gói dịch vụ, bạn sẽ không phải trả thêm bất cứ chi phí gì.</p>
                         </div>
                     </div>
-                    <div className="col-span-1 flex flex-col items-center gap-5">
+                    <div className="col-span-full xl:col-span-1 flex flex-col items-center gap-5">
                         <FaHandshake className='text-primary text-6xl' />
                         <div className="text-center">
                             <p className='font-semibold'>Xác nhận thuê xe</p>
@@ -186,11 +186,11 @@ const Rent = () => {
             </div>
             <div className="w-full bg-[#2020200A]">
                 <div className="w-10/12 m-auto py-8">
-                    <p className='text-2xl font-semibold text-center py-5'>Dòng xe cho thuê đa dạng</p>
+                    <p className='text-xl xl:text-2xl font-semibold text-center py-5'>Dòng xe cho thuê đa dạng</p>
                     <div className="grid grid-cols-4 gap-4">
                         {vehicles.map(v => (
-                            <div className="col-span-1 text-center" key={v.id}>
-                                <img src={v.img} alt="" />
+                            <div className="col-span-full xl:col-span-1 text-center" key={v.id}>
+                                <img src={v.img} alt="" className='shadow-lg rounded'/>
                                 <p className='font-semibold py-3'>{v.name}</p>
                                 <p className='text-sm'>{v.descr}</p>
                             </div>
@@ -199,10 +199,10 @@ const Rent = () => {
                 </div>
             </div>
             <div className="w-10/12 m-auto py-8">
-                <p className='text-2xl font-semibold text-center py-5'>Trải nghiệm của khách hàng thuê xe du lịch tại Hagiangbusticket</p>
+                <p className='text-xl xl:text-2xl font-semibold text-center py-5'>Trải nghiệm của khách hàng thuê xe du lịch tại Hagiangbusticket</p>
                 <div className="grid grid-cols-3 gap-4">
                     {experiences.map(e => (
-                        <div className="col-span-1 border border-[#d9d9d9] rounded-lg p-4 text-sm flex flex-col justify-between" key={e.id}>
+                        <div className="col-span-full xl:col-span-1 border border-[#d9d9d9] rounded-lg p-4 text-sm flex flex-col justify-between" key={e.id}>
                             <div className="whitespace-pre-line" dangerouslySetInnerHTML={{ __html: e.content }}></div>
                             <div>
                                 <p className='font-semibold text-lg'>{e.author}</p>

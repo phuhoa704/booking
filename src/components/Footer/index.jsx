@@ -15,7 +15,7 @@ const Footer = () => {
                     {footerSuggestions.map(fs => {
                         if (fs.id === 2 || fs.id === 3) {
                             return (
-                                <div className="col-span-2" key={fs.id}>
+                                <div className="col-span-full xl:col-span-2" key={fs.id}>
                                     <p className="font-semibold text-xl my-1.5">{fs.title}</p>
                                     <div className="grid grid-cols-1 gap-2.5">
                                         {fs.items.map(fsi => (
@@ -27,11 +27,11 @@ const Footer = () => {
                         }
                         if (fs.id === 5) {
                             return (
-                                <div className="col-span-4" key={fs.id}>
+                                <div className="col-span-full xl:col-span-4" key={fs.id}>
                                     <p className="font-semibold text-xl my-1.5">{fs.title}</p>
                                     <div className="grid grid-cols-4 gap-2.5">
                                         {fs.items.map(fsi => (
-                                            <div className="col-span-1 font-semibold text-sm cursor-pointer" key={fsi.id}>{fsi.title}</div>
+                                            <div className="col-span-2 xl:col-span-1 font-semibold text-sm cursor-pointer" key={fsi.id}>{fsi.title}</div>
                                         ))}
                                     </div>
                                 </div>
@@ -39,7 +39,7 @@ const Footer = () => {
                         }
                         if (fs.id !== 5 && fs.id !== 2 && fs.id !== 3) {
                             return (
-                                <div className="col-span-1" key={fs.id}>
+                                <div className="col-span-full xl:col-span-1" key={fs.id}>
                                     <p className="font-semibold text-xl my-1.5">{fs.title}</p>
                                     <div className="grid grid-cols-1 gap-2.5">
                                         {fs.items.map(fsi => (
@@ -52,7 +52,7 @@ const Footer = () => {
                     })}
                 </div>
                 <div className="grid grid-cols-4 gap-4 mt-6">
-                    <div className="col-span-1">
+                    <div className="col-span-full xl:col-span-1">
                         <p className="font-semibold text-xl my-1.5">Hỗ trợ</p>
                         <div className="grid grid-cols-1 gap-2 5">
                             {footerSupport.map(fs => (
@@ -60,7 +60,7 @@ const Footer = () => {
                             ))}
                         </div>
                     </div>
-                    <div className="col-span-1">
+                    <div className="col-span-full xl:col-span-1">
                         <p className="font-semibold text-xl my-1.5">Về chúng tôi</p>
                         <div className="grid grid-cols-1 gap-2 5">
                             {footerAbout.map(fs => (
@@ -80,11 +80,11 @@ const Footer = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-span-1">
+                    <div className="col-span-2 xl:col-span-1">
                         <p className="font-semibold text-xl mb-1.5 mt-8">Đối tác thanh toán</p>
                         <img src={partner} alt="" />
                     </div>
-                    <div className="col-span-1">
+                    <div className="col-span-2 xl:col-span-1">
                         <p className="font-semibold text-xl mb-1.5 mt-8">Tải ứng dụng Hagiangbusticket</p>
                         <div className="flex flex-col gap-4 w-9/12">
                             <img src={qrcode} className="cursor-pointer" alt="" />

@@ -21,17 +21,18 @@ const Navbar = () => {
     const [showProfileUpdation, setShowProfileUpdation] = useState(false);
     const [dropdown, setDropdown] = useState(false);
     const [state, setState] = useState('login');
+    const [showNavbar, setShowNavbar] = useState(false);
     //
-    const { user } = useSelector(state => state.auth);  
+    const { user } = useSelector(state => state.auth);
     //
     const [userDropdown] = useState([
-        {id: 1, name: "Thông tin tài khoản", icon: <i className="fa-regular fa-user"></i>, onClick: () => navigate(`${ROUTER.USER}/${ROUTER.INFO}`)},
-        {id: 2, name: "Thành viên thường", icon: <i className="fa-solid fa-tags"></i>, onClick: () => navigate(`${ROUTER.USER}/${ROUTER.MEMBER}`) },
-        {id: 3, name: "Vé của tôi", icon: <i className="fa-solid fa-ticket"></i>, onClick: () => navigate(`${ROUTER.USER}/${ROUTER.MYTICKET}`) },
-        {id: 4, name: "Ưu đãi", icon: <i className="fa-solid fa-gift"></i>, onClick: () => navigate(`${ROUTER.USER}/${ROUTER.PREFERENTIAL}`) },
-        {id: 5, name: "Quản lý thẻ", icon: <i className="fa-solid fa-credit-card"></i>, onClick: () => navigate(`${ROUTER.USER}/${ROUTER.CREDITS}`) },
-        {id: 6, name: "Nhận xét chuyến đi", icon: <i className="fa-solid fa-square-pen"></i>, onClick: () => navigate(`${ROUTER.USER}/${ROUTER.EVALUATION}`) },
-        {id: 7, name: "Đăng xuất", icon: <i className="fa-solid fa-right-from-bracket"></i>, onClick: () => dispatch(resetUser()) },
+        { id: 1, name: "Thông tin tài khoản", icon: <i className="fa-regular fa-user"></i>, onClick: () => navigate(`${ROUTER.USER}/${ROUTER.INFO}`) },
+        { id: 2, name: "Thành viên thường", icon: <i className="fa-solid fa-tags"></i>, onClick: () => navigate(`${ROUTER.USER}/${ROUTER.MEMBER}`) },
+        { id: 3, name: "Vé của tôi", icon: <i className="fa-solid fa-ticket"></i>, onClick: () => navigate(`${ROUTER.USER}/${ROUTER.MYTICKET}`) },
+        { id: 4, name: "Ưu đãi", icon: <i className="fa-solid fa-gift"></i>, onClick: () => navigate(`${ROUTER.USER}/${ROUTER.PREFERENTIAL}`) },
+        { id: 5, name: "Quản lý thẻ", icon: <i className="fa-solid fa-credit-card"></i>, onClick: () => navigate(`${ROUTER.USER}/${ROUTER.CREDITS}`) },
+        { id: 6, name: "Nhận xét chuyến đi", icon: <i className="fa-solid fa-square-pen"></i>, onClick: () => navigate(`${ROUTER.USER}/${ROUTER.EVALUATION}`) },
+        { id: 7, name: "Đăng xuất", icon: <i className="fa-solid fa-right-from-bracket"></i>, onClick: () => dispatch(resetUser()) },
     ])
     return (
         <>
@@ -43,25 +44,25 @@ const Navbar = () => {
             <Modal
                 handleShow={setModalVerify}
                 showStatus={modalVerify}
-                outlet={<Verification handleShow={setModalVerify} handleShowProfileUpdation={setShowProfileUpdation} state={state}/>}
+                outlet={<Verification handleShow={setModalVerify} handleShowProfileUpdation={setShowProfileUpdation} state={state} />}
             />
             <Modal
                 handleShow={setShowProfileUpdation}
                 showStatus={showProfileUpdation}
                 outlet={<ProfileUpdation />}
             />
-            <div className="w-full bg-primary py-4 px-3.5 flex justify-between items-center">
+            <div className="w-full bg-transparent xl:bg-primary absolute xl:relative z-10 py-4 px-3.5 flex justify-between items-center">
                 <div className="flex gap-4">
-                    <Link to="/" style={{ backgroundImage: `url(${logo})`}} className='w-[148px] h-10 bg-center bg-no-repeat bg-contain'>
+                    <Link to="/" style={{ backgroundImage: `url(${logo})` }} className='w-[148px] h-10 bg-center bg-no-repeat bg-contain'>
                         {/* <img src={logo} alt="" /> */}
                     </Link>
-                    <a href="https://Hagiangbusticket.com/vi-VN/nhung-cau-hoi-thuong-gap.html" className='whitespace-pre text-sm font-bold text-white'>
+                    <a href="https://Hagiangbusticket.com/vi-VN/nhung-cau-hoi-thuong-gap.html" className='whitespace-pre text-sm font-bold text-white hidden xl:block'>
                         Cam kết hoàn 150% nếu <br />
                         nhà xe không giữ vé
                     </a>
                 </div>
                 <div className="flex gap-6">
-                    <ul className='flex items-center gap-4'>
+                    <ul className='hidden xl:flex items-center gap-4'>
                         <li>
                             <Link to={ROUTER.TICKETINFO} className='text-white font-semibold text-sm'>Quản lý đơn hàng</Link>
                         </li>
@@ -84,7 +85,7 @@ const Navbar = () => {
                     >
                         <img src={(lang === 'vi') ? uk : vietnam} alt='' className='w-7 h-5 object-cover border border-white rounded' />
                     </button>
-                    <div className="relative">
+                    <div className="relative hidden xl:block">
                         <button className='rounded bg-white text-black font-semibold p-1.5 text-sm' onClick={() => setShowHotline(!showHotline)}>
                             <i className="fa-solid fa-phone mr-1.5"></i>
                             Hotline 24/7
@@ -103,7 +104,7 @@ const Navbar = () => {
                     {(Object.keys(user).length > 0) ? (
                         <div class="relative w-8 h-8 bg-gray-100 rounded-full cursor-pointer" onClick={() => setDropdown(!dropdown)}>
                             <svg class="w-8 h-8 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"></path></svg>
-                            <div className="absolute bottom-0 w-44 z-[9999] bg-white translate-x-[-135px] translate-y-[240px] rounded shadow-lg p-2" style={{ display: dropdown ? 'block' : 'none' }}>
+                            <div className="absolute bottom-0 w-44 z-20 bg-white translate-x-[-90px] xl:translate-x-[-135px] translate-y-[240px] rounded shadow-lg p-2" style={{ display: dropdown ? 'block' : 'none' }}>
                                 <ul className='text-sm'>
                                     {userDropdown.map(u => (
                                         <li key={u.id} className='my-2.5 hover:text-primary' onClick={u.onClick}>{u.icon} {u.name}</li>
@@ -116,7 +117,15 @@ const Navbar = () => {
                             Đăng nhập
                         </button>
                     )}
+                    <button className='rounded bg-white text-blck font-semibold py-1.5 px-2.5 text-sm' onClick={() => setShowNavbar(!showNavbar)}>
+                        <i className="fa-solid fa-align-justify"></i>
+                    </button>
                 </div>
+            </div>
+            <div className={`absolute z-10 left-0 flex-col top-20 gap-4 ${showNavbar ? 'flex' : 'hidden'} bg-white w-full py-2 px-4 shadow-lg rounded`}>
+                <Link to={ROUTER.TICKETINFO} className='font-semibold text-sm'>Quản lý đơn hàng</Link>
+                <a href="/" className='font-semibold text-sm'>Mở bán vé trên Hagiangbusticket</a>
+                <a href="/" className='font-semibold text-sm'>Trở thành đối tác</a>
             </div>
         </>
     );

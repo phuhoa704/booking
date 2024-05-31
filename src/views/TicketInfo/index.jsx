@@ -3,8 +3,8 @@ const TicketInfo = () => {
         e.preventDefault();
     }
     return (
-        <div className="flex justify-center bg-[#f2f2f2]" style={{ height: 'calc(100vh - 72px)'}}>
-            <div className="pt-10 px-2.5 w-2/5">
+        <div className="flex justify-center bg-[#f2f2f2] h-full xl:h-rentPageContainer pt-16 xl:pt-0">
+            <div className="pt-10 px-2.5 w-10/12 xl:w-2/5">
                 <p className="text-[#484848] font-bold">Nhập thông tin đơn hàng</p>
                 <form onSubmit={handleSubmit}>
                     <div className="flex flex-col my-3">

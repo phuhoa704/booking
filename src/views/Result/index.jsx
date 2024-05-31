@@ -8,8 +8,8 @@ import { useLocation } from "react-router-dom";
 const Result = () => {
     const { state } = useLocation();
     return (
-        <div className="bg-[#F2F2F2] w-full h-screen">
-            <div className="w-1/2 m-auto py-5">
+        <div className="bg-[#F2F2F2] w-full h-screen pt-16 xl:pt-0">
+            <div className="w-full xl:w-1/2 m-auto py-5 px-2.5 xl:px-0">
                 <div className="flex justify-center items-center gap-2 my-2 text-lg">
                     <FaBus className="text-primary" />
                     <span className="text-primary font-semibold">Đặt chỗ thành công</span>

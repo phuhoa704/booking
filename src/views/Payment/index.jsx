@@ -18,11 +18,11 @@ const Payment = () => {
         { id: 3, name: 'WELCOMETOTQD', descr: 'Giảm 10% từ CN, 17/03' },
     ])
     return (
-        <div className="bg-[#F2F2F2] w-full">
-            <div className="w-2/3 m-auto py-5">
+        <div className="bg-[#F2F2F2] w-full pt-16 xl:p-0">
+            <div className="w-full xl:w-2/3 m-auto py-5 px-2 xl:px-0">
                 <div className="grid grid-cols-3 gap-4">
-                    <div className="col-span-2">
-                        <div className="rounded-xl border border-[#F2F2F2] p-5 bg-white my-5">
+                    <div className="col-span-full xl:col-span-2">
+                        <div className="rounded-xl border border-[#F2F2F2] p-2.5 xl:p-5 bg-white my-5">
                             <div className="font-semibold my-3">Phương thức thanh toán</div>
                             <div className="flex gap-1.5 mb-2">
                                 <label class="relative flex items-center p-3 rounded-full cursor-pointer" htmlFor="html">
@@ -200,7 +200,7 @@ const Payment = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-span-1">
+                    <div className="col-span-full xl:col-span-1">
                         <div className="bg-white border border-[#F2F2F2] p-5 rounded-xl my-5">
                             <Collapse
                                 title={<div className="flex justify-between font-semibold">
@@ -229,7 +229,7 @@ const Payment = () => {
                                                 <p className="font-semibold">{v.name}</p>
                                                 <p>{v.descr}</p>
                                             </div>
-                                            <div className="col-span-1 p-2 flex items-center justify-center rounded border-[#F2F2F2] border-t border-b border-r text-primary underline">
+                                            <div className="col-span-1 p-2 dashed-left-border flex items-center justify-center rounded border-[#F2F2F2] border-t border-b border-r text-primary underline">
                                                 Dùng ngay
                                             </div>
                                         </div>
@@ -315,13 +315,13 @@ const Payment = () => {
                 </div>
             </div>
             <div className="py-5 bg-white w-full">
-                <div className="w-2/3 m-auto">
-                    <div className="flex justify-cennter gap-2.5">
-                        <div className="w-1/2 flex gap-2.5">
-                            <button className="bg-primary w-1/2 text-sm text-white py-2.5 rounded-lg" onClick={() => navigate(ROUTER.RESULT, { state: {payment: true} })}>Tôi đã chuyển khoản</button>
-                            <button className="bg-white border w-1/2 text-sm text-[#000] font-semibold border-[#D9D9D9] py-2.5 rounded-lg" onClick={() => navigate(ROUTER.RESULT, { state: {payment: false} })}>Tôi sẽ chuyển khoản sau</button>
+                <div className="w-full xl:w-2/3 m-auto px-2.5 xl:px-0">
+                    <div className="flex justify-cennter gap-2.5 items-center">
+                        <div className="w-1/2 flex gap-2.5 flex-col xl:flex-row">
+                            <button className="bg-primary w-full xl:w-1/2 text-sm text-white py-2.5 rounded-lg" onClick={() => navigate(ROUTER.RESULT, { state: {payment: true} })}>Tôi đã chuyển khoản</button>
+                            <button className="bg-white border w-full xl:w-1/2 text-sm text-[#000] font-semibold border-[#D9D9D9] py-2.5 rounded-lg" onClick={() => navigate(ROUTER.RESULT, { state: {payment: false} })}>Tôi sẽ chuyển khoản sau</button>
                         </div>
-                        <p className="text-sm">Bạn sẽ sớm nhận được biển số xe, số điện thoại tài xế
+                        <p className="text-sm w-1/2">Bạn sẽ sớm nhận được biển số xe, số điện thoại tài xế
                             và dễ dàng thay đổi điểm đón trả sau khi đặt.</p>
                     </div>
                     <p className="text-sm my-2">Bằng việc nhấn nút Tiếp tục, bạn đồng ý với <span className="text-primary underline font-semibold">Chính sách bảo mật thanh toán </span> và <span className="text-primary underline font-semibold">Quy chế</span></p>

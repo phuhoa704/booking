@@ -18,15 +18,15 @@ const Confirmation = () => {
         { id: 2, name: 'Honda Wave RSX, Yamaha Sirius', type: 'Xe số', price: '100.000đ/ngày', method: 'Giao xe tận nơi', img: xeso },
     ])
     return (
-        <div className="bg-[#F2F2F2] w-full">
-            <div className="w-2/3 m-auto py-5">
+        <div className="bg-[#F2F2F2] w-full pt-16 xl:p-0">
+            <div className="w-full xl:w-2/3 m-auto py-5 px-2 xl:px-0">
                 <div className="w-full">
                     <div className="flex items-center cursor-pointer" onClick={() => navigate(ROUTER.SEARCH)}>
                         <FaAngleLeft />
                         <span className="text-primary">Quay lại</span>
                     </div>
                     <div className="grid grid-cols-3 gap-4">
-                        <div className="col-span-2">
+                        <div className="col-span-full xl:col-span-2">
                             <div className="rounded-xl border border-[#F2F2F2] p-5 bg-white my-5">
                                 <div className="w-full border border-[#0d2e59] p-2 flex items-center justify-between rounded">
                                     <span className="text-[#0d2e59]">Đăng nhập để tự điền thông tin và nhận điểm khi đặt vé</span>
@@ -102,7 +102,7 @@ const Confirmation = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-span-1">
+                        <div className="col-span-full xl:col-span-1">
                             <div className="bg-white border border-[#F2F2F2] p-5 rounded-xl my-5">
                                 <Collapse
                                     title={<div className="flex justify-between font-semibold">
@@ -179,7 +179,7 @@ const Confirmation = () => {
                 </div>
             </div>
             <div className="py-5 bg-white w-full">
-                <div className="w-2/3 m-auto">
+                <div className="w-full xl:w-2/3 m-auto px-2.5 xl:px-0">
                     <div className="flex justify-cennter gap-2.5">
                         <button className="bg-primary text-white py-2.5 w-1/2 rounded-lg" onClick={() => navigate(ROUTER.PAYMENT)}>Tiếp tục</button>
                         <p className="text-sm">Bạn sẽ sớm nhận được biển số xe, số điện thoại tài xế

@@ -68,30 +68,30 @@ const Home = () => {
     }, [])
     return (
         <>
-            <section className='w-full bg-center bg-cover flex justify-center items-center relative' style={{ backgroundImage: `url(${background})`, height: `calc(90vh - 180px)` }}>
-                <div className="w-8/12 text-center">
-                    <p className='text-3xl text-white font-semibold my-4'>Hagiangbusticket - Cam kết hoàn 150% nếu nhà xe không giữ chỗ</p>
+            <section className='w-full bg-center bg-cover flex justify-center items-start xl:items-center relative h-smallContainer xl:h-largeContainer pt-16 xl:pt-0' style={{ backgroundImage: `url(${background})` }}>
+                <div className="w-full xl:w-8/12 px-2 xl:px-0 text-center">
+                    <p className='text-xl xl:text-3xl text-white font-semibold my-4'>Hagiangbusticket - Cam kết hoàn 150% nếu nhà xe không giữ chỗ</p>
                     <div className="w-full bg-white rounded-lg shadow-secondary">
                         <div className="flex justify-center py-3">
-                            <div className="flex pt-3 md:pt-0">
+                            <div className="flex pt-1.5 md:pt-0 xl:pt-3">
                                 <div
                                     onClick={() => setActiveTab(1)}
-                                    className={`px-3 py-2 mr-3 transition-all duration-300 ease-linear cursor-pointer text-xl font-semibold ${(activeTab === 1) ? 'text-primary border-primary border-b-2' : ''}`}
+                                    className={`px-3 py-2 mr-3 transition-all duration-300 ease-linear cursor-pointer text-sm xl:text-xl font-semibold ${(activeTab === 1) ? 'text-primary border-primary border-b-2' : ''}`}
                                 >
                                     <i className="fa-solid fa-bus"></i> Xe khách
                                 </div>
                                 <div
                                     onClick={() => navigate(ROUTER.RENT)}
-                                    className={`px-3 py-2 mr-3 transition-all duration-300 ease-linear cursor-pointer text-xl font-semibold ${(activeTab === 2) ? 'text-primary border-primary border-b-2' : ''}`}
+                                    className={`px-3 py-2 mr-3 transition-all duration-300 ease-linear cursor-pointer text-sm xl:text-xl font-semibold ${(activeTab === 2) ? 'text-primary border-primary border-b-2' : ''}`}
                                 >
                                     <i className="fa-solid fa-taxi"></i> Thuê xe
                                 </div>
                             </div>
                         </div>
                         <div className="grid grid-cols-5 gap-2.5 w-full relative border-t border-[#ddd] py-3.5 px-3 dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
-                            <div className="border border-[#d9d9d9] col-span-4">
+                            <div className="border border-[#d9d9d9] col-span-full xl:col-span-4">
                                 <div className="grid grid-cols-4 h-full">
-                                    <div className="col-span-1 relative">
+                                    <div className="col-span-2 xl:col-span-1 relative">
                                         <Select
                                             options={location}
                                             classNames={{
@@ -115,7 +115,7 @@ const Home = () => {
                                             <i className="fa-solid fa-arrow-right-arrow-left"></i>
                                         </div>
                                     </div>
-                                    <div className="col-span-1 border-r border-[#d9d9d9]">
+                                    <div className="col-span-2 xl:col-span-1 border-[#d9d9d9] xl:border-r">
                                         <Select
                                             options={location}
                                             classNames={{
@@ -127,15 +127,15 @@ const Home = () => {
                                             className='hidden-select-border'
                                         />
                                     </div>
-                                    <div className="col-span-1 border-r border-[#d9d9d9]">
+                                    <div className="col-span-2 xl:col-span-1 border-t border-r xl:border-t-0 border-[#d9d9d9] ">
                                         {rendered && (<DatePicker className="px-2.5 py-2.5 bg-white border border-[#d9d9d9] w-full h-full rounded border-none focus:border-none" placeholderText="Ngày đi" selected={startDate} onChange={(date) => setStartDate(date)} />)}
                                     </div>
-                                    <div className="col-span-1">
+                                    <div className="col-span-2 xl:col-span-1 border-t border-[#d9d9d9] xl:border-none">
                                         {rendered && (<DatePicker className="px-2.5 py-2.5 bg-white border border-[#d9d9d9] w-full h-full rounded border-none focus:border-none" placeholderText="Ngày về" selected={startDate} onChange={(date) => setStartDate(date)} />)}
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-span-1">
+                            <div className="col-span-full xl:col-span-1">
                                 <button className='bg-[#ffd333] py-2.5 text-center w-full rounded'>
                                     <span className='font-semibold' onClick={() => navigate(ROUTER.SEARCH)}>Tìm kiếm</span>
                                 </button>
@@ -143,24 +143,24 @@ const Home = () => {
                         </div>
                     </div>
                 </div>
-                <div className="absolute bottom-0 py-5 bg-blacktransparent w-full flex justify-center gap-12">
-                    <div className="flex items-center gap-2">
+                <div className="absolute bottom-0 py-2 xl:py-5 bg-blacktransparent w-full flex justify-center gap-4 xl:gap-12">
+                    <div className="flex items-center flex-col gap-2 xl:flex-row">
                         <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g id="Group">
                                 <path id="Vector" d="M22 11L19.56 8.21L19.9 4.52L16.29 3.7L14.4 0.5L11 1.96L7.6 0.5L5.71 3.69L2.1 4.5L2.44 8.2L0 11L2.44 13.79L2.1 17.49L5.71 18.31L7.6 21.5L11 20.03L14.4 21.49L16.29 18.3L19.9 17.48L19.56 13.79L22 11ZM8.38 15.01L6 12.61C5.61 12.22 5.61 11.59 6 11.2L6.07 11.13C6.46 10.74 7.1 10.74 7.49 11.13L9.1 12.75L14.25 7.59C14.64 7.2 15.28 7.2 15.67 7.59L15.74 7.66C16.13 8.05 16.13 8.68 15.74 9.07L9.82 15.01C9.41 15.4 8.78 15.4 8.38 15.01Z" fill="#FFD333" />
                             </g>
                         </svg>
-                        <span className='text-white font-semibold'>Chắc chắn có chỗ</span>
+                        <span className='text-white font-semibold text-center text-xs xl:text-base'>Chắc chắn có chỗ</span>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 flex-col xl:flex-row">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g id="Rounded / headset_mic">
                                 <path id="Vector" d="M11.4 1.02048C6.62 1.33048 3 5.52048 3 10.3105V17.0005C3 18.6605 4.34 20.0005 6 20.0005H7C8.1 20.0005 9 19.1005 9 18.0005V14.0005C9 12.9005 8.1 12.0005 7 12.0005H5V10.2905C5 6.45048 7.96 3.11048 11.79 3.00048C15.76 2.89048 19 6.06048 19 10.0005V12.0005H17C15.9 12.0005 15 12.9005 15 14.0005V18.0005C15 19.1005 15.9 20.0005 17 20.0005H19V21.0005H13C12.45 21.0005 12 21.4505 12 22.0005C12 22.5505 12.45 23.0005 13 23.0005H18C19.66 23.0005 21 21.6605 21 20.0005V10.0005C21 4.83048 16.64 0.680479 11.4 1.02048Z" fill="#FFD333" />
                             </g>
                         </svg>
-                        <span className='text-white font-semibold'>Hỗ trợ 24/7</span>
+                        <span className='text-white font-semibold text-center text-xs xl:text-base'>Hỗ trợ 24/7</span>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 flex-col xl:flex-row">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g id="discount" clipPath="url(#clip0_6256_177330)">
                                 <g id="Group">
@@ -177,20 +177,20 @@ const Home = () => {
                                 </clipPath>
                             </defs>
                         </svg>
-                        <span className='text-white font-semibold'>Nhiều ưu đãi</span>
+                        <span className='text-white font-semibold text-center text-xs xl:text-base'>Nhiều ưu đãi</span>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-2 flex-col xl:flex-row">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g id="monetization_on">
                                 <path id="Vector" d="M8.1 14.75C8.33333 15.55 8.69583 16.1958 9.1875 16.6875C9.67917 17.1792 10.3167 17.5167 11.1 17.7V18.125C11.1 18.3583 11.1875 18.5625 11.3625 18.7375C11.5375 18.9125 11.7417 19 11.975 19C12.2083 19 12.4125 18.9125 12.5875 18.7375C12.7625 18.5625 12.85 18.3583 12.85 18.125V17.75C13.6833 17.6 14.4 17.275 15 16.775C15.6 16.275 15.9 15.5333 15.9 14.55C15.9 13.85 15.7 13.2083 15.3 12.625C14.9 12.0417 14.1 11.5333 12.9 11.1C11.9 10.7667 11.2083 10.475 10.825 10.225C10.4417 9.975 10.25 9.63333 10.25 9.2C10.25 8.76667 10.4042 8.425 10.7125 8.175C11.0208 7.925 11.4667 7.8 12.05 7.8C12.5833 7.8 13 7.92917 13.3 8.1875C13.6 8.44583 13.8167 8.76667 13.95 9.15L15.55 8.5C15.3667 7.91667 15.0292 7.40833 14.5375 6.975C14.0458 6.54167 13.5 6.3 12.9 6.25V5.875C12.9 5.64167 12.8125 5.4375 12.6375 5.2625C12.4625 5.0875 12.2583 5 12.025 5C11.7917 5 11.5875 5.0875 11.4125 5.2625C11.2375 5.4375 11.15 5.64167 11.15 5.875V6.25C10.3167 6.43333 9.66667 6.8 9.2 7.35C8.73333 7.9 8.5 8.51667 8.5 9.2C8.5 9.98333 8.72917 10.6167 9.1875 11.1C9.64583 11.5833 10.3667 12 11.35 12.35C12.4 12.7333 13.1292 13.075 13.5375 13.375C13.9458 13.675 14.15 14.0667 14.15 14.55C14.15 15.1 13.9542 15.5042 13.5625 15.7625C13.1708 16.0208 12.7 16.15 12.15 16.15C11.6 16.15 11.1125 15.9792 10.6875 15.6375C10.2625 15.2958 9.95 14.7833 9.75 14.1L8.1 14.75ZM12 22C10.6167 22 9.31667 21.7375 8.1 21.2125C6.88333 20.6875 5.825 19.975 4.925 19.075C4.025 18.175 3.3125 17.1167 2.7875 15.9C2.2625 14.6833 2 13.3833 2 12C2 10.6167 2.2625 9.31667 2.7875 8.1C3.3125 6.88333 4.025 5.825 4.925 4.925C5.825 4.025 6.88333 3.3125 8.1 2.7875C9.31667 2.2625 10.6167 2 12 2C13.3833 2 14.6833 2.2625 15.9 2.7875C17.1167 3.3125 18.175 4.025 19.075 4.925C19.975 5.825 20.6875 6.88333 21.2125 8.1C21.7375 9.31667 22 10.6167 22 12C22 13.3833 21.7375 14.6833 21.2125 15.9C20.6875 17.1167 19.975 18.175 19.075 19.075C18.175 19.975 17.1167 20.6875 15.9 21.2125C14.6833 21.7375 13.3833 22 12 22Z" fill="#FFD333" />
                             </g>
                         </svg>
-                        <span className='text-white font-semibold'>Thanh toán đa dạng</span>
+                        <span className='text-white font-semibold text-center text-xs xl:text-base'>Thanh toán đa dạng</span>
                     </div>
                 </div>
             </section>
             <div className="w-full py-2">
-                <div className="w-8/12 m-auto">
+                <div className="w-full xl:w-8/12 m-auto px-2 xl:px-0">
                     <PopularRoad />
                     <Concessionary />
                     <ConcessionaryFromPartner />
@@ -201,7 +201,7 @@ const Home = () => {
                     <ForPartner />
                     <News />
                     <section className='my-4'>
-                        <p className="font-semibold text-2xl text-[#3d3d3b] py-2.5">Khách hàng nói gì về Hagiangbusticket</p>
+                        <p className="font-semibold text-base xl:text-2xl text-[#3d3d3b] py-2.5">Khách hàng nói gì về Hagiangbusticket</p>
                         <Swiper {...swiperParams} modules={[Pagination]} className="mySwiper">
                             {dataTestimonial.map(dt => (
                                 <SwiperSlide key={dt.id}>
