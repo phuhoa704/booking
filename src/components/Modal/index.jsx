@@ -22,7 +22,7 @@ const Modal = (Props) => {
                         onClick={() => handleShow(false)}
                         className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-[99999] outline-none focus:outline-none"
                     >
-                        <div className="relative w-auto rounded xl:max-h-[90vh] max-h-[80vh] mx-auto max-w-full flex">
+                        <div className="relative w-11/12 xl:w-auto rounded xl:max-h-[90vh] max-h-[100vh] mx-auto max-w-full flex">
                             <motion.div
                                 variants={
                                     position == "right" ? variantsToRight : variantsToTop
@@ -30,7 +30,7 @@ const Modal = (Props) => {
                                 initial="hidden"
                                 animate="visible"
                                 exit="hidden"
-                                className="max-w-full"
+                                className="max-w-full w-full"
                             >
                                 <div
                                     className="flex max-h-full max-w-full"
