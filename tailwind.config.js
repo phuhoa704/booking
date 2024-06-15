@@ -9,7 +9,12 @@ export default {
     extend: {
       backgroundColor: {
         primary: '#2474E5',
-        blacktransparent: 'rgba(0,0,0,.5)'
+        blacktransparent: 'rgba(0,0,0,.5)',
+        pending: '#f5e342',
+        approved: '#1b9e13',
+        completed: '#13999e',
+        canceled: '#c4221a',
+        payment_method: '#b83a1d',
       },
       boxShadow: {
         primary: 'box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px',

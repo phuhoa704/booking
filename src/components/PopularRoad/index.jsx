@@ -47,7 +47,9 @@ const PopularRoad = () => {
                 {data.map(d => (
                     <SwiperSlide key={d.id}>
                         <div className="w-11/12 shadow-primary rounded cursor-pointer" onClick={() => navigate(ROUTER.SEARCH)}>
-                            <img className="w-full h-32 rounded-tl rounded-tr" src={d.img} alt="" />
+                            <div className="w-full h-32 rounded-lt rounded-tr relative">
+                                <img className="w-full h-full rounded-tl rounded-tr absolute" src={d.img} alt="" />
+                            </div>
                             <div className={"p-2.5 rounded-bl rounded-br"} style={{ backgroundColor: d.color }}>
                                 <p className="text-white font-semibold">{d.name}</p>
                                 <p className="text-white text-sm">{d.price}</p>

@@ -3,19 +3,22 @@ import uk from '../../assets/uk.png';
 import vietnam from '../../assets/vietnam.png';
 import { useState } from 'react';
 import Modal from '../Modal';
-import LoginAndSignupForm from '../Auth/LoginAndSignup';
+import LoginForm from '../Auth/Login';
 import Verification from '../Auth/Verification';
 import { ROUTER } from '../../configs/router';
 import { Link, useNavigate } from 'react-router-dom';
 import ProfileUpdation from '../Auth/ProfileUpdation';
 import { useDispatch, useSelector } from 'react-redux';
-import { resetUser } from '../../redux/slices/Auth';
+import SignupForm from '../Auth/Signup';
+import { logout } from '../../redux/actions/Auth';
+import { API_STORE } from '../../configs/apis';
 
 const Navbar = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [lang, setLang] = useState('vi');
     const [modalLogin, setModalLogin] = useState(false);
+    const [modalSignup, setModalSignup] = useState(false);
     const [modalVerify, setModalVerify] = useState(false);
     const [showHotline, setShowHotline] = useState(false);
     const [showProfileUpdation, setShowProfileUpdation] = useState(false);
@@ -32,14 +35,34 @@ const Navbar = () => {
         { id: 4, name: "Ưu đãi", icon: <i className="fa-solid fa-gift"></i>, onClick: () => navigate(`${ROUTER.USER}/${ROUTER.PREFERENTIAL}`) },
         { id: 5, name: "Quản lý thẻ", icon: <i className="fa-solid fa-credit-card"></i>, onClick: () => navigate(`${ROUTER.USER}/${ROUTER.CREDITS}`) },
         { id: 6, name: "Nhận xét chuyến đi", icon: <i className="fa-solid fa-square-pen"></i>, onClick: () => navigate(`${ROUTER.USER}/${ROUTER.EVALUATION}`) },
-        { id: 7, name: "Đăng xuất", icon: <i className="fa-solid fa-right-from-bracket"></i>, onClick: () => dispatch(resetUser()) },
+        {
+            id: 7, name: "Đăng xuất", icon: <i className="fa-solid fa-right-from-bracket"></i>, onClick: () => {
+                dispatch(resetUser())
+                navigate(ROUTER.HOME)
+            }
+        },
     ])
+    const handleChangeState = (t) => {
+        if (t === 'login') {
+            setModalLogin(true);
+            setModalSignup(false);
+        }
+        if (t === 'signup') {
+            setModalSignup(true);
+            setModalLogin(false);
+        }
+    }
     return (
         <>
             <Modal
                 handleShow={setModalLogin}
                 showStatus={modalLogin}
-                outlet={<LoginAndSignupForm handleShow={setModalLogin} handleShowVerify={setModalVerify} handleChangeState={setState} state={state} />}
+                outlet={<LoginForm handleShow={setModalLogin} handleChangeState={handleChangeState} />}
+            />
+            <Modal
+                handleShow={setModalSignup}
+                showStatus={modalSignup}
+                outlet={<SignupForm handleShow={setModalSignup} handleChangeState={handleChangeState} />}
             />
             <Modal
                 handleShow={setModalVerify}
@@ -102,8 +125,8 @@ const Navbar = () => {
                         </div>
                     </div>
                     {(Object.keys(user).length > 0) ? (
-                        <div class="relative w-8 h-8 bg-gray-100 rounded-full cursor-pointer" onClick={() => setDropdown(!dropdown)}>
-                            <svg class="w-8 h-8 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"></path></svg>
+                        <div className="relative w-8 h-8 bg-gray-100 rounded-full cursor-pointer" onClick={() => setDropdown(!dropdown)}>
+                            {user.avatar ? <div className='w-8 h-8'><img className='w-full h-full rounded-full' src={`${API_STORE}${user.avatar}`} alt='' /></div> : <svg className="w-8 h-8 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"></path></svg>}
                             <div className="absolute bottom-0 w-44 z-20 bg-white translate-x-[-90px] xl:translate-x-[-135px] translate-y-[240px] rounded shadow-lg p-2" style={{ display: dropdown ? 'block' : 'none' }}>
                                 <ul className='text-sm'>
                                     {userDropdown.map(u => (
@@ -117,7 +140,7 @@ const Navbar = () => {
                             Đăng nhập
                         </button>
                     )}
-                    <button className='rounded bg-white text-blck font-semibold py-1.5 px-2.5 text-sm' onClick={() => setShowNavbar(!showNavbar)}>
+                    <button className='rounded bg-white text-blck font-semibold py-1.5 px-2.5 text-sm block lg:hidden' onClick={() => setShowNavbar(!showNavbar)}>
                         <i className="fa-solid fa-align-justify"></i>
                     </button>
                 </div>

@@ -1,3 +1,5 @@
+@import url('https://id.vexere.cuongdev.click/admins/assets/libs/summernote/summernote-bs4.min.css');
+
 .swiper-button-prev,
 .swiper-button-next {
     background-color: #fff;
@@ -83,4 +85,9 @@ input[type=checkbox] {
 
 .dashed-left-border {
     border-left: 1px dashed #F2F2F2;
+}
+
+.active-btn {
+    border: 1px solid #2474e5;
+    color: rgb(36,116,229);
 }
