@@ -1,22 +1,36 @@
-import { FaBus, FaUserFriends, FaCircle, FaQrcode } from "react-icons/fa";
+import { FaBus, FaUserFriends, FaCircle, FaQrcode, FaRegUser, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 import Collapse from "../../components/Collapse";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import image from '../../assets/confirmation/img.png';
 import { BsQrCodeScan, BsPhoneVibrate, BsCheck2All, BsShieldCheck, BsFillInfoCircleFill } from "react-icons/bs";
 import vnpay from '../../assets/payment/vnpay.png';
 import shopee from '../../assets/payment/shopee.png';
 import momo from '../../assets/payment/momo.png';
 import zalopay from '../../assets/payment/zalopay.png';
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { ROUTER } from "../../configs/router";
+import { formatChangeNumber } from "../../helpers/number";
+import { useDispatch, useSelector } from "react-redux";
+import moment from "moment";
+import { API_STORE } from "../../configs/apis";
+import { booking } from "../../redux/actions/Orders";
 
 const Payment = () => {
     const navigate = useNavigate();
+    const { state } = useLocation();
+    const dispatch = useDispatch();
     const [vouchers] = useState([
         { id: 1, name: 'WELCOMETOTQD', descr: 'Giảm 15,000VNĐ từ CN, 17/03' },
         { id: 2, name: 'DISCOUNTTQD', descr: 'Giảm 50% từ CN, 17/03' },
         { id: 3, name: 'WELCOMETOTQD', descr: 'Giảm 10% từ CN, 17/03' },
     ])
+    const [payment, setPayment] = useState(2);
+    const { searchDetail } = useSelector(state => state.search);
+    useEffect(() => {
+        if(!(state && Object.keys(state).length > 0)) {
+            navigate(ROUTER.SEARCH);
+        }
+    }, [state])
     return (
         <div className="bg-[#F2F2F2] w-full pt-16 xl:p-0">
             <div className="w-full xl:w-2/3 m-auto py-5 px-2 xl:px-0">
@@ -26,7 +40,7 @@ const Payment = () => {
                             <div className="font-semibold my-3">Phương thức thanh toán</div>
                             <div className="flex gap-1.5 mb-2">
                                 <label class="relative flex items-center p-3 rounded-full cursor-pointer" htmlFor="html">
-                                    <input name="type" type="radio"
+                                    <input name="type" value={2} checked={payment === 2} onChange={() => setPayment(2)} type="radio"
                                         class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 text-gray-900 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:before:bg-gray-900 hover:before:opacity-10"
                                         id="html" />
                                     <span
@@ -46,7 +60,7 @@ const Payment = () => {
                                         </div>
                                     </div>
                                     <div className="text-xs">Không cần nhập thông tin. Xác nhận thanh toán tức thì, nhanh chóng và ít sai sót.</div>
-                                    <div className="p-2 5">
+                                    {/* <div className="p-2 5">
                                         <div className="border border-primary p-2 rounded-lg">
                                             <div className="grid grid-cols-4 gap-2 pb-2.5 border-b border-[#F2F2F2]">
                                                 <div className="col-span-3">
@@ -78,20 +92,20 @@ const Payment = () => {
                                                 <span className="text-primary underline font-semibold">Tự nhập thông tin</span>
                                             </div>
                                         </div>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                             <hr />
-                            <div className="border-primary border bg-[#d7e4f7] flex justify-between rounded p-2 mt-4 text-sm">
+                            {/* <div className="border-primary border bg-[#d7e4f7] flex justify-between rounded p-2 mt-4 text-sm">
                                 <div className="flex items-center">
                                     <BsFillInfoCircleFill className="text-primary" />
                                     <span className="ml-1">Vé có bảo hiểm không áp dụng thanh toán tại nhà xe</span>
                                 </div>
                                 <div className="text-primary underline font-semibold">Hủy bảo hiểm</div>
-                            </div>
+                            </div> */}
                             <div className="flex gap-1.5 my-2 relative">
                                 <label class="relative flex items-center p-3 rounded-full cursor-pointer" htmlFor="html">
-                                    <input name="type" type="radio"
+                                    <input name="type" value={1} checked={payment === 1} onChange={() => setPayment(1)} type="radio"
                                         class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 text-gray-900 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:before:bg-gray-900 hover:before:opacity-10"
                                         id="html" />
                                     <span
@@ -108,9 +122,8 @@ const Payment = () => {
                                     </div>
                                     <div className="text-xs">Bạn có thể thanh toán cho tài xế khi lên xe.</div>
                                 </div>
-                                <div className="absolute w-full h-full bg-[#ffffff66]"></div>
                             </div>
-                            <hr />
+                            {/* <hr />
                             <div className="my-2 flex gap-1.5">
                                 <label class="relative flex items-center p-3 rounded-full cursor-pointer" htmlFor="html">
                                     <input name="type" type="radio"
@@ -197,7 +210,24 @@ const Payment = () => {
                                     </div>
                                     <div className="text-xs">Điện thoại của bạn phải được cài đặt ứng dụng Zalopay.</div>
                                 </div>
+                            </div> */}
+                        </div>
+                        <div className="bg-white border border-[#F2F2F2] p-5 rounded-xl my-5">
+                            <div className="flex justify-between items-center">
+                                <div className="font-semibold my-3">Thông tin liên hệ</div>
                             </div>
+                            <di className="flex justify-between items-center text-sm">
+                                <div className="flex items-center gap-2"><FaRegUser />Hành khách</div>
+                                <div className="font-semibold">{state.name}</div>
+                            </di>
+                            <div className="flex justify-between items-center text-sm">
+                                <div className="flex items-center gap-2"><FaPhoneAlt />Số điện thoại</div>
+                                <div className="font-semibold">{state.phone}</div>
+                            </div>
+                            <di className="flex justify-between items-center text-sm">
+                                <div className="flex items-center gap-2"><FaEnvelope />Email</div>
+                                <div className="font-semibold">{state.email}</div>
+                            </di>
                         </div>
                     </div>
                     <div className="col-span-full xl:col-span-1">
@@ -205,13 +235,12 @@ const Payment = () => {
                             <Collapse
                                 title={<div className="flex justify-between font-semibold">
                                     <div>Tổng tiền</div>
-                                    <div>280.000đ</div>
+                                    <div>{formatChangeNumber(`${state.subtotal}`)}</div>
                                 </div>}
                                 content={<div className="flex justify-between">
                                     <div className="text-sm">Giá vé</div>
                                     <div className="flex flex-col">
-                                        <p className="text-sm">280.000đ x 1</p>
-                                        <p className="text-xs text-[#858585]">Mã ghế/giường: C9</p>
+                                        <p className="text-sm">{formatChangeNumber(`${searchDetail.price}`)} x {state.quantity}</p>
                                     </div>
                                 </div>}
                             />
@@ -243,10 +272,10 @@ const Payment = () => {
                                 <div className="flex justify-between items-center text-xs gap-2">
                                     <div className="flex items-center gap-2">
                                         <FaBus className="text-primary" />
-                                        <span>T2, 27/05/2024</span>
+                                        <span>{moment(new Date(searchDetail.start_time)).format('DD/MM/YYYY HH:mm')}</span>
                                         <div className="flex items-center text-[#484848] gap-1.5">
                                             <FaUserFriends />
-                                            <span>1</span>
+                                            <span>{state.quantity}</span>
                                         </div>
                                     </div>
                                     <div className="text-primary underline font-semibold">Chi tiết</div>
@@ -254,11 +283,11 @@ const Payment = () => {
                                 <div className="border-t border-[#F2F2F2] mt-2">
                                     <div className="p-2 flex gap-2.5">
                                         <div className="w-1/4 rounded">
-                                            <img src={image} alt="" className="rounded" />
+                                            <img src={`${API_STORE}${searchDetail?.vehicle_category?.image}`} alt="" className="rounded" />
                                         </div>
                                         <div className="flex flex-col justify-center">
-                                            <p className="text-xs font-bold">Huỳnh Gia</p>
-                                            <p style={{ fontSize: 9 }}>Giường nằm 38 chỗ (WC)</p>
+                                            <p className="text-xs font-bold">{searchDetail?.coach_company?.name}</p>
+                                            <p style={{ fontSize: 9 }}>{searchDetail?.vehicle_category?.name}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -266,50 +295,32 @@ const Payment = () => {
                                 <div className="flex flex-col gap-3">
                                     <div className="flex items-center gap-2">
                                         <div className="flex flex-col">
-                                            <span className="font-bold">23:00</span>
-                                            <span className="text-xs">(27/05)</span>
+                                            <span className="font-bold">{moment(new Date(searchDetail.start_time)).format('HH:mm')}</span>
+                                            <span className="text-xs">({moment(new Date(searchDetail.start_time)).format('DD/MM')})</span>
                                         </div>
                                         <div className="flex text-xs items-center gap-2">
                                             <FaCircle className="text-primary" />
                                             <div className="flex flex-col">
-                                                <span className="font-semibold">VP Phạm Ngũ Lão</span>
-                                                <span className="text-[#858585]">275H Phạm Ngũ Lão, Phường Phạm Ngũ Lão, Quận 1, Hồ Chí Minh</span>
+                                                <span className="font-semibold">{searchDetail?.pickups?.find(p => p.id === state.pickup) ? searchDetail.pickups.find(p => p.id === state.pickup).name : 'Đang cập nhật'}</span>
+                                                <span className="text-[#858585]">{searchDetail?.pickups?.find(p => p.id === state.pickup) ? searchDetail.pickups.find(p => p.id === state.pickup).address : 'Đang cập nhật'}</span>
                                             </div>
                                         </div>
                                     </div>
                                     <div className="flex items-center gap-2">
                                         <div className="flex flex-col">
-                                            <span className="font-bold">05:30</span>
-                                            <span className="text-xs">(28/05)</span>
+                                            <span className="font-bold">{moment(new Date(searchDetail.end_time)).format('HH:mm')}</span>
+                                            <span className="text-xs">({moment(new Date(searchDetail.end_time)).format('DD/MM')})</span>
                                         </div>
                                         <div className="flex text-xs items-center gap-2">
                                             <i className="fa-solid fa-location-dot text-[#de3e6e]"></i>
                                             <div className="flex flex-col">
-                                                <span className="font-semibold">Cây Xăng Mã Vòng</span>
-                                                <span className="text-[#858585]">127 Yersin, Phường Phương Sơn, Nha Trang, Khánh Hòa</span>
+                                                <span className="font-semibold">{searchDetail?.drops?.find(p => p.id === state.drop) ? searchDetail.drops.find(p => p.id === state.drop).name : 'Đang cập nhật'}</span>
+                                                <span className="text-[#858585]">{searchDetail?.drops?.find(p => p.id === state.drop) ? searchDetail.drops.find(p => p.id === state.drop).address : 'Đang cập nhật'}</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="bg-white border border-[#F2F2F2] p-5 rounded-xl my-5">
-                            <div className="flex justify-between items-center">
-                                <div className="font-semibold my-3">Thông tin liên hệ</div>
-                                <div className="text-primary underline font-semibold text-sm">Chi tiết</div>
-                            </div>
-                            <di className="flex justify-between items-center text-xs">
-                                <div>Hành khách</div>
-                                <div className="font-semibold">abcdef</div>
-                            </di>
-                            <di className="flex justify-between items-center text-xs">
-                                <div>Số điện thoại</div>
-                                <div className="font-semibold">0941225226</div>
-                            </di>
-                            <di className="flex justify-between items-center text-xs">
-                                <div>Email</div>
-                                <div className="font-semibold">test@gmail.com</div>
-                            </di>
                         </div>
                     </div>
                 </div>
@@ -317,11 +328,26 @@ const Payment = () => {
             <div className="py-5 bg-white w-full">
                 <div className="w-full xl:w-2/3 m-auto px-2.5 xl:px-0">
                     <div className="flex justify-cennter gap-2.5 items-center">
-                        <div className="w-1/2 flex gap-2.5 flex-col xl:flex-row">
-                            <button className="bg-primary w-full xl:w-1/2 text-sm text-white py-2.5 rounded-lg" onClick={() => navigate(ROUTER.RESULT, { state: {payment: true} })}>Tôi đã chuyển khoản</button>
-                            <button className="bg-white border w-full xl:w-1/2 text-sm text-[#000] font-semibold border-[#D9D9D9] py-2.5 rounded-lg" onClick={() => navigate(ROUTER.RESULT, { state: {payment: false} })}>Tôi sẽ chuyển khoản sau</button>
+                        <div className="w-1/3 flex gap-2.5 flex-col xl:flex-row">
+                            <button className="bg-primary w-full text-sm text-white py-2.5 rounded-lg" onClick={() => {
+                                const order = {
+                                    name: state.name,
+                                    email: state.email,
+                                    phone: state.phone,
+                                    payment_method: payment,
+                                    trips: [
+                                        {
+                                            trip_id: state.trip_id,
+                                            type: state.type,
+                                            quantity: state.quantity
+                                        }
+                                    ]
+                                }
+                                dispatch(booking(order));
+                            }}>{(payment === 1) ? 'Xác nhận đặt vé' : 'Tôi đã chuyển khoản'}</button>
+                            {/* <button className="bg-white border w-full xl:w-1/2 text-sm text-[#000] font-semibold border-[#D9D9D9] py-2.5 rounded-lg" onClick={() => navigate(ROUTER.RESULT, { state: { payment: false } })}>Tôi sẽ chuyển khoản sau</button> */}
                         </div>
-                        <p className="text-sm w-1/2">Bạn sẽ sớm nhận được biển số xe, số điện thoại tài xế
+                        <p className="text-sm w-2/3">Bạn sẽ sớm nhận được biển số xe, số điện thoại tài xế
                             và dễ dàng thay đổi điểm đón trả sau khi đặt.</p>
                     </div>
                     <p className="text-sm my-2">Bằng việc nhấn nút Tiếp tục, bạn đồng ý với <span className="text-primary underline font-semibold">Chính sách bảo mật thanh toán </span> và <span className="text-primary underline font-semibold">Quy chế</span></p>

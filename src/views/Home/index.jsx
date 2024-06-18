@@ -37,7 +37,7 @@ import { useNavigate } from 'react-router-dom';
 import { ROUTER } from '../../configs/router';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProvinces } from '../../redux/actions/Location';
-import { searchResult } from '../../redux/actions/Search';
+import { getSearchResult } from '../../redux/actions/Search';
 import { getDetailNews } from '../../redux/actions/News';
 import moment from 'moment';
 
@@ -153,15 +153,24 @@ const Home = () => {
                                 </div>
                             </div>
                             <div className="col-span-full xl:col-span-1">
-                                <button className='bg-[#ffd333] py-2.5 text-center w-full rounded' onClick={() => dispatch(searchResult({
-                                    page: 1,
-                                    page_size: 10,
-                                    departure_province_id: firstPlace,
-                                    return_province_id: secondPlace,
-                                    start_date: moment(startDate).format('YYYY-MM-DD'),
-                                    end_date: moment(endDate).format('YYYY-MM-DD'),
-                                    sort: 'asc_time'
-                                }))}>
+                                <button className='bg-[#ffd333] py-2.5 text-center w-full rounded' onClick={() => {
+                                    dispatch(getSearchResult({
+                                        page: 1,
+                                        page_size: 10,
+                                        departure_province_id: firstPlace ? firstPlace.value : '',
+                                        return_province_id: secondPlace ? secondPlace.value : '',
+                                        start_date: startDate ? moment(new Date(startDate)).format('YYYY-MM-DD') : '',
+                                        end_date: endDate ? moment(new Date(endDate)).format('YYYY-MM-DD') : '',
+                                        sort: 'asc_time'
+                                    }))
+                                    navigate(ROUTER.SEARCH, { state: {
+                                        departure_province_id: firstPlace ? firstPlace.value : '',
+                                        return_province_id: secondPlace ? secondPlace.value : '',
+                                        start_date: startDate ? moment(new Date(startDate)).format('YYYY-MM-DD') : '',
+                                        end_date: endDate ? moment(new Date(endDate)).format('YYYY-MM-DD') : '',
+                                        sort: 'asc_time'
+                                    }});
+                                }}>
                                     <span className='font-semibold'>Tìm kiếm</span>
                                 </button>
                             </div>

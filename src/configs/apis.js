@@ -21,6 +21,7 @@ export const ENDPOINTS = {
     NEWSDETAIL: '/news/detail', //${id}
     //SEARCH
     SEARCH: '/search', //&page=&page_size=&departure_province_id=&return_province_id=&state_date=&return_date=&sort=
+    SEARCHDETAIL: '/detail',
     //ORDER
     ORDER: '/order',
     LISTORDER: '/orders',
@@ -28,5 +29,7 @@ export const ENDPOINTS = {
     CANCELEDORDER: '/orders/canceled',
     SHOWORDER: '/orders/show', //${id}
     CANCELORDER: '/orders/cancel', //${id}
-    LOOKPUPORDER: '/orders/look-up'
+    LOOKPUPORDER: '/orders/look-up',
+    //PAYMENT
+    PAYMENT: '/onepay/payment?order_code=' //${order_code}
 }

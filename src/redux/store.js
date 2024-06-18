@@ -13,7 +13,7 @@ export const store = configureStore({
         location,
         news,
         search,
-        order
+        order,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(),
     devTools: process.env.NODE_ENV !== 'production',

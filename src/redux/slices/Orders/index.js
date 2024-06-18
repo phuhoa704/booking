@@ -4,7 +4,8 @@ const initialState = {
     orderList: [],
     orderDetail: {},
     orderCompleted: [],
-    orderCanceled: []
+    orderCanceled: [],
+    bookingOrder: {}
 }
 
 export const orderSlice = createSlice({
@@ -22,9 +23,12 @@ export const orderSlice = createSlice({
         },
         saveOrderCanceled: (state, action) => {
             state.orderCanceled = action.payload;
+        },
+        saveBookingOrder: (state, action) => {
+            state.bookingOrder = action.payload;
         }
     }
 })
 
-export const { saveOrderList, saveOrderDetail, saveOrderCompleted, saveOrderCanceled } = orderSlice.actions;
+export const { saveOrderList, saveOrderDetail, saveOrderCompleted, saveOrderCanceled, saveBookingOrder } = orderSlice.actions;
 export default orderSlice.reducer;

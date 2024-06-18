@@ -1,13 +1,13 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { ROUTER } from '../../configs/router';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 //datepicker
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 // react select
 import Select from 'react-select';
 
-import { location, searchResult, filters } from '../../configs/data';
+import { location, filters } from '../../configs/data';
 import Collapse from '../../components/Collapse';
 import InputRange from 'react-input-range';
 import 'react-input-range/lib/css/index.css';
@@ -21,10 +21,15 @@ import ResponsiveSort from '../../components/ResponsiveSort';
 import ResponsiveTime from '../../components/ResponsiveTime';
 import ResponsiveStation from '../../components/ResponsiveStation';
 import ResponsiveSearch from '../../components/ResponsiveSearch';
+import { useDispatch, useSelector } from 'react-redux';
+import { getSearchResult } from '../../redux/actions/Search';
 
 const Search = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const { state } = useLocation();
     const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
     const [activeTab, setActiveTab] = useState(1)
     const [firstPlace, setFirstPlace] = useState(null);
     const [secondPlace, setSecondPlace] = useState(null);
@@ -34,19 +39,40 @@ const Search = () => {
         max: 10
     })
     const [sortOpts] = useState([
-        { id: 1, label: 'Mặc định', value: '1' },
-        { id: 2, label: 'Giờ đi sớm nhất', value: '2' },
-        { id: 3, label: 'Giờ đi muộn nhất', value: '3' },
-        { id: 4, label: 'Đánh giá cao nhất', value: '4' },
-        { id: 5, label: 'Giá tăng dần', value: '5' },
-        { id: 6, label: 'Giá giảm dần', value: '6' },
+        { id: 1, label: 'Mặc định', value: null },
+        { id: 2, label: 'Giờ đi sớm nhất', value: 'asc_time' },
+        { id: 3, label: 'Giờ đi muộn nhất', value: 'desc_time' },
+        { id: 4, label: 'Giá tăng dần', value: 'asc_price' },
+        { id: 5, label: 'Giá giảm dần', value: 'desc_price' },
     ])
+    const [sortVal, setSortVal] = useState(null);
     //responsive state
     const [modalFilter, setModalFilter] = useState(false);
     const [modalSort, setModalSort] = useState(false);
     const [modalTime, setModalTime] = useState(false);
     const [modalStation, setModalStation] = useState(false);
     const [modalSearch, setModalSearch] = useState(false);
+    //store state
+    const { searchResult } = useSelector(state => state.search);
+    useEffect(() => {
+        if (state && Object.keys(state).length > 0) {
+            dispatch(getSearchResult({
+                page: 1,
+                page_size: 10,
+                ...state
+            }))
+        } else {
+            dispatch(getSearchResult({
+                page: 1,
+                page_size: 10,
+                departure_province_id: '',
+                return_province_id: '',
+                start_date: '',
+                end_date: '',
+                sort: 'asc_time'
+            }))
+        }
+    }, [state])
     return (
         <>
             <Modal
@@ -116,7 +142,7 @@ const Search = () => {
                                         <Select
                                             options={location}
                                             classNames={{
-                                                menu: () => 'text-left',
+                                                menu: () => 'text-left !z-10',
                                                 // placeholder: (styles) => ({...styles, ...dotPlaceholder('#2474E5')})
                                             }}
                                             value={firstPlace}
@@ -140,7 +166,7 @@ const Search = () => {
                                         <Select
                                             options={location}
                                             classNames={{
-                                                menu: () => 'text-left',
+                                                menu: () => 'text-left !z-10',
                                             }}
                                             value={secondPlace}
                                             onChange={(e) => setSecondPlace(e)}
@@ -152,13 +178,23 @@ const Search = () => {
                                         <DatePicker className="px-2.5 py-2.5 bg-white border border-[#d9d9d9] w-full h-full rounded border-none focus:border-none" placeholderText="Ngày đi" selected={startDate} onChange={(date) => setStartDate(date)} />
                                     </div>
                                     <div className="col-span-2 xl:col-span-1 border-t border-[#d9d9d9] xl:border-none">
-                                        <DatePicker className="px-2.5 py-2.5 bg-white border border-[#d9d9d9] w-full h-full rounded border-none focus:border-none" placeholderText="Ngày về" selected={startDate} onChange={(date) => setStartDate(date)} />
+                                        <DatePicker className="px-2.5 py-2.5 bg-white border border-[#d9d9d9] w-full h-full rounded border-none focus:border-none" placeholderText="Ngày về" selected={endDate} onChange={(date) => setEndDate(date)} />
                                     </div>
                                 </div>
                             </div>
                             <div className="col-span-full xl:col-span-1">
-                                <button className='bg-[#ffd333] py-2.5 text-center w-full rounded'>
-                                    <span className='font-semibold' onClick={() => navigate(ROUTER.SEARCH)}>Tìm kiếm</span>
+                                <button className='bg-[#ffd333] py-2.5 text-center w-full rounded' onClick={() => {
+                                    dispatch(getSearchResult({
+                                        page: 1,
+                                        page_size: 10,
+                                        departure_province_id: firstPlace ? firstPlace.value : '',
+                                        return_province_id: secondPlace ? secondPlace.value : '',
+                                        start_date: startDate ? moment(new Date(startDate)).format('YYYY-MM-DD') : '',
+                                        end_date: endDate ? moment(new Date(endDate)).format('YYYY-MM-DD') : '',
+                                        sort: 'asc_time'
+                                    }))
+                                }}>
+                                    <span className='font-semibold'>Tìm kiếm</span>
                                 </button>
                             </div>
                         </div>
@@ -172,9 +208,22 @@ const Search = () => {
                                         <li key={s.id}>
                                             <div class="inline-flex items-center">
                                                 <label class="relative flex items-center p-3 rounded-full cursor-pointer" htmlFor="html">
-                                                    <input name="type" value={s.value} type="radio"
+                                                    <input name="type" checked={sortVal === s.value} value={s.value}
+                                                        onChange={() => {
+                                                            setSortVal(s.value);
+                                                            dispatch(getSearchResult({
+                                                                page: 1,
+                                                                page_size: 10,
+                                                                departure_province_id: firstPlace ? firstPlace.value : '',
+                                                                return_province_id: secondPlace ? secondPlace.value : '',
+                                                                start_date: startDate ? moment(new Date(startDate)).format('YYYY-MM-DD') : '',
+                                                                end_date: endDate ? moment(new Date(endDate)).format('YYYY-MM-DD') : '',
+                                                                sort: s.value
+                                                            }))
+                                                        }}
+                                                        type="radio"
                                                         class="before:content[''] peer relative h-5 w-5 cursor-pointer appearance-none rounded-full border border-blue-gray-200 text-gray-900 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-gray-900 checked:before:bg-gray-900 hover:before:opacity-10"
-                                                        id="html" />
+                                                        id="sort" />
                                                     <span
                                                         class="absolute text-gray-900 transition-opacity opacity-0 pointer-events-none top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 peer-checked:opacity-100">
                                                         <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 16 16" fill="currentColor">
@@ -182,7 +231,7 @@ const Search = () => {
                                                         </svg>
                                                     </span>
                                                 </label>
-                                                <label class="mt-px text-gray-700 cursor-pointer select-none text-sm" htmlFor="html">
+                                                <label class="mt-px text-gray-700 cursor-pointer select-none text-sm" htmlFor="sort">
                                                     {s.label}
                                                 </label>
                                             </div>
@@ -354,8 +403,8 @@ const Search = () => {
                                 ))}
                             </div> */}
                             </div>
-                            {searchResult.map(sr => (
-                                <Card Props={sr} />
+                            {(searchResult.length > 0) && searchResult.map(sr => (
+                                <Card data={sr} />
                             ))}
                             <div className="w-full text-center">
                                 <button className='bg-primary py-2.5 px-2 text-white text-sm rounded'>Xem thêm chuyến</button>

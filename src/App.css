@@ -91,3 +91,7 @@ input[type=checkbox] {
     border: 1px solid #2474e5;
     color: rgb(36,116,229);
 }
+
+.react-datepicker-popper {
+    z-index: 2 !important;
+}

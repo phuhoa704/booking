@@ -1,9 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { hideLoading, showLoading } from "../../slices/Loading";
 import httpRequest from "../../../httpRequest";
-import { ENDPOINTS } from "../../../configs/apis";
+import { API, ENDPOINTS } from "../../../configs/apis";
 import { Toast } from "../../../components/Alert/Toast";
-import { saveOrderCanceled, saveOrderCompleted, saveOrderDetail, saveOrderList } from "../../slices/Orders";
+import { saveBookingOrder, saveOrderCanceled, saveOrderCompleted, saveOrderDetail, saveOrderList } from "../../slices/Orders";
 
 export const lookupOrder = createAsyncThunk(
     'order/lookupOrder',
@@ -134,6 +134,38 @@ export const showOrder = createAsyncThunk(
                 thunky.dispatch(saveOrderDetail(res.data.data));
                 return {
                     action: true
+                }
+            }
+        }catch(err){
+            console.log(err);
+            thunky.dispatch(hideLoading());
+            Toast.fire({
+                title: err.response.data.message,
+                icon: 'error'
+            })
+        }
+    }
+)
+
+export const booking = createAsyncThunk(
+    'order/booking',
+    async(data, thunky) => {
+        try {
+            thunky.dispatch(showLoading());
+            const res = await httpRequest.post(ENDPOINTS.ORDER, data);
+            thunky.dispatch(hideLoading());
+            if(res.data.result) {
+                Toast.fire({
+                    title: res.data.message,
+                    icon: 'success'
+                })
+                thunky.dispatch(saveBookingOrder(res.data.data));
+                if(data.payment_method === 2) {
+                    window.location.replace(`${API}${ENDPOINTS.PAYMENT}${res.data.data.order_code}`);
+                }
+                return {
+                    action: true,
+                    data: res.data.data
                 }
             }
         }catch(err){

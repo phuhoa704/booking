@@ -19,15 +19,17 @@ import Payment from "./views/Payment";
 import Result from "./views/Result";
 import { useEffect } from "react";
 import { TOKEN } from "./configs/constants";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { profile } from "./redux/actions/Auth";
 import ChangePassword from "./views/User/ChangePassword";
 import { getListCategory, getListNews } from "./redux/actions/News";
 import NewsDetail from "./views/NewsDetail";
 import TicketInfoResult from "./views/TicketInfoResult";
+import Loading from "./components/Loading";
 
 function App() {
   const dispatch = useDispatch();
+  const { loading } = useSelector(state => state.loading);
   useEffect(() => {
     const token = window.localStorage.getItem(TOKEN);
     if(token) {
@@ -38,6 +40,7 @@ function App() {
   },[])
   return (
     <div className='App'>
+      {loading && <Loading />}
       <Navbar />
       <Routes>
         <Route path={ROUTER.HOME} element={<Home />} />
