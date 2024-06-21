@@ -31,5 +31,7 @@ export const ENDPOINTS = {
     CANCELORDER: '/orders/cancel', //${id}
     LOOKPUPORDER: '/orders/look-up',
     //PAYMENT
-    PAYMENT: '/onepay/payment?order_code=' //${order_code}
+    PAYMENT: '/onepay/payment?order_code=', //${order_code}
+    //ROUTES
+    ROUTES: '/routes'
 }

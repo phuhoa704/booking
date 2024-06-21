@@ -1,18 +1,7 @@
 import { useState } from "react";
-import uudai1 from '../../assets/concessionary/uudai1.jpg';
-import uudai2 from '../../assets/concessionary/uudai2.jpg';
-import uudai3 from '../../assets/concessionary/uudai3.png';
-import uudai4 from '../../assets/concessionary/uudai4.jpg';
-import uudai5 from '../../assets/concessionary/uudai5.png';
 
 const Concessionary = () => {
-    const [data] = useState([
-        { id: 1, title: 'Ưu đãi khi đặt xe Hải Phòng Travel dành cho tất cả khách hàng khi đặt tại Hagiangbusticket', img: uudai1 },
-        { id: 2, title: 'Nhận ưu đãi x2 khi đặt dịch vụ xe khách khứ hồi', img: uudai2 },
-        { id: 3, title: 'Tổng hợp chương trình khuyến mãi trong tháng', img: uudai3 },
-        { id: 4, title: 'Giới thiệu bạn mới - Nhận quà khủng từ Hagiangbusticket', img: uudai4 },
-        { id: 5, title: 'Ưu đãi bất ngờ khi đặt Hagiangbusticket', img: uudai5 },
-    ])
+    const [data] = useState([])
     return (
         <section className="my-4">
             <p className="font-semibold text-base xl:text-2xl text-[#3d3d3b] py-2.5">Ưu đãi nổi bật</p>

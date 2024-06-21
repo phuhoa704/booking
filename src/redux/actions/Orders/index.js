@@ -18,6 +18,7 @@ export const lookupOrder = createAsyncThunk(
                     icon: 'success'
                 })
                 thunky.dispatch(saveOrderDetail(res.data.data));
+                thunky.dispatch(saveBookingOrder(res.data.data));
                 return {
                     action: true
                 }

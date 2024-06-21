@@ -1,12 +1,7 @@
 import { FaBus, FaUserFriends, FaCircle, FaQrcode, FaRegUser, FaPhoneAlt, FaEnvelope } from "react-icons/fa";
 import Collapse from "../../components/Collapse";
 import { useEffect, useState } from "react";
-import image from '../../assets/confirmation/img.png';
-import { BsQrCodeScan, BsPhoneVibrate, BsCheck2All, BsShieldCheck, BsFillInfoCircleFill } from "react-icons/bs";
-import vnpay from '../../assets/payment/vnpay.png';
-import shopee from '../../assets/payment/shopee.png';
-import momo from '../../assets/payment/momo.png';
-import zalopay from '../../assets/payment/zalopay.png';
+import { BsShieldCheck } from "react-icons/bs";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ROUTER } from "../../configs/router";
 import { formatChangeNumber } from "../../helpers/number";

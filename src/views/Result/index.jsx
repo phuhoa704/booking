@@ -3,13 +3,35 @@ import { BsClock, BsFillHouseFill } from 'react-icons/bs';
 import app from '../../assets/vexere-app.png';
 import appstore from '../../assets/download/download-app-store.png';
 import chplay from '../../assets/download/download-gg-play.png';
-import { useLocation } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { PAYMENT_METHODS, STATUS } from "../../configs/constants";
 import moment from "moment";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { useEffect } from "react";
+import { lookupOrder } from "../../redux/actions/Orders";
+import { ROUTER } from "../../configs/router";
 
 const Result = () => {
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const [searchParams] = useSearchParams();
+    const orderCode = searchParams.get("order_code");
+    const paymentError = searchParams.get("payment-error");
     const { bookingOrder } = useSelector(state => state.order);
+    useEffect(() => {
+        if(orderCode) {
+            const parsed = JSON.parse(orderCode);
+            dispatch(lookupOrder({
+                order_code: parsed.order_code,
+                phone: parsed.phone
+            }));
+        }
+    }, [orderCode]);
+    /* useEffect(() => {
+        if(!(Object.keys(bookingOrder).length > 0)) {
+            navigate(ROUTER.SEARCH);
+        }
+    },[bookingOrder]) */
     return (
         <div className="bg-[#F2F2F2] w-full h-screen pt-16 xl:pt-0">
             <div className="w-full xl:w-1/2 m-auto py-5 px-2.5 xl:px-0">
@@ -24,7 +46,7 @@ const Result = () => {
                 <div className="rounded-lg border border-[#D9D9D9] p-5 bg-white my-5">
                     Chúng tôi đã gửi thông tin vé đến SĐT <span className="font-semibold">{bookingOrder.phone}</span> và email <span className="font-semibold">{bookingOrder.email}</span>, bạn hãy kiểm tra thật kỹ nhé !
                 </div>
-                <div className="rounded-lg border border-[#D9D9D9] p-5 bg-white my-5 grid grid-cols-2 gap-4">
+                <div className="rounded-lg border border-[#D9D9D9] p-5 bg-white my-5">
                     <h2 className="m-0 text-lg text-center capitalize font-semibold">
                         Mã: {bookingOrder.order_code}
                     </h2>

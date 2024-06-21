@@ -1,16 +1,7 @@
 import { useState } from "react";
-import travel1 from '../../assets/travel/travel1.jpg';
-import travel2 from '../../assets/travel/travel2.jpg';
-import travel3 from '../../assets/travel/travel3.jpg';
-import travel4 from '../../assets/travel/travel4.jpg';
 
 const Travel = () => {
-    const [data] = useState([
-        { id: 1, title: 'Thuê xe Sài Gòn đi Vũng Tàu', img: travel1 },
-        { id: 2, title: 'Thuê xe Sài Gòn đi Mũi Né', img: travel2 },
-        { id: 3, title: 'Thuê xe Sài Gòn đi Đà Lạt', img: travel3 },
-        { id: 3, title: 'Thuê xe Sài Gòn đi Hồ Tràm', img: travel4 }
-    ])
+    const [data] = useState([])
     return (
         <section className="my-4">
             <p className="font-semibold text-base xl:text-2xl text-[#3d3d3b] py-2.5">Thuê xe du lịch</p>

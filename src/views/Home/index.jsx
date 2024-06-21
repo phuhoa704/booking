@@ -1,21 +1,8 @@
 import background from '../../assets/leaderboard.png';
 import { useState } from 'react';
-import PopularRoad from '../../components/PopularRoad';
-import Concessionary from '../../components/Concessionary';
-import ConcessionaryFromPartner from '../../components/ConcessionaryFromPartner';
-import HotNews from '../../components/HotNews';
-import Services from '../../components/Services';
-import CarRental from '../../components/CarRental';
-import Travel from '../../components/Travel';
-import ForPartner from '../../components/ForPartner';
-import News from '../../components/News';
 //datepicker
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-// import DatePicker from 'react-date-picker';
-// import 'react-date-picker/dist/DatePicker.css';
-// import 'react-calendar/dist/Calendar.css';
-// Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 // Import Swiper styles
 import 'swiper/css';
@@ -29,8 +16,6 @@ import CustomerCard from '../../components/CustomerCard';
 import Flatforms from '../../components/Flatforms';
 import SocialMedia from '../../components/SocialMedia';
 import BusStations from '../../components/BusStations';
-// data sample
-import { location } from '../../configs/data';
 import { useEffect } from 'react';
 import Footer from '../../components/Footer';
 import { useNavigate } from 'react-router-dom';
@@ -40,6 +25,9 @@ import { getProvinces } from '../../redux/actions/Location';
 import { getSearchResult } from '../../redux/actions/Search';
 import { getDetailNews } from '../../redux/actions/News';
 import moment from 'moment';
+import { API_STORE } from '../../configs/apis';
+import { getRoutes } from '../../redux/actions/Routes';
+import PopularRoad from '../../components/PopularRoad';
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -76,6 +64,7 @@ const Home = () => {
     useEffect(() => {
         setRendered(true)
         dispatch(getProvinces([]));
+        dispatch(getRoutes([]));
     }, [])
     return (
         <>
@@ -225,6 +214,7 @@ const Home = () => {
             </section>
             <div className="w-full py-2">
                 <div className="w-full xl:w-8/12 m-auto px-2 xl:px-0">
+                    <PopularRoad />
                     {/* <PopularRoad />
                     <Concessionary />
                     <ConcessionaryFromPartner />
@@ -257,7 +247,7 @@ const Home = () => {
                                             dispatch(getDetailNews(d.id));
                                             navigate(`/news/${d.slug}`);
                                         }}>
-                                            <img src={d.banner} className="w-full h-36 rounded-tl rounded-tr" alt="" />
+                                            <img src={`${API_STORE}${d.banner}`} className="w-full h-36 rounded-tl rounded-tr" alt="" />
                                             <div className="p-2.5 rounded-bl rounded-br">
                                                 <p className="font-semibold">{d.name}</p>
                                             </div>

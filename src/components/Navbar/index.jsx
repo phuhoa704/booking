@@ -37,7 +37,7 @@ const Navbar = () => {
         { id: 6, name: "Nhận xét chuyến đi", icon: <i className="fa-solid fa-square-pen"></i>, onClick: () => navigate(`${ROUTER.USER}/${ROUTER.EVALUATION}`) },
         {
             id: 7, name: "Đăng xuất", icon: <i className="fa-solid fa-right-from-bracket"></i>, onClick: () => {
-                dispatch(resetUser())
+                dispatch(logout())
                 navigate(ROUTER.HOME)
             }
         },

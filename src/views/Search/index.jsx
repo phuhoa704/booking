@@ -255,7 +255,9 @@ const Search = () => {
                                                     formatLabel={value => `${value}:00`}
                                                     value={rangeVals}
                                                     onChange={value => setRangeVals(value)}
-                                                    onChangeComplete={value => console.log(value)}
+                                                    onChangeComplete={value => {
+                                                        console.log(value)
+                                                    }}
                                                 />
                                             }
                                         />

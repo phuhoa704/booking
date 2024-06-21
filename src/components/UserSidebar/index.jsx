@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ROUTER } from "../../configs/router";
-import { useDispatch } from "react-redux";
-import { resetUser } from '../../redux/slices/Auth';
+import { useDispatch } from "react-redux";  
+import { logout } from "../../redux/actions/Auth";
 
 const UserSidebar = () => {
     const dispatch = useDispatch();
@@ -18,7 +18,7 @@ const UserSidebar = () => {
         { id: 6, name: "Nhận xét chuyến đi", icon: <i className="fa-solid fa-square-pen"></i>, path: `${ROUTER.USER}/${ROUTER.EVALUATION}`, onClick: () => navigate(`${ROUTER.USER}/${ROUTER.EVALUATION}`) },
         {
             id: 7, name: "Đăng xuất", icon: <i className="fa-solid fa-right-from-bracket"></i>, onClick: () => {
-                dispatch(resetUser())
+                dispatch(logout())
                 navigate(ROUTER.HOME)
             }
         },
