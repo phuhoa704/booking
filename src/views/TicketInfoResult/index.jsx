@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { ROUTER } from "../../configs/router";
 import { FaAngleLeft } from "react-icons/fa";
 import { useEffect } from "react";
+import { formatChangeNumber } from "../../helpers/number";
 
 const TicketInfoResult = () => {
     const navigate = useNavigate();
@@ -39,6 +40,7 @@ const TicketInfoResult = () => {
                             <p className="font-semibold text-base">{od.trip.coach_company.name}</p>
                             <p className="text-xs">Số điện thoại: {od.trip.coach_company.phone}</p>
                             <p className="text-xs">Tuyến đường: {od.trip.route.name} - Loại xe: {od.trip.vehicle_category.name}</p>
+                            <p className="text-xs">Giá tiền: {formatChangeNumber(`${od.price}`)} - Số ghế: {od.quantity}</p>
                         </div>
                         <div className="grid grid-cols-2 divide-x">
                             <div className="col-span-full xl:col-span-1 p-3">

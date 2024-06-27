@@ -4,6 +4,7 @@ import httpRequest from "../../../httpRequest";
 import { API, ENDPOINTS } from "../../../configs/apis";
 import { Toast } from "../../../components/Alert/Toast";
 import { saveBookingOrder, saveOrderCanceled, saveOrderCompleted, saveOrderDetail, saveOrderList } from "../../slices/Orders";
+import { resetSearchState } from "../../slices/Search";
 
 export const lookupOrder = createAsyncThunk(
     'order/lookupOrder',
@@ -161,6 +162,7 @@ export const booking = createAsyncThunk(
                     icon: 'success'
                 })
                 thunky.dispatch(saveBookingOrder(res.data.data));
+                thunky.dispatch(resetSearchState());
                 if(data.payment_method === 2) {
                     window.location.replace(`${API}${ENDPOINTS.PAYMENT}${res.data.data.order_code}`);
                 }

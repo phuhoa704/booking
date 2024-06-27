@@ -10,6 +10,7 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
 import { lookupOrder } from "../../redux/actions/Orders";
 import { ROUTER } from "../../configs/router";
+import { formatChangeNumber } from "../../helpers/number";
 
 const Result = () => {
     const navigate = useNavigate();
@@ -57,14 +58,16 @@ const Result = () => {
                     <div className="text-center mb-2">
                         <p className="font-semibold">Họ và tên: <span className="font-normal">{bookingOrder.name}</span></p>
                         <p className="font-semibold">Số điện thoại: <span className="font-normal">{bookingOrder.phone}</span></p>
-                        <p className="font-semibold">Ngày: <span className="font-normal">{moment(new Date(bookingOrder.created_at)).format('DD-MM-YYYY')}</span></p>
+                        <p className="font-semibold">Ngày đặt: <span className="font-normal">{moment(new Date(bookingOrder.created_at)).format('DD-MM-YYYY')}</span></p>
+                        <p className="font-semibold">Tổng tiền: <span className="font-normal">{formatChangeNumber(`${bookingOrder.total}`)}</span></p>
                     </div>
                     {(bookingOrder.order_details && bookingOrder.order_details.length > 0) && bookingOrder.order_details.map(od => (
-                        <div className="border rounded-lg border-[#eee] w-full shadow-lg">
+                        <div className="border rounded-lg border-[#eee] w-full shadow-lg mb-4">
                             <div className="text-center text-sm mb-2">
                                 <p className="font-semibold text-base">{od.trip.coach_company.name}</p>
                                 <p className="text-xs">Số điện thoại: {od.trip.coach_company.phone}</p>
                                 <p className="text-xs">Tuyến đường: {od.trip.route.name} - Loại xe: {od.trip.vehicle_category.name}</p>
+                                <p className="text-xs">Giá tiền: {formatChangeNumber(`${od.price}`)} - Số ghế: {od.quantity}</p>
                             </div>
                             <div className="grid grid-cols-2 divide-x">
                                 <div className="col-span-full xl:col-span-1 p-3">

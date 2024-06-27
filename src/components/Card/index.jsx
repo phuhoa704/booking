@@ -7,9 +7,10 @@ import moment from "moment";
 import { formatChangeNumber } from "../../helpers/number";
 import { useDispatch } from "react-redux";
 import { getSearchDetail } from "../../redux/actions/Search";
+import { saveDeparture, saveDepartureQuantity, saveReturn, saveReturnDetail, saveReturnQuantity } from "../../redux/slices/Search";
 
 const Card = (Props) => {
-    const { data } = Props;
+    const { data, returnBooking } = Props;
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [state, setState] = useState(false);
@@ -85,7 +86,6 @@ const Card = (Props) => {
                                     <div className="font-bold text-lg mr-2">{moment(new Date(data.start_time)).format('HH:mm')}</div>
                                     <div className="whitespace-nowrap">{data.departure_province.name}</div>
                                 </div>
-                                <div className="top-[26px] absolute text-sm">4h30m</div>
                                 <div className="absolute bottom-[-5px] flex items-center">
                                     <div className="font-bold text-lg mr-2">{moment(new Date(data.end_time)).format('HH:mm')}</div>
                                     <div className="whitespace-nowrap">{data.return_province.name}</div>
@@ -252,7 +252,15 @@ const Card = (Props) => {
                                 <div className="flex items-center">
                                     <div className="text-sm mr-2.5">Tổng cộng: <span className="text-primary font-semibold">{formatChangeNumber(subtotal.toString())}đ</span></div>
                                     <button className="p-2 bg-primary rounded text-white text-sm" onClick={() => {
-                                        dispatch(getSearchDetail(data.id))
+                                        if(returnBooking) {
+                                            dispatch(saveReturnDetail(data));
+                                            dispatch(saveReturnQuantity(quantity));
+                                            dispatch(saveReturn({pickup, drop}));
+                                        } else {
+                                            dispatch(getSearchDetail(data.id))
+                                            dispatch(saveDepartureQuantity(quantity));
+                                            dispatch(saveDeparture({pickup, drop}));
+                                        }
                                         navigate(ROUTER.CONFIRMATION, {state: {pickup, drop, quantity, trip_id: data.id, type: 1, subtotal}});
                                     }}>Tiếp tục</button>
                                 </div>

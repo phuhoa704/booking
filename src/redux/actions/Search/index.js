@@ -10,7 +10,7 @@ export const getSearchResult = createAsyncThunk(
     async(data, thunky) => {
         try {
             thunky.dispatch(showLoading());
-            const res = await httpRequest.get(`${ENDPOINTS.SEARCH}?page=${data.page ? data.page : ''}&page_size=${data.page_size ? data.page_size : ''}&departure_province_id=${data.departure_province_id ? data.departure_province_id : ''}&return_province_id=${data.return_province_id ? data.return_province_id : ''}&start_date=${data.start_date ? data.start_date : ''}&return_date=${data.return_date ? data.return_date : ''}&sort=${data.sort ? data.sort : ''}`)
+            const res = await httpRequest.get(`${ENDPOINTS.SEARCH}?page=${data.page ? data.page : ''}&page_size=${data.page_size ? data.page_size : ''}&departure_province_id=${data.departure_province_id ? data.departure_province_id : ''}&return_province_id=${data.return_province_id ? data.return_province_id : ''}&start_date=${data.start_date ? data.start_date : ''}&return_date=${data.end_date ? data.end_date : ''}&sort=${data.sort ? data.sort : ''}`)
             if(res.data.result) {
                 thunky.dispatch(hideLoading())
                 thunky.dispatch(saveSearchResult(res.data.data.data));

@@ -26,6 +26,9 @@ import { getListCategory, getListNews } from "./redux/actions/News";
 import NewsDetail from "./views/NewsDetail";
 import TicketInfoResult from "./views/TicketInfoResult";
 import Loading from "./components/Loading";
+import { getProvinces } from './redux/actions/Location';
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
 
 function App() {
   const dispatch = useDispatch();
@@ -37,6 +40,7 @@ function App() {
     }
     dispatch(getListCategory([]));
     dispatch(getListNews([]));
+    dispatch(getProvinces([]));
   },[])
   return (
     <div className='App'>

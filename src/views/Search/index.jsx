@@ -23,6 +23,7 @@ import ResponsiveStation from '../../components/ResponsiveStation';
 import ResponsiveSearch from '../../components/ResponsiveSearch';
 import { useDispatch, useSelector } from 'react-redux';
 import { getSearchResult } from '../../redux/actions/Search';
+import moment from 'moment';
 
 const Search = () => {
     const dispatch = useDispatch();
@@ -46,6 +47,8 @@ const Search = () => {
         { id: 5, label: 'Giá giảm dần', value: 'desc_price' },
     ])
     const [sortVal, setSortVal] = useState(null);
+    const [filterPickup, setFileterPickup] = useState(null);
+    const [filterDrop, setFileterDrop] = useState(null);
     //responsive state
     const [modalFilter, setModalFilter] = useState(false);
     const [modalSort, setModalSort] = useState(false);
@@ -54,8 +57,29 @@ const Search = () => {
     const [modalSearch, setModalSearch] = useState(false);
     //store state
     const { searchResult } = useSelector(state => state.search);
+    const { provinces } = useSelector(state => state.location);
     useEffect(() => {
         if (state && Object.keys(state).length > 0) {
+            setStartDate(state.start_date ? new Date(state.start_date) : null);
+            setEndDate(state.end_date ? new Date(state.end_date) : null);
+            if(state.departure_province_id) {
+                let finder = provinces.find(p => p.id === state.departure_province_id);
+                if(finder) {
+                    setFirstPlace({
+                        label: finder.name,
+                        value: finder.id
+                    })
+                }
+            }
+            if(state.return_province_id) {
+                let finder = provinces.find(p => p.id === state.return_province_id);
+                if(finder) {
+                    setSecondPlace({
+                        label: finder.name,
+                        value: finder.id
+                    })
+                }
+            }
             dispatch(getSearchResult({
                 page: 1,
                 page_size: 10,
@@ -140,7 +164,10 @@ const Search = () => {
                                 <div className="grid grid-cols-4 h-full">
                                     <div className="col-span-2 xl:col-span-1 relative">
                                         <Select
-                                            options={location}
+                                            options={provinces.map(p => ({
+                                                label: p.name,
+                                                value: p.id
+                                            }))}
                                             classNames={{
                                                 menu: () => 'text-left !z-10',
                                                 // placeholder: (styles) => ({...styles, ...dotPlaceholder('#2474E5')})
@@ -150,7 +177,7 @@ const Search = () => {
                                             placeholder={<div><i className="fa-solid fa-location-arrow text-primary text-lg"></i> Nơi bắt đầu</div>}
                                             className='hidden-select-border'
                                         />
-                                        <div
+                                        {/* <div
                                             onClick={() => {
                                                 let tempFirst = firstPlace;
                                                 let tempSecond = secondPlace;
@@ -160,11 +187,14 @@ const Search = () => {
                                             className="absolute w-8 h-8 right-0 top-1/2 translate-x-[50%] translate-y-[-50%] cursor-pointer z-10 rounded-full bg-[#cfd1d0] flex items-center justify-center"
                                         >
                                             <i className="fa-solid fa-arrow-right-arrow-left"></i>
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <div className="col-span-2 xl:col-span-1 border-[#d9d9d9] xl:border-r">
                                         <Select
-                                            options={location}
+                                            options={provinces.map(p => ({
+                                                label: p.name,
+                                                value: p.id
+                                            }))}
                                             classNames={{
                                                 menu: () => 'text-left !z-10',
                                             }}
@@ -239,29 +269,12 @@ const Search = () => {
                                     ))}
                                 </ul>
                             </div>
-                            <div className="w-full bg-white p-2 5 border border-[#e0e0e0] rounded-lg">
+                            {/* <div className="w-full bg-white p-2 5 border border-[#e0e0e0] rounded-lg">
                                 <div className='flex justify-between mb-2.5'>
                                     <span className='font-semibold text-lg'>Lọc</span>
                                     <span className='text-primary underline font-semibold'>Xóa lọc</span>
                                 </div>
                                 <ul>
-                                    <li className='border-b border-[#d9d9d9] mb-3'>
-                                        <Collapse
-                                            title={'Giờ đi'}
-                                            content={
-                                                <InputRange
-                                                    maxValue={24}
-                                                    minValue={0}
-                                                    formatLabel={value => `${value}:00`}
-                                                    value={rangeVals}
-                                                    onChange={value => setRangeVals(value)}
-                                                    onChangeComplete={value => {
-                                                        console.log(value)
-                                                    }}
-                                                />
-                                            }
-                                        />
-                                    </li>
                                     <li className='border-b border-[#d9d9d9] mb-3'>
                                         <Collapse
                                             title={'Nhà xe'}
@@ -328,11 +341,11 @@ const Search = () => {
                                             title={'Điểm đón'}
                                             content={
                                                 <ul>
-                                                    {location.map(l => (
+                                                    {provinces.map(l => (
                                                         <li>
                                                             <div className="flex items-center cursor-pointer">
-                                                                <input type="checkbox" value={l.value} class="w-5 h-5 shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" />
-                                                                <label for="hs-default-checkbox" class="text-sm ms-3">{l.label}</label>
+                                                                <input type="checkbox" value={l.id} onChange={(e) => setFileterPickup(e.target.value)} class="w-5 h-5 shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" />
+                                                                <label for="hs-default-checkbox" class="text-sm ms-3">{l.name}</label>
                                                             </div>
                                                         </li>
                                                     ))}
@@ -345,11 +358,11 @@ const Search = () => {
                                             title={'Điểm trả'}
                                             content={
                                                 <ul>
-                                                    {location.map(l => (
+                                                    {provinces.map(l => (
                                                         <li>
                                                             <div className="flex items-center cursor-pointer">
-                                                                <input type="checkbox" value={l.value} class="w-5 h-5 shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" />
-                                                                <label for="hs-default-checkbox" class="text-sm ms-3">{l.label}</label>
+                                                                <input type="checkbox" value={l.id} onChange={(e) => setFileterDrop(e.target.value)} class="w-5 h-5 shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" />
+                                                                <label for="hs-default-checkbox" class="text-sm ms-3">{l.name}</label>
                                                             </div>
                                                         </li>
                                                     ))}
@@ -357,37 +370,8 @@ const Search = () => {
                                             }
                                         />
                                     </li>
-                                    <li className='border-b border-[#d9d9d9] mb-3'>
-                                        <Collapse
-                                            title={'Vị trí ghế'}
-                                            content={
-                                                <div className='flex justify-between items-center'>
-                                                    <span className='text-sm'>Số ghế trống</span>
-                                                    <div className="flex items-center gap-4">
-                                                        <button
-                                                            onClick={() => {
-                                                                if (numSeat > 1) {
-                                                                    setNumSeat(numSeat - 1);
-                                                                }
-                                                            }}
-                                                            className={`rounded-full p-1.5 text-sm w-7 h-7 flex justify-center items-center border-2 ${(numSeat < 2) ? 'border-[#e0e0e0] bg-[#f7f7f7] text-[#e0e0e0]' : 'bg-[#e3edfc] border-primary text-primary'}`}>
-                                                            <i className="fa-solid fa-minus"></i>
-                                                        </button>
-                                                        <span>{numSeat}</span>
-                                                        <button
-                                                            onClick={() => {
-                                                                setNumSeat(numSeat + 1);
-                                                            }}
-                                                            className={`rounded-full p-1.5 text-sm w-7 h-7 flex justify-center items-center border-2 bg-[#e3edfc] border-primary text-primary`}>
-                                                            <i className="fa-solid fa-plus"></i>
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            }
-                                        />
-                                    </li>
                                 </ul>
-                            </div>
+                            </div> */}
                         </div>
                         <div className="col-span-full xl:col-span-5">
                             <div className="my-3 flex items-center overflow-x-auto w-full">
@@ -405,8 +389,38 @@ const Search = () => {
                                 ))}
                             </div> */}
                             </div>
-                            {(searchResult.length > 0) && searchResult.map(sr => (
-                                <Card data={sr} />
+                            {(searchResult.filter(s => {
+                                if(filterPickup) {
+                                    return s.departure_province_id === filterPickup
+                                } else {
+                                    return true
+                                }
+                            }).filter(s => {
+                                if(filterDrop) {
+                                    return s.return_province_id === filterDrop
+                                } else {
+                                    return true
+                                }
+                            }).length > 0) && searchResult.filter(s => {
+                                if(filterPickup) {
+                                    return s.departure_province_id === filterPickup
+                                } else {
+                                    return true
+                                }
+                            }).filter(s => {
+                                if(filterDrop) {
+                                    return s.return_province_id === filterDrop
+                                } else {
+                                    return true
+                                }
+                            }).filter(s => {
+                                if(state.coach_company_id) {
+                                    return s.coach_company_id === state.coach_company_id
+                                } else {
+                                    return true
+                                }
+                            }).map(sr => (
+                                <Card data={sr} returnBooking={state.returnBooking}/>
                             ))}
                             <div className="w-full text-center">
                                 <button className='bg-primary py-2.5 px-2 text-white text-sm rounded'>Xem thêm chuyến</button>

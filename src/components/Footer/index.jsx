@@ -6,12 +6,36 @@ import partner from '../../assets/payment_partner/payment_partner_desktop.png';
 import qrcode from '../../assets/download/download_app_qr.png';
 import appstore from '../../assets/download/download-app-store.png';
 import chplay from '../../assets/download/download-gg-play.png';
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { ROUTER } from "../../configs/router";
 
 const Footer = () => {
+    const navigate = useNavigate();
+    const { routes } = useSelector(state => state.routes);
     return (
         <div className="w-full bg-[#f2f2f2]">
             <div className="w-9/12 py-8 m-auto">
                 <div className="grid grid-cols-5 gap-4">
+                    <div className="col-span-full xl:col-span-1">
+                        <p className="font-semibold text-xl my-1.5">Tuyến đường</p>
+                        <div className="grid grid-cols-1 gap-2.5">
+                            {routes.map(fsi => (
+                                <div className="col-span-full font-semibold text-sm cursor-pointer" key={fsi.id} onClick={() => {
+                                    navigate(ROUTER.SEARCH, {
+                                        state: {
+                                            departure_province_id: '',
+                                            return_province_id: '',
+                                            start_date: '',
+                                            end_date: '',
+                                            sort: 'asc_time',
+                                            route_id: fsi.id
+                                        }
+                                    });
+                                }}>{fsi.name}</div>
+                            ))}
+                        </div>
+                    </div>
                     {footerSuggestions.map(fs => {
                         if (fs.id === 2 || fs.id === 3) {
                             return (
@@ -37,7 +61,7 @@ const Footer = () => {
                                 </div>
                             )
                         }
-                        if (fs.id !== 5 && fs.id !== 2 && fs.id !== 3) {
+                        if (fs.id === 4) {
                             return (
                                 <div className="col-span-full xl:col-span-1" key={fs.id}>
                                     <p className="font-semibold text-xl my-1.5">{fs.title}</p>

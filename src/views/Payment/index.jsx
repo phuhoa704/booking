@@ -20,12 +20,20 @@ const Payment = () => {
         { id: 3, name: 'WELCOMETOTQD', descr: 'Giảm 10% từ CN, 17/03' },
     ])
     const [payment, setPayment] = useState(2);
-    const { searchDetail } = useSelector(state => state.search);
+    const { searchDetail, returnDetail, departureQuantity, returnQuantity, departurePickup, departureDrop, returnPickup, returnDrop } = useSelector(state => state.search);
     useEffect(() => {
-        if(!(state && Object.keys(state).length > 0)) {
+        if (!(state && Object.keys(state).length > 0)) {
             navigate(ROUTER.SEARCH);
         }
     }, [state])
+    console.log({
+        searchDetail,
+        returnDetail,
+        departurePickup,
+        departureDrop,
+        returnPickup,
+        returnDrop
+    })
     return (
         <div className="bg-[#F2F2F2] w-full pt-16 xl:p-0">
             <div className="w-full xl:w-2/3 m-auto py-5 px-2 xl:px-0">
@@ -230,13 +238,19 @@ const Payment = () => {
                             <Collapse
                                 title={<div className="flex justify-between font-semibold">
                                     <div>Tổng tiền</div>
-                                    <div>{formatChangeNumber(`${state.subtotal}`)}</div>
+                                    <div>{formatChangeNumber((Object.keys(returnDetail).length > 0) ? `${(searchDetail.price * departureQuantity) + (returnDetail.price * returnQuantity)}` : `${searchDetail.price * departureQuantity}`)}</div>
                                 </div>}
-                                content={<div className="flex justify-between">
-                                    <div className="text-sm">Giá vé</div>
-                                    <div className="flex flex-col">
-                                        <p className="text-sm">{formatChangeNumber(`${searchDetail.price}`)} x {state.quantity}</p>
+                                content={<div className="flex flex-col">
+                                    <div className="flex justify-between border-b border-[#d9d9d9] py-2">
+                                        <div className="text-sm">Giá vé</div>
+                                        <p className="text-sm">{formatChangeNumber(`${searchDetail.price}`)} x {departureQuantity}</p>
                                     </div>
+                                    {(Object.keys(returnDetail).length > 0) && (
+                                        <div className="flex justify-between border-b border-[#d9d9d9] py-2">
+                                            <div className="text-sm">Giá vé</div>
+                                            <p className="text-sm">{formatChangeNumber(`${returnDetail.price}`)} x {returnQuantity}</p>
+                                        </div>
+                                    )}
                                 </div>}
                             />
                         </div>
@@ -263,14 +277,14 @@ const Payment = () => {
                         </div>
                         <div className="bg-white border border-[#F2F2F2] p-5 rounded-xl my-5">
                             <div className="font-semibold my-3">Thông tin chuyến đi</div>
-                            <div className="border border-[#D9D9D9] rounded-lg p-4">
+                            <div className="border border-[#D9D9D9] rounded-lg p-4 mb-2.5">
                                 <div className="flex justify-between items-center text-xs gap-2">
                                     <div className="flex items-center gap-2">
                                         <FaBus className="text-primary" />
                                         <span>{moment(new Date(searchDetail.start_time)).format('DD/MM/YYYY HH:mm')}</span>
                                         <div className="flex items-center text-[#484848] gap-1.5">
                                             <FaUserFriends />
-                                            <span>{state.quantity}</span>
+                                            <span>{departureQuantity}</span>
                                         </div>
                                     </div>
                                     <div className="text-primary underline font-semibold">Chi tiết</div>
@@ -296,8 +310,8 @@ const Payment = () => {
                                         <div className="flex text-xs items-center gap-2">
                                             <FaCircle className="text-primary" />
                                             <div className="flex flex-col">
-                                                <span className="font-semibold">{searchDetail?.pickups?.find(p => p.id === state.pickup) ? searchDetail.pickups.find(p => p.id === state.pickup).name : 'Đang cập nhật'}</span>
-                                                <span className="text-[#858585]">{searchDetail?.pickups?.find(p => p.id === state.pickup) ? searchDetail.pickups.find(p => p.id === state.pickup).address : 'Đang cập nhật'}</span>
+                                                <span className="font-semibold">{searchDetail?.pickups?.find(p => p.id === departurePickup) ? searchDetail.pickups.find(p => p.id === departurePickup).name : 'Đang cập nhật'}</span>
+                                                <span className="text-[#858585]">{searchDetail?.pickups?.find(p => p.id === departurePickup) ? searchDetail.pickups.find(p => p.id === departurePickup).address : 'Đang cập nhật'}</span>
                                             </div>
                                         </div>
                                     </div>
@@ -309,13 +323,68 @@ const Payment = () => {
                                         <div className="flex text-xs items-center gap-2">
                                             <i className="fa-solid fa-location-dot text-[#de3e6e]"></i>
                                             <div className="flex flex-col">
-                                                <span className="font-semibold">{searchDetail?.drops?.find(p => p.id === state.drop) ? searchDetail.drops.find(p => p.id === state.drop).name : 'Đang cập nhật'}</span>
-                                                <span className="text-[#858585]">{searchDetail?.drops?.find(p => p.id === state.drop) ? searchDetail.drops.find(p => p.id === state.drop).address : 'Đang cập nhật'}</span>
+                                                <span className="font-semibold">{searchDetail?.drops?.find(p => p.id === departureDrop) ? searchDetail.drops.find(p => p.id === departureDrop).name : 'Đang cập nhật'}</span>
+                                                <span className="text-[#858585]">{searchDetail?.drops?.find(p => p.id === departureDrop) ? searchDetail.drops.find(p => p.id === departureDrop).address : 'Đang cập nhật'}</span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            {(Object.keys(returnDetail).length > 0) && (
+                                <div className="border border-[#D9D9D9] rounded-lg p-4">
+                                    <div className="flex justify-between items-center text-xs gap-2">
+                                        <div className="flex items-center gap-2">
+                                            <FaBus className="text-primary" />
+                                            <span>{moment(new Date(returnDetail.start_time)).format('DD/MM/YYYY HH:mm')}</span>
+                                            <div className="flex items-center text-[#484848] gap-1.5">
+                                                <FaUserFriends />
+                                                <span>{returnQuantity}</span>
+                                            </div>
+                                        </div>
+                                        <div className="text-primary underline font-semibold">Chi tiết</div>
+                                    </div>
+                                    <div className="border-t border-[#F2F2F2] mt-2">
+                                        <div className="p-2 flex gap-2.5">
+                                            <div className="w-1/4 rounded">
+                                                <img src={`${API_STORE}${returnDetail?.vehicle_category?.image}`} alt="" className="rounded" />
+                                            </div>
+                                            <div className="flex flex-col justify-center">
+                                                <p className="text-xs font-bold">{returnDetail?.coach_company?.name}</p>
+                                                <p style={{ fontSize: 9 }}>{returnDetail?.vehicle_category?.name}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div className="flex flex-col gap-3">
+                                        <div className="flex items-center gap-2">
+                                            <div className="flex flex-col">
+                                                <span className="font-bold">{moment(new Date(returnDetail.start_time)).format('HH:mm')}</span>
+                                                <span className="text-xs">({moment(new Date(returnDetail.start_time)).format('DD/MM')})</span>
+                                            </div>
+                                            <div className="flex text-xs items-center gap-2">
+                                                <FaCircle className="text-primary" />
+                                                <div className="flex flex-col">
+                                                    <span className="font-semibold">{returnDetail?.pickups?.find(p => p.id === returnPickup) ? returnDetail.pickups.find(p => p.id === returnPickup).name : 'Đang cập nhật'}</span>
+                                                    <span className="text-[#858585]">{returnDetail?.pickups?.find(p => p.id === returnPickup) ? returnDetail.pickups.find(p => p.id === returnPickup).address : 'Đang cập nhật'}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <div className="flex flex-col">
+                                                <span className="font-bold">{moment(new Date(returnDetail.end_time)).format('HH:mm')}</span>
+                                                <span className="text-xs">({moment(new Date(returnDetail.end_time)).format('DD/MM')})</span>
+                                            </div>
+                                            <div className="flex text-xs items-center gap-2">
+                                                <i className="fa-solid fa-location-dot text-[#de3e6e]"></i>
+                                                <div className="flex flex-col">
+                                                    <span className="font-semibold">{returnDetail?.drops?.find(p => p.id === returnDrop) ? returnDetail.drops.find(p => p.id === returnDrop).name : 'Đang cập nhật'}</span>
+                                                    <span className="text-[#858585]">{returnDetail?.drops?.find(p => p.id === returnDrop) ? returnDetail.drops.find(p => p.id === returnDrop).address : 'Đang cập nhật'}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
@@ -324,22 +393,36 @@ const Payment = () => {
                 <div className="w-full xl:w-2/3 m-auto px-2.5 xl:px-0">
                     <div className="flex justify-cennter gap-2.5 items-center">
                         <div className="w-1/3 flex gap-2.5 flex-col xl:flex-row">
-                            <button className="bg-primary w-full text-sm text-white py-2.5 rounded-lg" onClick={() => {
+                            <button className="bg-primary w-full text-sm text-white py-2.5 rounded-lg" onClick={async() => {
                                 const order = {
                                     name: state.name,
                                     email: state.email,
                                     phone: state.phone,
                                     payment_method: payment,
-                                    trips: [
+                                    trips: (Object.keys(returnDetail).length > 0) ? [
                                         {
-                                            trip_id: state.trip_id,
-                                            type: state.type,
-                                            quantity: state.quantity
+                                            trip_id: searchDetail.id,
+                                            type: 1,
+                                            quantity: departureQuantity
+                                        },
+                                        {
+                                            trip_id: returnDetail.id,
+                                            type: 2,
+                                            quantity: returnQuantity
+                                        }
+                                    ] : [
+                                        {
+                                            trip_id: searchDetail.id,
+                                            type: 1,
+                                            quantity: departureQuantity
                                         }
                                     ]
                                 }
-                                dispatch(booking(order));
-                            }}>{(payment === 1) ? 'Xác nhận đặt vé' : 'Tôi đã chuyển khoản'}</button>
+                                let rs = await dispatch(booking(order));
+                                if(rs.payload.action && payment === 1) {
+                                    navigate(ROUTER.RESULT)
+                                }
+                            }}>Xác nhận đặt vé</button>
                             {/* <button className="bg-white border w-full xl:w-1/2 text-sm text-[#000] font-semibold border-[#D9D9D9] py-2.5 rounded-lg" onClick={() => navigate(ROUTER.RESULT, { state: { payment: false } })}>Tôi sẽ chuyển khoản sau</button> */}
                         </div>
                         <p className="text-sm w-2/3">Bạn sẽ sớm nhận được biển số xe, số điện thoại tài xế
