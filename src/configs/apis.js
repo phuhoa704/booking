@@ -1,5 +1,5 @@
-export const API = 'https://id.vexere.cuongdev.click/api';
-export const API_STORE = 'https://id.vexere.cuongdev.click';
+export const API = 'https://adminvexere.cuongdesign.net/api';
+export const API_STORE = 'https://adminvexere.cuongdesign.net';
 
 export const ENDPOINTS = {
     //AUTH
