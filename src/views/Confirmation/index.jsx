@@ -18,6 +18,7 @@ import Modal from "../../components/Modal";
 import LoginForm from "../../components/Auth/Login";
 import SignupForm from "../../components/Auth/Signup";
 import CalendarComp from "../../components/Calendar";
+import { Toast } from "../../components/Alert/Toast";
 
 const Confirmation = () => {
     const navigate = useNavigate();
@@ -124,12 +125,12 @@ const Confirmation = () => {
                                     )}
                                     <div className="font-semibold my-3">Thông tin liên hệ</div>
                                     <form>
-                                        <input type="text" className="p-2.5 w-full bg-white border border-[#D9D9D9] rounded my-2" name="name" value={formVals.name} onChange={handleChange} placeholder="Tên người đi" />
+                                        <input type="text" required className="p-2.5 w-full bg-white border border-[#D9D9D9] rounded my-2" name="name" value={formVals.name} onChange={handleChange} placeholder="Tên người đi" />
                                         <div className="flex gap-2.5 my-2">
                                             <button type="button" className="p-2.5 bg-white border border-[#D9D9D9] w-20 text-sm rounded">VN +84</button>
-                                            <input type="text" className="p-2.5 bg-white border border-[#D9D9D9] rounded" style={{ width: 'calc(100% - 80px)' }} name="phone" value={formVals.phone} onChange={handleChange} placeholder="Số điện thoại" />
+                                            <input type="text" required className="p-2.5 bg-white border border-[#D9D9D9] rounded" style={{ width: 'calc(100% - 80px)' }} name="phone" value={formVals.phone} onChange={handleChange} placeholder="Số điện thoại" />
                                         </div>
-                                        <input type="text" className="p-2.5 w-full bg-white border border-[#D9D9D9] rounded my-2" name="email" value={formVals.email} onChange={handleChange} placeholder="Email để nhận thông tin đặt chỗ" />
+                                        <input type="text" required className="p-2.5 w-full bg-white border border-[#D9D9D9] rounded my-2" name="email" value={formVals.email} onChange={handleChange} placeholder="Email để nhận thông tin đặt chỗ" />
                                     </form>
                                     <div className="flex items-center rounded border border-[#27ae5f] bg-[#EEFBF4] p-2 w-full my-2">
                                         <i className="fa-solid fa-circle-check text-[#27ae5f]"></i>
@@ -331,7 +332,16 @@ const Confirmation = () => {
                 <div className="py-5 bg-white w-full">
                     <div className="w-full xl:w-2/3 m-auto px-2.5 xl:px-0">
                         <div className="flex justify-cennter gap-2.5">
-                            <button className="bg-primary text-white py-2.5 rounded-lg px-5" onClick={() => navigate(ROUTER.PAYMENT, { state: { ...formVals, ...state } })}>Tiếp tục</button>
+                            <button className="bg-primary text-white py-2.5 rounded-lg px-5" onClick={() => {
+                                if(formVals.email && formVals.name && formVals.phone) {
+                                    navigate(ROUTER.PAYMENT, { state: { ...formVals, ...state } })
+                                } else {
+                                    Toast.fire({
+                                        title: 'Vui lòng nhập đầy đủ thông tin',
+                                        icon: 'warning'
+                                    })
+                                }
+                            }}>Tiếp tục</button>
                             <button className="bg-pending text-black py-2.5 rounded-lg px-5" onClick={() => setModalCalendar(true)}>Đặt thêm chiều về</button>
                             <p className="text-sm">Bạn sẽ sớm nhận được biển số xe, số điện thoại tài xế
                                 và dễ dàng thay đổi điểm đón trả sau khi đặt.</p>
