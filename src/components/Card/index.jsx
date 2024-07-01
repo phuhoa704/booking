@@ -583,6 +583,11 @@ const Card = (Props) => {
                                         </div>
                                     </div>
                                     <p className="py-2 text-sm">{c.content}</p>
+                                    <div className="flex gap-4">
+                                        {(c.images && c.images.length > 0) && c.images.map(ci => (
+                                            <img src={`${API_STORE}${'ci'}`} className="h-10 w-10 shadow-lg rounded"/>
+                                        ))}
+                                    </div>
                                     <div className="flex gap-2.5">
                                         <span className="text-[#b8b8b8] text-xs">Đi ngày {c.date_move}</span>
                                         {c.booked && (<span className="text-[#27AE60] text-xs flex items-center gap-2"><FaCheckCircle /> Đã mua vé</span>)}
