@@ -6,6 +6,7 @@ import news from './slices/News';
 import search from './slices/Search';
 import order from './slices/Orders';
 import routes from './slices/Routes';
+import comments from './slices/Comments';
 
 export const store = configureStore({
     reducer: {
@@ -15,7 +16,8 @@ export const store = configureStore({
         news,
         search,
         order,
-        routes
+        routes,
+        comments
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(),
     devTools: process.env.NODE_ENV !== 'production',

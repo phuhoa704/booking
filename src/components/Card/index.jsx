@@ -1,50 +1,38 @@
-import { FaStar, FaInfoCircle, FaAngleDown, FaAngleLeft } from "react-icons/fa";
-import { useState } from "react";
+import { FaStar, FaInfoCircle, FaAngleDown, FaAngleLeft, FaCheckCircle } from "react-icons/fa";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { ROUTER } from "../../configs/router";
 import { API_STORE } from "../../configs/apis";
 import moment from "moment";
 import { formatChangeNumber } from "../../helpers/number";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getSearchDetail } from "../../redux/actions/Search";
 import { saveDeparture, saveDepartureQuantity, saveReturn, saveReturnDetail, saveReturnQuantity } from "../../redux/slices/Search";
+import { getComments, postComment } from "../../redux/actions/Comments";
 
 const Card = (Props) => {
     const { data, returnBooking } = Props;
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [state, setState] = useState(false);
+    const [expand, setExpand] = useState(false);
+    const [comment, setComment] = useState('');
+    const [rating, setRating] = useState(0);
     const [vouchers] = useState([
         { id: 1, name: 'FS040624BMT', descr: 'Giảm 50% chuyến đi từ 12:00 • T3, 04/06' },
         { id: 2, name: 'BMTCOMBO5', descr: 'Giảm 3% chuyến đi từ T6, 01/03' },
         { id: 3, name: 'FS040624VXR10', descr: 'Giảm 10% chuyến đi từ 12:00 • T3, 04/06' },
     ])
-    const [seats] = useState([
-        { id: 1, seat: true, pickable: false },
-        { id: 2, seat: true, pickable: false },
-        { id: 3, seat: true, pickable: false },
-        { id: 4, seat: true, pickable: false },
-        { id: 5, seat: true, pickable: false },
-        { id: 6, seat: true, pickable: true },
-        { id: 7, seat: true, pickable: true },
-        { id: 8, seat: true, pickable: true },
-        { id: 9, seat: true, pickable: true },
-        { id: 10, seat: true, pickable: true },
-        { id: 11, seat: true, pickable: true },
-        { id: 12, seat: true, pickable: false },
-        { id: 13, seat: true, pickable: true },
-        { id: 14, seat: true, pickable: true },
-        { id: 15, seat: true, pickable: true },
-        { id: 16, seat: false, pickable: true },
-        { id: 17, seat: false, pickable: true },
-        { id: 18, seat: true, pickable: true },
-    ])
-    const [selected, setSelected] = useState([]);
+    const [sortOpts, setSortOpts] = useState([])
     const [currentStep, setCurrentStep] = useState(1);
     const [subtotal, setSubtotal] = useState(0);
     const [quantity, setQuantity] = useState(0);
     const [pickup, setPickup] = useState(0);
     const [drop, setDrop] = useState(0);
+    const [files, setFiles] = useState([]);
+    const [fileBase64, setFileBase64] = useState([]);
+    const { comments, hasComment, hasImage, total, rating1, rating2, rating3, rating4, rating5, avg } = useSelector(state => state.comments);
+    const { user } = useSelector(state => state.auth);
     return (
         <div className="w-full border border-[#e0e0e0] rounded-lg bg-white hover:shadow-lg p-4 mb-4">
             <div className="flex gap-2.5 flex-col xl:flex-row">
@@ -54,10 +42,25 @@ const Card = (Props) => {
                 <div className="w-full xl:w-largeCardContainer">
                     <div className="flex justify-between mb-1.5">
                         <div className="flex items-center gap-2.5">
-                            <span className="font-semibold">{data.coach_company.name} ({data.coach_company.address})</span>
+                            <span className="font-semibold cursor-pointer" onClick={() => {
+                                setExpand(!expand);
+                                if(state) {
+                                    setState(false);
+                                }
+                                dispatch(getComments({
+                                    company_id: data.coach_company_id,
+                                    hasComment: 0,
+                                    hasImage: 0,
+                                    rating5: 0,
+                                    rating4: 0,
+                                    rating3: 0,
+                                    rating2: 0,
+                                    rating1: 0,
+                                }))
+                            }}>{data.coach_company.name} ({data.coach_company.address})</span>
                             <span className="bg-primary xl:flex items-center text-sm px-1 rounded hidden">
                                 <FaStar className="mr-2 text-white" />
-                                <span className="text-white">4.5 (556)</span>
+                                <span className="text-white">{parseInt(avg)} ({total})</span>
                             </span>
                         </div>
                         <span className="text-primary font-bold text-lg">Từ {formatChangeNumber(data.price.toString())}đ</span>
@@ -94,7 +97,12 @@ const Card = (Props) => {
                         </div>
                         <div className="flex flex-col justify-between items-end">
                             <span>Còn {data.quantity} chỗ trống</span>
-                            <button className="p-2 font-semibold bg-[#ffd333] text-[#484848] text-sm" onClick={() => setState(!state)}>Chọn chuyến</button>
+                            <button className="p-2 font-semibold bg-[#ffd333] text-[#484848] text-sm" onClick={() => {
+                                setState(!state);
+                                if(expand) {
+                                    setExpand(false);
+                                }
+                                }}>Chọn chuyến</button>
                         </div>
                     </div>
                 </div>
@@ -252,21 +260,337 @@ const Card = (Props) => {
                                 <div className="flex items-center">
                                     <div className="text-sm mr-2.5">Tổng cộng: <span className="text-primary font-semibold">{formatChangeNumber(subtotal.toString())}đ</span></div>
                                     <button className="p-2 bg-primary rounded text-white text-sm" onClick={() => {
-                                        if(returnBooking) {
+                                        if (returnBooking) {
                                             dispatch(saveReturnDetail(data));
                                             dispatch(saveReturnQuantity(quantity));
-                                            dispatch(saveReturn({pickup, drop}));
+                                            dispatch(saveReturn({ pickup, drop }));
                                         } else {
                                             dispatch(getSearchDetail(data.id))
                                             dispatch(saveDepartureQuantity(quantity));
-                                            dispatch(saveDeparture({pickup, drop}));
+                                            dispatch(saveDeparture({ pickup, drop }));
                                         }
-                                        navigate(ROUTER.CONFIRMATION, {state: {pickup, drop, quantity, trip_id: data.id, type: 1, subtotal}});
+                                        navigate(ROUTER.CONFIRMATION, { state: { pickup, drop, quantity, trip_id: data.id, type: 1, subtotal } });
                                     }}>Tiếp tục</button>
                                 </div>
                             </div>
                         </>
                     )}
+                </div>
+            )}
+            {expand && (
+                <div className="my-3">
+                    <div className="py-2.5 px-4 border-t border-b border-[#d9d9d9]">
+                        {(Object.keys(user).length > 0) && (
+                            <div className="py-2.5 w-10/12 m-auto">
+                                <div class="flex items-center py-2">
+                                    {Array(1, 2, 3, 4, 5).map(i => (
+                                        <svg key={i} className="rating w-5 h-5 ms-1 cursor-pointer" style={{ color: (i <= rating) ? '#fddf47' : '#d1d5db' }} onClick={() => setRating(i)} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                        </svg>
+                                    ))}
+                                </div>
+                                <label
+                                    htmlFor="tittlePost"
+                                    className="mb-2.5 block font-medium text-black"
+                                >
+                                    Hình ảnh
+                                </label>
+                                <div className="relative py-2">
+                                    <div className="flex items-center justify-center w-full">
+                                        <label
+                                            htmlFor="dropzone-file"
+                                            className={`flex flex-col items-center justify-center w-full h-fit ${(!fileBase64 || fileBase64.length === 0)
+                                                ? "border-2 border-gray-300 border-dashed"
+                                                : ""
+                                                } rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100`}
+                                        >
+                                            {fileBase64 && fileBase64.length > 0 ?
+                                                <div className="mt-4 grid-cols-4 grid gap-2">
+                                                    {fileBase64.map((item, index) => (
+                                                        <div key={index} className="col-span-1 h-40 relative">
+                                                            <img src={item} alt="" className="w-full h-full object-cover rounded-lg" />
+                                                        </div>
+                                                    ))}
+                                                </div> : (
+                                                    <div className="bg-gray-200 h-48 rounded-lg flex flex-col items-center justify-center text-gray-500">
+                                                        <svg
+                                                            className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                                                            aria-hidden="true"
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            fill="none"
+                                                            viewBox="0 0 20 16"
+                                                        >
+                                                            <path
+                                                                stroke="currentColor"
+                                                                stroke-linecap="round"
+                                                                stroke-linejoin="round"
+                                                                stroke-width="2"
+                                                                d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                                                            />
+                                                        </svg>
+                                                        <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                                                            <span className="font-semibold">
+                                                                Nhấn vào đây để upload
+                                                            </span>{" "}
+                                                            Hoặc kéo ảnh vào đây
+                                                        </p>
+                                                        <p className="text-xs text-gray-500 dark:text-gray-400">
+                                                            SVG, PNG, JPG or GIF
+                                                        </p>
+                                                    </div>
+                                                )}
+                                            <input
+                                                id="dropzone-file"
+                                                type="file"
+                                                name="files"
+                                                onChange={(evt) => {
+                                                    const selectedFiles = evt.target.files;
+                                                    if (selectedFiles && selectedFiles.length > 0) {
+                                                        const filesArray = Array.from(selectedFiles);
+                                                        setFiles(filesArray);
+                                                        filesArray.forEach((file) => {
+                                                            const reader = new FileReader();
+                                                            reader.onload = (e) => {
+                                                                setFileBase64((prevBase64) => {
+                                                                    const base64 = e.target?.result;
+                                                                    return [...(prevBase64 || []), base64];
+                                                                });
+                                                            };
+                                                            reader.readAsDataURL(file);
+                                                        });
+                                                    }
+                                                }}
+                                                className="hidden"
+                                                multiple // cho phép chọn nhiều file
+                                            />
+                                        </label>
+                                    </div>
+                                </div>
+                                <textarea placeholder="Nhập đánh giá của bạn" value={comment} name='comment' onChange={(e) => setComment(e.target.value)} rows={4} className="border border-[#d9d9d9] rounded w-full bg-white p-2.5" />
+                                <div className="text-right">
+                                    <button className="p-2 rounded bg-primary text-white" onClick={async () => {
+                                        const formData = new FormData();
+                                        files.forEach(f => {
+                                            formData.append('images[]', f)
+                                        })
+                                        formData.append('rating', rating);
+                                        formData.append('content', comment);
+                                        let rs = await dispatch(postComment({
+                                            company_id: data.coach_company_id,
+                                            data: formData
+                                        }))
+                                        if (rs.payload.action) {
+                                            dispatch(getComments({
+                                                company_id: data.coach_company_id,
+                                                hasComment: 0,
+                                                hasImage: 0,
+                                                rating5: 0,
+                                                rating4: 0,
+                                                rating3: 0,
+                                                rating2: 0,
+                                                rating1: 0,
+                                            }))
+                                        }
+                                    }}>Gửi đánh giá</button>
+                                </div>
+                            </div>
+                        )}
+                        <div className="flex gap-5">
+                            <span className="bg-primary xl:flex items-center text-sm px-1 rounded hidden">
+                                <FaStar className="mr-2 text-white" />
+                                <span className="text-white">{parseInt(avg)} ({total})</span>
+                            </span>
+                            <div class="flex items-center">
+                                {Array(1, 2, 3, 4, 5).map(i => (
+                                    <svg key={i} className="rating w-4 h-4 ms-1 cursor-pointer" style={{ color: (i <= parseInt(avg)) ? '#fddf47' : '#d1d5db' }} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                    </svg>
+                                ))}
+                            </div>
+                            <span>
+                                • {total} đánh giá
+                            </span>
+                        </div>
+                        <div className="w-full overflow-x-auto scroll-horizontal py-4">
+                            <div className="flex gap-4 w-max">
+                                <button className="p-2.5 border border-[#d9d9d9] flex items-center rounded text-sm hover:text-primary hover:border-primary" style={{ border: (sortOpts.includes('ALL') ? '1px solid #2474E5' : '1px solid #d9d9d9'), color: (sortOpts.includes('ALL') ? '#2474E5' : '#000') }} onClick={() => {
+                                    if (sortOpts.includes('ALL')) {
+                                        setSortOpts(sortOpts.filter(s => s !== 'ALL'));
+                                    } else {
+                                        setSortOpts([...sortOpts, 'ALL'])
+                                    }
+                                    dispatch(getComments({
+                                        company_id: data.coach_company_id,
+                                        hasComment: 0,
+                                        hasImage: 0,
+                                        rating5: 0,
+                                        rating4: 0,
+                                        rating3: 0,
+                                        rating2: 0,
+                                        rating1: 0,
+                                    }))
+                                }}>Tất cả ({total})</button>
+                                <button className="p-2.5 border border-[#d9d9d9] flex items-center rounded text-sm hover:text-primary hover:border-primary" style={{ border: (sortOpts.includes('COMMENT') ? '1px solid #2474E5' : '1px solid #d9d9d9'), color: (sortOpts.includes('COMMENT') ? '#2474E5' : '#000') }} onClick={() => {
+                                    if (sortOpts.includes('COMMENT')) {
+                                        setSortOpts(sortOpts.filter(s => s !== 'COMMENT'));
+                                    } else {
+                                        setSortOpts([...sortOpts, 'COMMENT'])
+                                    }
+                                    dispatch(getComments({
+                                        company_id: data.coach_company_id,
+                                        hasComment: 1,
+                                        hasImage: (sortOpts.includes('IMAGE')) ? 1 : 0,
+                                        rating5: (sortOpts.includes('RATING5')) ? 1 : 0,
+                                        rating4: (sortOpts.includes('RATING4')) ? 1 : 0,
+                                        rating3: (sortOpts.includes('RATING3')) ? 1 : 0,
+                                        rating2: (sortOpts.includes('RATING2')) ? 1 : 0,
+                                        rating1: (sortOpts.includes('RATING1')) ? 1 : 0,
+                                    }))
+                                }}>Có nhận xét ({hasComment})</button>
+                                <button className="p-2.5 border border-[#d9d9d9] flex items-center rounded text-sm hover:text-primary hover:border-primary" style={{ border: (sortOpts.includes('IMAGE') ? '1px solid #2474E5' : '1px solid #d9d9d9'), color: (sortOpts.includes('IMAGE') ? '#2474E5' : '#000') }} onClick={() => {
+                                    if (sortOpts.includes('IMAGE')) {
+                                        setSortOpts(sortOpts.filter(s => s !== 'IMAGE'));
+                                    } else {
+                                        setSortOpts([...sortOpts, 'IMAGE'])
+                                    }
+                                    dispatch(getComments({
+                                        company_id: data.coach_company_id,
+                                        hasComment: (sortOpts.includes('COMMENT')) ? 1 : 0,
+                                        hasImage: 1,
+                                        rating5: (sortOpts.includes('RATING5')) ? 1 : 0,
+                                        rating4: (sortOpts.includes('RATING4')) ? 1 : 0,
+                                        rating3: (sortOpts.includes('RATING3')) ? 1 : 0,
+                                        rating2: (sortOpts.includes('RATING2')) ? 1 : 0,
+                                        rating1: (sortOpts.includes('RATING1')) ? 1 : 0,
+                                    }))
+                                }}>Có hình ảnh ({hasImage})</button>
+                                <button className="p-2.5 border border-[#d9d9d9] flex items-center rounded text-sm hover:text-primary hover:border-primary" style={{ border: (sortOpts.includes('RATING5') ? '1px solid #2474E5' : '1px solid #d9d9d9'), color: (sortOpts.includes('RATING5') ? '#2474E5' : '#000') }} onClick={() => {
+                                    if (sortOpts.includes('RATING5')) {
+                                        setSortOpts(sortOpts.filter(s => s !== 'RATING5'));
+                                    } else {
+                                        setSortOpts([...sortOpts, 'RATING5'])
+                                    }
+                                    dispatch(getComments({
+                                        company_id: data.coach_company_id,
+                                        hasComment: (sortOpts.includes('COMMENT')) ? 1 : 0,
+                                        hasImage: (sortOpts.includes('IMAGE')) ? 1 : 0,
+                                        rating5: 1,
+                                        rating4: (sortOpts.includes('RATING4')) ? 1 : 0,
+                                        rating3: (sortOpts.includes('RATING3')) ? 1 : 0,
+                                        rating2: (sortOpts.includes('RATING2')) ? 1 : 0,
+                                        rating1: (sortOpts.includes('RATING1')) ? 1 : 0,
+                                    }))
+                                }}>
+                                    5
+                                    <svg class="w-4 h-4 ms-1 text-gray-300 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                    </svg> ({rating5})
+                                </button>
+                                <button className="p-2.5 border border-[#d9d9d9] flex items-center rounded text-sm hover:text-primary hover:border-primary" style={{ border: (sortOpts.includes('RATING4') ? '1px solid #2474E5' : '1px solid #d9d9d9'), color: (sortOpts.includes('RATING4') ? '#2474E5' : '#000') }} onClick={() => {
+                                    if (sortOpts.includes('RATING4')) {
+                                        setSortOpts(sortOpts.filter(s => s !== 'RATING4'));
+                                    } else {
+                                        setSortOpts([...sortOpts, 'RATING4'])
+                                    }
+                                    dispatch(getComments({
+                                        company_id: data.coach_company_id,
+                                        hasComment: (sortOpts.includes('COMMENT')) ? 1 : 0,
+                                        hasImage: (sortOpts.includes('IMAGE')) ? 1 : 0,
+                                        rating5: (sortOpts.includes('RATING5')) ? 1 : 0,
+                                        rating4: 1,
+                                        rating3: (sortOpts.includes('RATING3')) ? 1 : 0,
+                                        rating2: (sortOpts.includes('RATING2')) ? 1 : 0,
+                                        rating1: (sortOpts.includes('RATING1')) ? 1 : 0,
+                                    }))
+                                }}>4 <svg class="w-4 h-4 ms-1 text-gray-300 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                    </svg> ({rating4})</button>
+                                <button className="p-2.5 border border-[#d9d9d9] flex items-center rounded text-sm hover:text-primary hover:border-primary" style={{ border: (sortOpts.includes('RATING3') ? '1px solid #2474E5' : '1px solid #d9d9d9'), color: (sortOpts.includes('RATING3') ? '#2474E5' : '#000') }} onClick={() => {
+                                    if (sortOpts.includes('RATING3')) {
+                                        setSortOpts(sortOpts.filter(s => s !== 'RATING3'));
+                                    } else {
+                                        setSortOpts([...sortOpts, 'RATING3'])
+                                    }
+                                    dispatch(getComments({
+                                        company_id: data.coach_company_id,
+                                        hasComment: (sortOpts.includes('COMMENT')) ? 1 : 0,
+                                        hasImage: (sortOpts.includes('IMAGE')) ? 1 : 0,
+                                        rating5: (sortOpts.includes('RATING5')) ? 1 : 0,
+                                        rating4: (sortOpts.includes('RATING4')) ? 1 : 0,
+                                        rating3: 1,
+                                        rating2: (sortOpts.includes('RATING2')) ? 1 : 0,
+                                        rating1: (sortOpts.includes('RATING1')) ? 1 : 0,
+                                    }))
+                                }}>3 <svg class="w-4 h-4 ms-1 text-gray-300 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                    </svg> ({rating3})</button>
+                                <button className="p-2.5 border border-[#d9d9d9] flex items-center rounded text-sm hover:text-primary hover:border-primary" style={{ border: (sortOpts.includes('RATING2') ? '1px solid #2474E5' : '1px solid #d9d9d9'), color: (sortOpts.includes('RATING2') ? '#2474E5' : '#000') }} onClick={() => {
+                                    if (sortOpts.includes('RATING2')) {
+                                        setSortOpts(sortOpts.filter(s => s !== 'RATING2'));
+                                    } else {
+                                        setSortOpts([...sortOpts, 'RATING2'])
+                                    }
+                                    dispatch(getComments({
+                                        company_id: data.coach_company_id,
+                                        hasComment: (sortOpts.includes('COMMENT')) ? 1 : 0,
+                                        hasImage: (sortOpts.includes('IMAGE')) ? 1 : 0,
+                                        rating5: (sortOpts.includes('RATING5')) ? 1 : 0,
+                                        rating4: (sortOpts.includes('RATING4')) ? 1 : 0,
+                                        rating3: (sortOpts.includes('RATING3')) ? 1 : 0,
+                                        rating2: 1,
+                                        rating1: (sortOpts.includes('RATING1')) ? 1 : 0,
+                                    }))
+                                }}>2 <svg class="w-4 h-4 ms-1 text-gray-300 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                    </svg> ({rating2})</button>
+                                <button className="p-2.5 border border-[#d9d9d9] flex items-center rounded text-sm hover:text-primary hover:border-primary" style={{ border: (sortOpts.includes('RATING1') ? '1px solid #2474E5' : '1px solid #d9d9d9'), color: (sortOpts.includes('RATING1') ? '#2474E5' : '#000') }} onClick={() => {
+                                    if (sortOpts.includes('RATING1')) {
+                                        setSortOpts(sortOpts.filter(s => s !== 'RATING1'));
+                                    } else {
+                                        setSortOpts([...sortOpts, 'RATING1'])
+                                    }
+                                    dispatch(getComments({
+                                        company_id: data.coach_company_id,
+                                        hasComment: (sortOpts.includes('COMMENT')) ? 1 : 0,
+                                        hasImage: (sortOpts.includes('IMAGE')) ? 1 : 0,
+                                        rating5: (sortOpts.includes('RATING5')) ? 1 : 0,
+                                        rating4: (sortOpts.includes('RATING4')) ? 1 : 0,
+                                        rating3: (sortOpts.includes('RATING3')) ? 1 : 0,
+                                        rating2: (sortOpts.includes('RATING2')) ? 1 : 0,
+                                        rating1: 1,
+                                    }))
+                                }}>1 <svg class="w-4 h-4 ms-1 text-gray-300 dark:text-gray-500" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                    </svg> ({rating1})</button>
+                            </div>
+                        </div>
+                        <div className="py-4">
+                            {comments.map(c => (
+                                <div className="border-b border-[#f2f2f2] py-4 w-10/12 m-auto">
+                                    <div className="flex gap-4">
+                                        <div className="rounded-full w-10 h-10 bg-primary text-white p-2 text-center">
+                                            {c.user.avatar ? (<img src={`${API_STORE}${c.user.avatar}`} />) : <svg className="w-full h-full text-white -left-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd"></path></svg>}
+                                        </div>
+                                        <div className="">
+                                            <p className="">{c.user.name}</p>
+                                            <div class="flex items-center">
+                                                {Array(1, 2, 3, 4, 5).map(i => (
+                                                    <svg key={i} className="rating w-4 h-4 ms-1 cursor-pointer" style={{ color: (i <= c.rating) ? '#fddf47' : '#d1d5db' }} aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 22 20">
+                                                        <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
+                                                    </svg>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p className="py-2 text-sm">{c.content}</p>
+                                    <div className="flex gap-2.5">
+                                        <span className="text-[#b8b8b8] text-xs">Đi ngày {c.date_move}</span>
+                                        {c.booked && (<span className="text-[#27AE60] text-xs flex items-center gap-2"><FaCheckCircle /> Đã mua vé</span>)}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </div>
             )}
         </div>

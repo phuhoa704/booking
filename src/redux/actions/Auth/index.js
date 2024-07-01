@@ -222,7 +222,7 @@ export const updateAvatar = createAsyncThunk(
             thunky.dispatch(showLoading());
             const res = await httpRequest.post(ENDPOINTS.UPDATEAVATAR, data, {
                 headers: {
-                    "Content-Type": "multiple/form-data"
+                    "Content-Type": "multipart/form-data"
                 }
             });
             thunky.dispatch(hideLoading());

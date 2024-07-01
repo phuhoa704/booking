@@ -33,5 +33,8 @@ export const ENDPOINTS = {
     //PAYMENT
     PAYMENT: '/onepay/payment?order_code=', //${order_code}
     //ROUTES
-    ROUTES: '/routes'
+    ROUTES: '/routes',
+    //COMMENTS
+    COMMENTS: '/comments', //${company_id}?hasComment=&hasImage=&ratting5=&ratting4=&ratting3=&ratting2=1&ratting1=
+    POSTCOMMENT: '/comments/store', //${company_id}
 }
