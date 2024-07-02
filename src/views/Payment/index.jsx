@@ -272,7 +272,7 @@ const Payment = () => {
                                 </div>}
                             />
                         </div>
-                        <div className="bg-white border border-[#F2F2F2] p-5 rounded-xl my-5">
+                        {/* <div className="bg-white border border-[#F2F2F2] p-5 rounded-xl my-5">
                             <div className="flex justify-between items-center">
                                 <div className="font-semibold my-3">Mã giảm giá</div>
                                 <div className="text-primary underline font-semibold text-sm">Chọn hoặc nhập mã</div>
@@ -292,7 +292,7 @@ const Payment = () => {
                                     ))}
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="bg-white border border-[#F2F2F2] p-5 rounded-xl my-5">
                             <div className="font-semibold my-3">Thông tin chuyến đi</div>
                             <div className="border border-[#D9D9D9] rounded-lg p-4 mb-2.5">

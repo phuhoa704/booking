@@ -134,13 +134,13 @@ const Card = (Props) => {
                     </div>
                     {(currentStep === 1) && (
                         <>
-                            <div className="grid grid-cols-2 my-3">
+                            {/* <div className="grid grid-cols-2 my-3">
                                 <div className="col-span-full xl:col-span-1 flex justify-between rounded border border-primary bg-[#ECF4FD] p-2">
                                     <span className="text-sm">Quy định cần lưu ý khi đi xe</span>
                                     <span className="cursor-pointer text-sm text-primary font-semibold underline">Xem chi tiết</span>
                                 </div>
-                            </div>
-                            <div className="my-3 overflow-x-auto custom-scroll w-full">
+                            </div> */}
+                            {/* <div className="my-3 overflow-x-auto custom-scroll w-full">
                                 <div className="flex items-center gap-4">
                                     {vouchers.map(v => (
                                         <div className="flex-1 bg-[#e0f2ff] rounded p-2 flex justify-between items-center text-sm gap-4 xl:gap-0" key={v.id}>
@@ -155,7 +155,7 @@ const Card = (Props) => {
                                         </div>
                                     ))}
                                 </div>
-                            </div>
+                            </div> */}
                             <div className="my-5 grid grid-cols-2">
                                 <div className="col-span-1"></div>
                                 <div className="col-span-1">
@@ -177,7 +177,7 @@ const Card = (Props) => {
                             <div className="w-full">
                                 <div className="flex items-center rounded border border-[#27ae5f] bg-[#EEFBF4] p-2 w-fit">
                                     <i className="fa-solid fa-circle-check text-[#27ae5f]"></i>
-                                    <span className="text-sm ml-2">An tâm được đón đúng nơi, trả đúng chỗ đã chọn và dễ dàng thay đổi khi cần.</span>
+                                    <span className="text-sm ml-2">An tâm được đón đúng nơi, trả đúng chỗ đã chọn.</span>
                                 </div>
                             </div>
                             <div className="grid grid-cols-2 divide-y xl:divide-x">
