@@ -20,20 +20,38 @@ const Payment = () => {
         { id: 3, name: 'WELCOMETOTQD', descr: 'Giảm 10% từ CN, 17/03' },
     ])
     const [payment, setPayment] = useState(2);
+    const [departureTrip, setDepartureTrip] = useState();
+    const [returnTrip, setReturnTrip] = useState();
     const { searchDetail, returnDetail, departureQuantity, returnQuantity, departurePickup, departureDrop, returnPickup, returnDrop } = useSelector(state => state.search);
     useEffect(() => {
         if (!(state && Object.keys(state).length > 0)) {
             navigate(ROUTER.SEARCH);
         }
     }, [state])
-    console.log({
-        searchDetail,
-        returnDetail,
-        departurePickup,
-        departureDrop,
-        returnPickup,
-        returnDrop
-    })
+    useEffect(() => {
+        if(Object.keys(searchDetail).length > 0) {
+            const departurePickupDetail = searchDetail.pickups.find(sp => sp.id === departurePickup);
+            const departureDropDetail = searchDetail.drops.find(sp => sp.id === departureDrop);
+            if(departurePickupDetail && departureDropDetail) {
+                setDepartureTrip({
+                    trip_drop: departureDropDetail,
+                    trip_pickup: departurePickupDetail
+                })
+            }
+        }
+    }, [searchDetail])
+    useEffect(() => {
+        if(Object.keys(returnDetail).length > 0) {
+            const returnPickupDetail = returnDetail.pickups.find(rp => rp.id === returnPickup);
+            const returnDropDetail = returnDetail.drops.find(rp => rp.id === returnDrop);
+            if(returnPickupDetail && returnDropDetail) {
+                setReturnTrip({
+                    trip_drop: returnDropDetail,
+                    trip_pickup: returnPickupDetail
+                })
+            }
+        }
+    }, [returnDetail])
     return (
         <div className="bg-[#F2F2F2] w-full pt-16 xl:p-0">
             <div className="w-full xl:w-2/3 m-auto py-5 px-2 xl:px-0">
@@ -403,18 +421,21 @@ const Payment = () => {
                                         {
                                             trip_id: searchDetail.id,
                                             type: 1,
-                                            quantity: departureQuantity
+                                            quantity: departureQuantity,
+                                            ...departureTrip
                                         },
                                         {
                                             trip_id: returnDetail.id,
                                             type: 2,
-                                            quantity: returnQuantity
+                                            quantity: returnQuantity,
+                                            ...returnTrip
                                         }
                                     ] : [
                                         {
                                             trip_id: searchDetail.id,
                                             type: 1,
-                                            quantity: departureQuantity
+                                            quantity: departureQuantity,
+                                            ...departureTrip
                                         }
                                     ]
                                 }
