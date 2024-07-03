@@ -1,7 +1,7 @@
 import logo from '../../assets/logo-01.svg';
 import uk from '../../assets/uk.png';
 import vietnam from '../../assets/vietnam.png';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Modal from '../Modal';
 import LoginForm from '../Auth/Login';
 import Verification from '../Auth/Verification';
@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import SignupForm from '../Auth/Signup';
 import { logout } from '../../redux/actions/Auth';
 import { API_STORE } from '../../configs/apis';
+import { SETTINGS } from '../../configs/constants';
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -25,8 +26,14 @@ const Navbar = () => {
     const [dropdown, setDropdown] = useState(false);
     const [state, setState] = useState('login');
     const [showNavbar, setShowNavbar] = useState(false);
+    const [siteLogo, setSiteLogo] = useState('');
+    const [phone, setPhone] = useState('');
+    const [email, setEmail] = useState('');
+    const [background, setBackground] = useState('');
+    const [text, setText] = useState('');
     //
     const { user } = useSelector(state => state.auth);
+    const { settings } = useSelector(state => state.settings);
     //
     const [userDropdown] = useState([
         { id: 1, name: "Thông tin tài khoản", icon: <i className="fa-regular fa-user"></i>, onClick: () => navigate(`${ROUTER.USER}/${ROUTER.INFO}`) },
@@ -52,6 +59,25 @@ const Navbar = () => {
             setModalLogin(false);
         }
     }
+    useEffect(() => {
+        if(settings.length > 0) {
+            //siteLogo
+            const siteLogo = settings.find(s => s.key === SETTINGS.SITELOGO);
+            setSiteLogo(siteLogo ? siteLogo.value : '');
+            //phone
+            const phone = settings.find(s => s.key === SETTINGS.PHONE);
+            setPhone(phone ? phone.value : '');
+            //email
+            const email = settings.find(s => s.key === SETTINGS.EMAIL);
+            setEmail(email ? email.value : '');
+            //background
+            const background = settings.find(s => s.key === SETTINGS.BACKGROUND);
+            setBackground(background ? background.value : '');
+            //text
+            const text = settings.find(s => s.key === SETTINGS.COLOR);
+            setText(text ? text.value : '');
+        }
+    }, [settings])
     return (
         <>
             <Modal
@@ -74,9 +100,9 @@ const Navbar = () => {
                 showStatus={showProfileUpdation}
                 outlet={<ProfileUpdation />}
             />
-            <div className="w-full bg-transparent xl:bg-primary absolute xl:relative z-10 py-4 px-3.5 flex justify-between items-center">
+            <div className="w-full bg-transparent xl:bg-primary absolute xl:relative z-10 py-4 px-3.5 flex justify-between items-center" style={{ backgroundColor: background ? background : '#2474E5', color: text ? text : '#fff'}}>
                 <div className="flex gap-4">
-                    <Link to="/" style={{ backgroundImage: `url(${logo})` }} className='w-[148px] h-10 bg-center bg-no-repeat bg-contain'>
+                    <Link to="/" style={{ backgroundImage: `url(${API_STORE}${siteLogo ? siteLogo : logo})` }} className='w-[148px] h-10 bg-center bg-no-repeat bg-contain'>
                         {/* <img src={logo} alt="" /> */}
                     </Link>
                     <a href="https://Hagiangbusticket.com/vi-VN/nhung-cau-hoi-thuong-gap.html" className='whitespace-pre text-sm font-bold text-white hidden xl:block'>
@@ -90,13 +116,10 @@ const Navbar = () => {
                             <Link to={ROUTER.TICKETINFO} className='text-white font-semibold text-sm'>Quản lý đơn hàng</Link>
                         </li>
                         <li>
-                            <a href="/" className='text-white font-semibold text-sm'>Mở bán vé trên Hagiangbusticket</a>
-                        </li>
-                        <li>
-                            <a href="/" className='text-white font-semibold text-sm'>Trở thành đối tác</a>
+                            <a href="https://adminvexere.cuongdesign.net/company-register" className='text-white font-semibold text-sm'>Trở thành đối tác</a>
                         </li>
                     </ul>
-                    <button
+                    {/* <button
                         onClick={() => {
                             if (lang === 'vi') {
                                 setLang('en');
@@ -107,7 +130,7 @@ const Navbar = () => {
                         }}
                     >
                         <img src={(lang === 'vi') ? uk : vietnam} alt='' className='w-7 h-5 object-cover border border-white rounded' />
-                    </button>
+                    </button> */}
                     <div className="relative hidden xl:block">
                         <button className='rounded bg-white text-black font-semibold p-1.5 text-sm' onClick={() => setShowHotline(!showHotline)}>
                             <i className="fa-solid fa-phone mr-1.5"></i>
@@ -116,10 +139,10 @@ const Navbar = () => {
                         <div className={`absolute z-10 w-72 bg-white rounded p-2.5 right-0 mt-2.5 ${showHotline ? 'block' : 'hidden'}`}>
                             <div className='flex flex-col text-sm'>
                                 <div className="">
-                                    <a href="tel:1900545541" className='text-primary'>1900545541</a> - Để đặt dịch vụ thuê xe
+                                    <a href={`mailto:${email}`} className='text-primary'>{email}</a> - Để đặt vé qua email
                                 </div>
                                 <div className="">
-                                    <a href="tel:1900888684" className='text-primary'>1900888684</a> - Để đặt vé qua điện thoại
+                                    <a href={`tel:${phone}`} className='text-primary'>{phone}</a> - Để đặt vé qua điện thoại
                                 </div>
                             </div>
                         </div>
@@ -147,8 +170,7 @@ const Navbar = () => {
             </div>
             <div className={`absolute z-10 left-0 flex-col top-20 gap-4 ${showNavbar ? 'flex' : 'hidden'} bg-white w-full py-2 px-4 shadow-lg rounded`}>
                 <Link to={ROUTER.TICKETINFO} className='font-semibold text-sm'>Quản lý đơn hàng</Link>
-                <a href="/" className='font-semibold text-sm'>Mở bán vé trên Hagiangbusticket</a>
-                <a href="/" className='font-semibold text-sm'>Trở thành đối tác</a>
+                <a href="https://adminvexere.cuongdesign.net/company-register" className='font-semibold text-sm'>Trở thành đối tác</a>
             </div>
         </>
     );

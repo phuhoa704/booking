@@ -39,7 +39,7 @@ export const getDistricts = createAsyncThunk(
     async(data, thunky) => {
         try {
             thunky.dispatch(showLoading());
-            const res = await httpRequest.get(ENDPOINTS.DISTRICT);
+            const res = await httpRequest.get(`${ENDPOINTS.DISTRICT}/${data}`);
             thunky.dispatch(hideLoading());
             if(res.data.result) {
                 thunky.dispatch(saveDistricts(res.data.data));
@@ -68,7 +68,7 @@ export const getWards = createAsyncThunk(
     async(data, thunky) => {
         try {
             thunky.dispatch(showLoading());
-            const res = await httpRequest.get(ENDPOINTS.WARD);
+            const res = await httpRequest.get(`${ENDPOINTS.WARD}/${data}`);
             thunky.dispatch(hideLoading());
             if(res.data.result) {
                 thunky.dispatch(saveWards(res.data.data));

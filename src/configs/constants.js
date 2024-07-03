@@ -10,3 +10,16 @@ export const PAYMENT_METHODS = [
     { label: 'Tiền mặt', value: 1 },
     { label: 'Chuyển khoản', value: 2 },
 ]
+
+export const SETTINGS = {
+    ADDRESS: 'address',
+    PHONE: 'phone_number',
+    FACEBOOK: 'facebook',
+    ZALO: 'zalo',
+    EMAIL: 'email',
+    SITENAME: 'site_name',
+    SITEURL: 'site_url',
+    SITELOGO: 'site_logo',
+    BACKGROUND: 'background_color',
+    COLOR: 'text_color'
+}

@@ -23,33 +23,30 @@ const Payment = () => {
     const [departureTrip, setDepartureTrip] = useState();
     const [returnTrip, setReturnTrip] = useState();
     const { searchDetail, returnDetail, departureQuantity, returnQuantity, departurePickup, departureDrop, returnPickup, returnDrop } = useSelector(state => state.search);
+    const { departureCustomAddress, returnCustomAddress, useDepartureCustomAddress, useReturnCustomAddress, departureDropAddress, useDepartureDropAddress, returnDropAddress, useReturnDropAddress } = useSelector(state => state.address);
     useEffect(() => {
         if (!(state && Object.keys(state).length > 0)) {
             navigate(ROUTER.SEARCH);
         }
     }, [state])
     useEffect(() => {
-        if(Object.keys(searchDetail).length > 0) {
+        if (Object.keys(searchDetail).length > 0) {
             const departurePickupDetail = searchDetail.pickups.find(sp => sp.id === departurePickup);
             const departureDropDetail = searchDetail.drops.find(sp => sp.id === departureDrop);
-            if(departurePickupDetail && departureDropDetail) {
-                setDepartureTrip({
-                    trip_drop: departureDropDetail,
-                    trip_pickup: departurePickupDetail
-                })
-            }
+            setDepartureTrip({
+                trip_drop: departureDropDetail ? departureDropDetail : {},
+                trip_pickup: departurePickupDetail ? departurePickupDetail : {}
+            })
         }
     }, [searchDetail])
     useEffect(() => {
-        if(Object.keys(returnDetail).length > 0) {
+        if (Object.keys(returnDetail).length > 0) {
             const returnPickupDetail = returnDetail.pickups.find(rp => rp.id === returnPickup);
             const returnDropDetail = returnDetail.drops.find(rp => rp.id === returnDrop);
-            if(returnPickupDetail && returnDropDetail) {
-                setReturnTrip({
-                    trip_drop: returnDropDetail,
-                    trip_pickup: returnPickupDetail
-                })
-            }
+            setReturnTrip({
+                trip_drop: returnDropDetail ? returnDropDetail : {},
+                trip_pickup: returnPickupDetail ? returnPickupDetail : {}
+            })
         }
     }, [returnDetail])
     return (
@@ -305,7 +302,6 @@ const Payment = () => {
                                             <span>{departureQuantity}</span>
                                         </div>
                                     </div>
-                                    <div className="text-primary underline font-semibold">Chi tiết</div>
                                 </div>
                                 <div className="border-t border-[#F2F2F2] mt-2">
                                     <div className="p-2 flex gap-2.5">
@@ -328,8 +324,14 @@ const Payment = () => {
                                         <div className="flex text-xs items-center gap-2">
                                             <FaCircle className="text-primary" />
                                             <div className="flex flex-col">
-                                                <span className="font-semibold">{searchDetail?.pickups?.find(p => p.id === departurePickup) ? searchDetail.pickups.find(p => p.id === departurePickup).name : 'Đang cập nhật'}</span>
-                                                <span className="text-[#858585]">{searchDetail?.pickups?.find(p => p.id === departurePickup) ? searchDetail.pickups.find(p => p.id === departurePickup).address : 'Đang cập nhật'}</span>
+                                                {useDepartureCustomAddress ? (
+                                                    <span className="font-semibold">{departureCustomAddress.address}</span>
+                                                ) : (
+                                                    <>
+                                                        <span className="font-semibold">{searchDetail?.pickups?.find(p => p.id === departurePickup) ? searchDetail.pickups.find(p => p.id === departurePickup).name : 'Đang cập nhật'}</span>
+                                                        <span className="text-[#858585]">{searchDetail?.pickups?.find(p => p.id === departurePickup) ? searchDetail.pickups.find(p => p.id === departurePickup).address : 'Đang cập nhật'}</span>
+                                                    </>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -341,8 +343,14 @@ const Payment = () => {
                                         <div className="flex text-xs items-center gap-2">
                                             <i className="fa-solid fa-location-dot text-[#de3e6e]"></i>
                                             <div className="flex flex-col">
-                                                <span className="font-semibold">{searchDetail?.drops?.find(p => p.id === departureDrop) ? searchDetail.drops.find(p => p.id === departureDrop).name : 'Đang cập nhật'}</span>
-                                                <span className="text-[#858585]">{searchDetail?.drops?.find(p => p.id === departureDrop) ? searchDetail.drops.find(p => p.id === departureDrop).address : 'Đang cập nhật'}</span>
+                                                {useDepartureDropAddress ? (
+                                                    <span className="font-semibold">{departureDropAddress.address}</span>
+                                                ) : (
+                                                    <>
+                                                        <span className="font-semibold">{searchDetail?.drops?.find(p => p.id === departureDrop) ? searchDetail.drops.find(p => p.id === departureDrop).name : 'Đang cập nhật'}</span>
+                                                        <span className="text-[#858585]">{searchDetail?.drops?.find(p => p.id === departureDrop) ? searchDetail.drops.find(p => p.id === departureDrop).address : 'Đang cập nhật'}</span>
+                                                    </>
+                                                )}
                                             </div>
                                         </div>
                                     </div>
@@ -382,8 +390,14 @@ const Payment = () => {
                                             <div className="flex text-xs items-center gap-2">
                                                 <FaCircle className="text-primary" />
                                                 <div className="flex flex-col">
-                                                    <span className="font-semibold">{returnDetail?.pickups?.find(p => p.id === returnPickup) ? returnDetail.pickups.find(p => p.id === returnPickup).name : 'Đang cập nhật'}</span>
-                                                    <span className="text-[#858585]">{returnDetail?.pickups?.find(p => p.id === returnPickup) ? returnDetail.pickups.find(p => p.id === returnPickup).address : 'Đang cập nhật'}</span>
+                                                    {useReturnCustomAddress ? (
+                                                        <span className="font-semibold">{returnCustomAddress.address}</span>
+                                                    ) : (
+                                                        <>
+                                                            <span className="font-semibold">{returnDetail?.pickups?.find(p => p.id === returnPickup) ? returnDetail.pickups.find(p => p.id === returnPickup).name : 'Đang cập nhật'}</span>
+                                                            <span className="text-[#858585]">{returnDetail?.pickups?.find(p => p.id === returnPickup) ? returnDetail.pickups.find(p => p.id === returnPickup).address : 'Đang cập nhật'}</span>
+                                                        </>
+                                                    )}
                                                 </div>
                                             </div>
                                         </div>
@@ -395,8 +409,14 @@ const Payment = () => {
                                             <div className="flex text-xs items-center gap-2">
                                                 <i className="fa-solid fa-location-dot text-[#de3e6e]"></i>
                                                 <div className="flex flex-col">
-                                                    <span className="font-semibold">{returnDetail?.drops?.find(p => p.id === returnDrop) ? returnDetail.drops.find(p => p.id === returnDrop).name : 'Đang cập nhật'}</span>
-                                                    <span className="text-[#858585]">{returnDetail?.drops?.find(p => p.id === returnDrop) ? returnDetail.drops.find(p => p.id === returnDrop).address : 'Đang cập nhật'}</span>
+                                                    {useReturnDropAddress ? (
+                                                        <span className="font-semibold">{returnDropAddress.address}</span>
+                                                    ) : (
+                                                        <>
+                                                            <span className="font-semibold">{returnDetail?.drops?.find(p => p.id === returnDrop) ? returnDetail.drops.find(p => p.id === returnDrop).name : 'Đang cập nhật'}</span>
+                                                            <span className="text-[#858585]">{returnDetail?.drops?.find(p => p.id === returnDrop) ? returnDetail.drops.find(p => p.id === returnDrop).address : 'Đang cập nhật'}</span>
+                                                        </>
+                                                    )}
                                                 </div>
                                             </div>
                                         </div>
@@ -411,7 +431,7 @@ const Payment = () => {
                 <div className="w-full xl:w-2/3 m-auto px-2.5 xl:px-0">
                     <div className="flex justify-cennter gap-2.5 items-center">
                         <div className="w-1/3 flex gap-2.5 flex-col xl:flex-row">
-                            <button className="bg-primary w-full text-sm text-white py-2.5 rounded-lg" onClick={async() => {
+                            <button className="bg-primary w-full text-sm text-white py-2.5 rounded-lg" onClick={async () => {
                                 const order = {
                                     name: state.name,
                                     email: state.email,
@@ -422,25 +442,28 @@ const Payment = () => {
                                             trip_id: searchDetail.id,
                                             type: 1,
                                             quantity: departureQuantity,
-                                            ...departureTrip
+                                            trip_pickup: useDepartureCustomAddress ? departureCustomAddress : departureTrip.trip_pickup,
+                                            trip_drop: useDepartureDropAddress ? departureDropAddress : departureTrip.trip_drop
                                         },
                                         {
                                             trip_id: returnDetail.id,
                                             type: 2,
                                             quantity: returnQuantity,
-                                            ...returnTrip
+                                            trip_pickup: useReturnCustomAddress ? returnCustomAddress : returnTrip.trip_pickup,
+                                            trip_drop: useReturnDropAddress ? returnDropAddress : returnTrip.trip_drop
                                         }
                                     ] : [
                                         {
                                             trip_id: searchDetail.id,
                                             type: 1,
                                             quantity: departureQuantity,
-                                            ...departureTrip
+                                            trip_pickup: useDepartureCustomAddress ? departureCustomAddress : departureTrip.trip_pickup,
+                                            trip_drop: useDepartureDropAddress ? departureDropAddress : departureTrip.trip_drop
                                         }
                                     ]
                                 }
                                 let rs = await dispatch(booking(order));
-                                if(rs.payload.action && payment === 1) {
+                                if (rs.payload.action && payment === 1) {
                                     navigate(ROUTER.RESULT)
                                 }
                             }}>Xác nhận đặt vé</button>

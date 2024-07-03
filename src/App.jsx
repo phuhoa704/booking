@@ -29,6 +29,8 @@ import Loading from "./components/Loading";
 import { getProvinces } from './redux/actions/Location';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
+import { getSettings } from "./redux/actions/Settings";
+import { getRoutes } from "./redux/actions/Routes";
 
 function App() {
   const dispatch = useDispatch();
@@ -41,6 +43,8 @@ function App() {
     dispatch(getListCategory([]));
     dispatch(getListNews([]));
     dispatch(getProvinces([]));
+    dispatch(getSettings([]));
+    dispatch(getRoutes([]));
   },[])
   return (
     <div className='App'>
@@ -66,7 +70,6 @@ function App() {
         <Route path={ROUTER.RESULT} element={<Result />}/>
         <Route path={ROUTER.NEWS} element={<NewsDetail />}/>
       </Routes>
-      {/* <Footer /> */}
     </div>
   )
 }

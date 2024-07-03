@@ -36,6 +36,19 @@ if (!isProduction) {
   app.use(base, sirv('./dist/client', { extensions: [] }))
 }
 
+const API_URL = 'https://adminvexere.cuongdesign.net/api/settings';
+function getSettings() {
+  return new Promise((resolve, reject) => {
+    request.get(API_URL, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+        resolve(JSON.parse(body))
+      } else {
+        reject(error)
+      }
+    });
+  })
+}
+
 // Serve HTML
 app.use('*', async (req, res) => {
   try {

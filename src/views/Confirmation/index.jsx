@@ -53,6 +53,7 @@ const Confirmation = () => {
     }
     const { user } = useSelector(state => state.auth);
     const { searchParams, returnDetail, departureQuantity, returnQuantity, departurePickup, departureDrop, returnPickup, returnDrop } = useSelector(state => state.search);
+    const { departureCustomAddress, returnCustomAddress, useDepartureCustomAddress, useReturnCustomAddress, departureDropAddress, useDepartureDropAddress, returnDropAddress, useReturnDropAddress } = useSelector(state => state.address);
     useEffect(() => {
         if (Object.keys(user).length > 0) {
             setFormVals({
@@ -77,7 +78,7 @@ const Confirmation = () => {
             setModalLogin(false);
         }
     }
-    console.log({searchDetail})
+    console.log({ searchDetail })
     return (
         <>
             <Modal
@@ -137,61 +138,6 @@ const Confirmation = () => {
                                         <span className="text-sm ml-2">Số điện thoại và email được sử dụng để gửi thông tin đơn hàng và liên hệ khi cần thiết.</span>
                                     </div>
                                 </div>
-                                <div className="rounded-xl border border-[#F2F2F2] p-5 bg-white">
-                                    <div className="font-semibold my-3">Tiện ích</div>
-                                    <div className="flex justify-between items-center">
-                                        <div className="flex flex-col">
-                                            <div className="flex text-sm">
-                                                <img src={protect} alt="" />
-                                                <span><span className="font-semibold ml-1.5">Bảo hiểm chuyến đi</span> (+20.000đ/ghế)</span>
-                                            </div>
-                                            <div className="text-xs text-[#858585]">Được bồi thường lên đến 400.000.000đ/ghế.</div>
-                                            <div className="flex text-[#858585] text-xs">
-                                                <span>Cung cấp bởi</span>
-                                                <img src={baoviet} alt="" />
-                                                <span>x</span>
-                                                <img src={saladin} alt="" />
-                                            </div>
-                                        </div>
-                                        <input type="checkbox" class="w-5 h-5 shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" />
-                                    </div>
-                                    <div className="w-full border border-[#27ae5f] p-2.5 flex flex-col gap-2.5 my-4 rounded cursor-pointer">
-                                        <div>
-                                            <p className="font-semibold text-sm">Bảo hiểm tai nạn</p>
-                                            <p className="text-xs">Quyền lợi bảo hiểm lên đến 400 triệu đồng khi xảy ra tai nạn</p>
-                                        </div>
-                                        <div>
-                                            <p className="font-semibold text-sm">Bảo hiểm hủy chuyến</p>
-                                            <p className="text-xs">Bồi thường 100% tiền vé nếu chuyến đi bị hủy bởi các lí do khách quan hoặc bất khả kháng về sức khỏe.</p>
-                                        </div>
-                                    </div>
-                                    <hr />
-                                    <div className="flex justify-between items-center my-5">
-                                        <div className="flex gap-2">
-                                            <img src={rental} alt="" />
-                                            <div className="flex flex-col">
-                                                <p className="font-semibold text-sm">Thuê xe máy tại Nha Trang</p>
-                                                <p className="text-xs text-[#858585]">Vexere sẽ liên hệ lại để xác nhận dịch vụ.</p>
-                                            </div>
-                                        </div>
-                                        <input type="checkbox" class="w-5 h-5 shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none" />
-                                    </div>
-                                    <div className="grid grid-cols-4 gap-2.5">
-                                        {bikes.map(b => (
-                                            <div className="col-span-1 flex flex-col text-center">
-                                                <img src={b.img} alt="" />
-                                                <p className="text-sm">{b.type}</p>
-                                                <p className="text-xs">{b.name}</p>
-                                                <p className="text-xs text-[#EB5757]">{b.price}</p>
-                                                <p style={{ fontSize: 9 }}>{b.method}</p>
-                                            </div>
-                                        ))}
-                                    </div>
-                                    <div className="flex items-center rounded border border-[#27ae5f] bg-[#EEFBF4] p-2 w-full my-2">
-                                        <i className="fa-solid fa-circle-check text-[#27ae5f]"></i>
-                                        <span className="text-sm ml-2">Thuê càng lâu, giá càng rẻ!</span>
-                                    </div>
-                                </div>
                             </div>
                             <div className="col-span-full xl:col-span-1">
                                 <div className="bg-white border border-[#F2F2F2] p-5 rounded-xl my-5">
@@ -226,7 +172,6 @@ const Confirmation = () => {
                                                     <span>{departureQuantity}</span>
                                                 </div>
                                             </div>
-                                            <div className="text-primary underline font-semibold">Chi tiết</div>
                                         </div>
                                         <div className="border-t border-[#F2F2F2] mt-2">
                                             <div className="p-2 flex gap-2.5">
@@ -249,8 +194,14 @@ const Confirmation = () => {
                                                 <div className="flex text-xs items-center gap-2">
                                                     <FaCircle className="text-primary" />
                                                     <div className="flex flex-col">
-                                                        <span className="font-semibold">{searchDetail?.pickups?.find(p => p.id === departurePickup) ? searchDetail.pickups.find(p => p.id === departurePickup).name : 'Đang cập nhật'}</span>
-                                                        <span className="text-[#858585]">{searchDetail?.pickups?.find(p => p.id === departurePickup) ? searchDetail.pickups.find(p => p.id === departurePickup).address : 'Đang cập nhật'}</span>
+                                                        {useDepartureCustomAddress ? (
+                                                            <span className="font-semibold">{departureCustomAddress.address}</span>
+                                                        ) : (
+                                                            <>
+                                                                <span className="font-semibold">{searchDetail?.pickups?.find(p => p.id === departurePickup) ? searchDetail.pickups.find(p => p.id === departurePickup).name : 'Đang cập nhật'}</span>
+                                                                <span className="text-[#858585]">{searchDetail?.pickups?.find(p => p.id === departurePickup) ? searchDetail.pickups.find(p => p.id === departurePickup).address : 'Đang cập nhật'}</span>
+                                                            </>
+                                                        )}
                                                     </div>
                                                 </div>
                                             </div>
@@ -262,8 +213,14 @@ const Confirmation = () => {
                                                 <div className="flex text-xs items-center gap-2">
                                                     <i className="fa-solid fa-location-dot text-[#de3e6e]"></i>
                                                     <div className="flex flex-col">
-                                                        <span className="font-semibold">{searchDetail?.drops?.find(p => p.id === departureDrop) ? searchDetail.drops.find(p => p.id === departureDrop).name : 'Đang cập nhật'}</span>
-                                                        <span className="text-[#858585]">{searchDetail?.drops?.find(p => p.id === departureDrop) ? searchDetail.drops.find(p => p.id === departureDrop).address : 'Đang cập nhật'}</span>
+                                                        {useDepartureDropAddress ? (
+                                                            <span className="font-semibold">{departureDropAddress.address}</span>
+                                                        ) : (
+                                                            <>
+                                                                <span className="font-semibold">{searchDetail?.drops?.find(p => p.id === departureDrop) ? searchDetail.drops.find(p => p.id === departureDrop).name : 'Đang cập nhật'}</span>
+                                                                <span className="text-[#858585]">{searchDetail?.drops?.find(p => p.id === departureDrop) ? searchDetail.drops.find(p => p.id === departureDrop).address : 'Đang cập nhật'}</span>
+                                                            </>
+                                                        )}
                                                     </div>
                                                 </div>
                                             </div>
@@ -280,7 +237,6 @@ const Confirmation = () => {
                                                         <span>{returnQuantity}</span>
                                                     </div>
                                                 </div>
-                                                <div className="text-primary underline font-semibold">Chi tiết</div>
                                             </div>
                                             <div className="border-t border-[#F2F2F2] mt-2">
                                                 <div className="p-2 flex gap-2.5">
@@ -303,8 +259,14 @@ const Confirmation = () => {
                                                     <div className="flex text-xs items-center gap-2">
                                                         <FaCircle className="text-primary" />
                                                         <div className="flex flex-col">
-                                                            <span className="font-semibold">{returnDetail?.pickups?.find(p => p.id === returnPickup) ? returnDetail.pickups.find(p => p.id === returnPickup).name : 'Đang cập nhật'}</span>
-                                                            <span className="text-[#858585]">{returnDetail?.pickups?.find(p => p.id === returnPickup) ? returnDetail.pickups.find(p => p.id === returnPickup).address : 'Đang cập nhật'}</span>
+                                                            {useReturnCustomAddress ? (
+                                                                <span className="font-semibold">{returnCustomAddress.address}</span>
+                                                            ) : (
+                                                                <>
+                                                                    <span className="font-semibold">{returnDetail?.pickups?.find(p => p.id === returnPickup) ? returnDetail.pickups.find(p => p.id === returnPickup).name : 'Đang cập nhật'}</span>
+                                                                    <span className="text-[#858585]">{returnDetail?.pickups?.find(p => p.id === returnPickup) ? returnDetail.pickups.find(p => p.id === returnPickup).address : 'Đang cập nhật'}</span>
+                                                                </>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -316,8 +278,14 @@ const Confirmation = () => {
                                                     <div className="flex text-xs items-center gap-2">
                                                         <i className="fa-solid fa-location-dot text-[#de3e6e]"></i>
                                                         <div className="flex flex-col">
-                                                            <span className="font-semibold">{returnDetail?.drops?.find(p => p.id === returnDrop) ? returnDetail.drops.find(p => p.id === returnDrop).name : 'Đang cập nhật'}</span>
-                                                            <span className="text-[#858585]">{returnDetail?.drops?.find(p => p.id === returnDrop) ? returnDetail.drops.find(p => p.id === returnDrop).address : 'Đang cập nhật'}</span>
+                                                            {useReturnDropAddress ? (
+                                                                <span className="font-semibold">{returnDropAddress.address}</span>
+                                                            ) : (
+                                                                <>
+                                                                    <span className="font-semibold">{returnDetail?.drops?.find(p => p.id === returnDrop) ? returnDetail.drops.find(p => p.id === returnDrop).name : 'Đang cập nhật'}</span>
+                                                                    <span className="text-[#858585]">{returnDetail?.drops?.find(p => p.id === returnDrop) ? returnDetail.drops.find(p => p.id === returnDrop).address : 'Đang cập nhật'}</span>
+                                                                </>
+                                                            )}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -328,12 +296,12 @@ const Confirmation = () => {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div >
                 <div className="py-5 bg-white w-full">
                     <div className="w-full xl:w-2/3 m-auto px-2.5 xl:px-0">
                         <div className="flex justify-cennter gap-2.5">
                             <button className="bg-primary text-white py-2.5 rounded-lg px-5" onClick={() => {
-                                if(formVals.email && formVals.name && formVals.phone) {
+                                if (formVals.email && formVals.name && formVals.phone) {
                                     navigate(ROUTER.PAYMENT, { state: { ...formVals, ...state } })
                                 } else {
                                     Toast.fire({
@@ -349,7 +317,7 @@ const Confirmation = () => {
                         <p className="text-sm my-2">Bằng việc nhấn nút Tiếp tục, bạn đồng ý với <span className="text-primary underline font-semibold">Chính sách bảo mật thanh toán </span> và <span className="text-primary underline font-semibold">Quy chế</span></p>
                     </div>
                 </div>
-            </div>
+            </div >
         </>
     );
 }

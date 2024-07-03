@@ -8,9 +8,12 @@ import { useSelector } from "react-redux";
 import { API_STORE } from '../../configs/apis';
 import { useNavigate } from 'react-router-dom';
 import { ROUTER } from '../../configs/router';
+import { useEffect, useState } from 'react';
+import { SETTINGS } from '../../configs/constants';
 
 const PopularRoad = () => {
     const navigate = useNavigate();
+    const [text, setText] = useState('');    
     const swiperParams = {
         navigation: true,
         slidesPerView: 4,
@@ -27,6 +30,14 @@ const PopularRoad = () => {
         },
     };
     const { routes } = useSelector(state => state.routes);
+    const { settings } = useSelector(state => state.settings);
+    useEffect(() => {
+        if(settings.length > 0) {
+            //settings
+            const text = settings.find(s => s.key === SETTINGS.COLOR);
+            setText(text ? text.value : '#fff');
+        }
+    }, [settings])
     return (
         <>
             {(routes.filter(d => d.popular === 1).length > 0) && (
@@ -51,7 +62,7 @@ const PopularRoad = () => {
                                         <img className="w-full h-full rounded-tl rounded-tr absolute" src={`${API_STORE}${d.image}`} alt="" />
                                     </div>
                                     <div className={"p-2.5 rounded-bl rounded-br bg-blacktransparent"}>
-                                        <p className="text-white font-semibold">{d.name}</p>
+                                        <p className="font-semibold" style={{ color: text }}>{d.name}</p>
                                     </div>
                                 </div>
                             </SwiperSlide>

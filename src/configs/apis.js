@@ -13,7 +13,7 @@ export const ENDPOINTS = {
     //LOCATION
     PROVINCE: '/provinces',
     DISTRICT: '/districts', //${provinceId}
-    WARD: '/ward', //${districtId}
+    WARD: '/wards', //${districtId}
     //NEWS
     CATEGORYLIST: '/news-categories', //&page=&page_size=
     CATEGORYDETAIL: '/news-categories/detail', //${id}
@@ -37,4 +37,7 @@ export const ENDPOINTS = {
     //COMMENTS
     COMMENTS: '/comments', //${company_id}?hasComment=&hasImage=&ratting5=&ratting4=&ratting3=&ratting2=1&ratting1=
     POSTCOMMENT: '/comments/store', //${company_id}
+    //SETTINGS
+    SETTINGSLIST: '/settings',
+    SETTINGDETAIL: '/settings/detail', //${key}
 }

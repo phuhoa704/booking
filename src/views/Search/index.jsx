@@ -374,21 +374,6 @@ const Search = () => {
                             </div> */}
                         </div>
                         <div className="col-span-full xl:col-span-5">
-                            <div className="my-3 flex items-center overflow-x-auto w-full">
-                                <span className='hidden xl:block'>Lọc phổ biến</span>
-                                <div className="w-full overflow-x-auto scroll-horizontal pb-2">
-                                    <div className="flex gap-4 w-max">
-                                        {filters.map(f => (
-                                            <div key={f.id} className="rounded w-32 h-16 bg-cover" style={{ backgroundImage: `url(${f.img})` }}></div>
-                                        ))}
-                                    </div>
-                                </div>
-                                {/* <div className="overflow-x-auto flex gap-2.5 items-center w-max">
-                                {filters.map(f => (
-                                    <div key={f.id} className="rounded w-32 h-16 bg-cover" style={{ backgroundImage: `url(${f.img})` }}></div>
-                                ))}
-                            </div> */}
-                            </div>
                             {(searchResult.filter(s => {
                                 if(filterPickup) {
                                     return s.departure_province_id === filterPickup
