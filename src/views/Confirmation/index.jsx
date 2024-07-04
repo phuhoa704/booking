@@ -78,7 +78,6 @@ const Confirmation = () => {
             setModalLogin(false);
         }
     }
-    console.log({ searchDetail })
     return (
         <>
             <Modal

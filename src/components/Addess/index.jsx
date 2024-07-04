@@ -11,27 +11,30 @@ const Address = (Props) => {
     const [formVals, setFormVals] = useState({
         address: '',
         province_id: '',
+        province: '',
         district_id: '',
+        district: '',
         ward_id: '',
+        ward: '',
         id: randomVoucherCode()
     })
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(returnBooking) {
-            if(type === 'PICKUP') {
+        if (returnBooking) {
+            if (type === 'PICKUP') {
                 dispatch(saveReturnCustomAddress(formVals));
                 dispatch(saveUseReturnCustomAddress(true));
             }
-            if(type === 'DROP') {
+            if (type === 'DROP') {
                 dispatch(saveReturnDropAddress(formVals));
                 dispatch(saveUseReturnDropAddress(true));
             }
         } else {
-            if(type === 'PICKUP') {
+            if (type === 'PICKUP') {
                 dispatch(saveDptCustomAddress(formVals));
                 dispatch(saveUseDptCustomAddress(true));
             }
-            if(type === 'DROP') {
+            if (type === 'DROP') {
                 dispatch(saveDptDropAddress(formVals));
                 dispatch(saveUseDptCustomAddress(true));
             }
@@ -41,6 +44,39 @@ const Address = (Props) => {
     const handleChange = (e) => {
         const name = e.target.name;
         const val = e.target.value;
+        if(name === 'province_id') {
+            let finder = provinces.find(p => p.id === parseInt(val));
+            if(finder) {
+                setFormVals({
+                    ...formVals,
+                    province_id: val,
+                    province: finder.name
+                })
+            }
+            return;
+        }
+        if(name === 'district_id') {
+            let finder = districts.find(p => p.id === parseInt(val));
+            if(finder) {
+                setFormVals({
+                    ...formVals,
+                    district_id: val,
+                    district: finder.name
+                })
+            }
+            return;
+        }
+        if(name === 'ward_id') {
+            let finder = wards.find(p => p.id === parseInt(val));
+            if(finder) {
+                setFormVals({
+                    ...formVals,
+                    ward_id: val,
+                    ward: finder.name
+                })
+            }
+            return;
+        }
         setFormVals({
             ...formVals,
             [name]: val
@@ -92,7 +128,9 @@ const Address = (Props) => {
                             </div>
                             <div className="col-span-1"></div>
                             <div className="col-span-1">
-                                <select className="bg-white w-full border border-[#d9d9d9] h-full px-2.5 py-2.5" name="ward_id" value={formVals.ward_id} onChange={handleChange}>
+                                <select className="bg-white w-full border border-[#d9d9d9] h-full px-2.5 py-2.5" name="ward_id" value={formVals.ward_id} onChange={(e) => {
+                                    handleChange(e);
+                                }}>
                                     <option>--Chọn Xã / Phường--</option>
                                     {wards.map(w => (
                                         <option value={w.id} key={w.id}>{w.name}</option>

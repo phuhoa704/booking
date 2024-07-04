@@ -14,11 +14,6 @@ const Payment = () => {
     const navigate = useNavigate();
     const { state } = useLocation();
     const dispatch = useDispatch();
-    const [vouchers] = useState([
-        { id: 1, name: 'WELCOMETOTQD', descr: 'Giảm 15,000VNĐ từ CN, 17/03' },
-        { id: 2, name: 'DISCOUNTTQD', descr: 'Giảm 50% từ CN, 17/03' },
-        { id: 3, name: 'WELCOMETOTQD', descr: 'Giảm 10% từ CN, 17/03' },
-    ])
     const [payment, setPayment] = useState(2);
     const [departureTrip, setDepartureTrip] = useState();
     const [returnTrip, setReturnTrip] = useState();
@@ -442,23 +437,107 @@ const Payment = () => {
                                             trip_id: searchDetail.id,
                                             type: 1,
                                             quantity: departureQuantity,
-                                            trip_pickup: useDepartureCustomAddress ? departureCustomAddress : departureTrip.trip_pickup,
-                                            trip_drop: useDepartureDropAddress ? departureDropAddress : departureTrip.trip_drop
+                                            trip_pickup: useDepartureCustomAddress ? {
+                                                name: '',
+                                                address: departureCustomAddress.name,
+                                                time: searchDetail.start_time,
+                                                province: departureCustomAddress.province.name,
+                                                district: departureCustomAddress.district.name,
+                                                ward: departureCustomAddress.ward.name
+                                            } : {
+                                                name: departureTrip.trip_pickup.name,
+                                                time: departureTrip.trip_pickup.time,
+                                                address: departureTrip.trip_pickup.address,
+                                                province: departureTrip.trip_pickup.province.name,
+                                                district: departureTrip.trip_pickup.district.name,
+                                                ward: departureTrip.trip_pickup.ward.name
+                                            },
+                                            trip_drop: useDepartureDropAddress ? {
+                                                name: '',
+                                                address: departureDropAddress.name,
+                                                time: searchDetail.start_time,
+                                                province: departureDropAddress.province.name,
+                                                district: departureDropAddress.district.name,
+                                                ward: departureDropAddress.ward.name
+                                            } : {
+                                                name: departureTrip.trip_drop.name,
+                                                time: departureTrip.trip_drop.time,
+                                                address: departureTrip.trip_drop.address,
+                                                province: departureTrip.trip_drop.province.name,
+                                                district: departureTrip.trip_drop.district.name,
+                                                ward: departureTrip.trip_drop.ward.name
+                                            }
                                         },
                                         {
                                             trip_id: returnDetail.id,
                                             type: 2,
                                             quantity: returnQuantity,
-                                            trip_pickup: useReturnCustomAddress ? returnCustomAddress : returnTrip.trip_pickup,
-                                            trip_drop: useReturnDropAddress ? returnDropAddress : returnTrip.trip_drop
+                                            trip_pickup: useReturnCustomAddress ? {
+                                                name: '',
+                                                address: returnCustomAddress.address,
+                                                time: returnDetail.start_time,
+                                                province: returnCustomAddress.province,
+                                                district: returnCustomAddress.district,
+                                                ward: returnCustomAddress.ward
+                                            } : {
+                                                name: returnTrip.trip_pickup.name,
+                                                time: returnTrip.trip_pickup.time,
+                                                address: returnTrip.trip_pickup.address,
+                                                province: returnTrip.trip_pickup.province.name,
+                                                district: returnTrip.trip_pickup.district.name,
+                                                ward: returnTrip.trip_pickup.ward.name
+                                            },
+                                            trip_drop: useReturnDropAddress ? {
+                                                name: '',
+                                                address: returnDropAddress.address,
+                                                time: returnDetail.start_time,
+                                                province: returnDropAddress.province,
+                                                district: returnDropAddress.district,
+                                                ward: returnDropAddress.ward
+                                            } : {
+                                                name: returnTrip.trip_drop.name,
+                                                time: returnTrip.trip_drop.time,
+                                                address: returnTrip.trip_drop.address,
+                                                province: returnTrip.trip_drop.province.name,
+                                                district: returnTrip.trip_drop.district.name,
+                                                ward: returnTrip.trip_drop.ward.name
+                                            }
                                         }
                                     ] : [
                                         {
                                             trip_id: searchDetail.id,
                                             type: 1,
                                             quantity: departureQuantity,
-                                            trip_pickup: useDepartureCustomAddress ? departureCustomAddress : departureTrip.trip_pickup,
-                                            trip_drop: useDepartureDropAddress ? departureDropAddress : departureTrip.trip_drop
+                                            trip_pickup: useDepartureCustomAddress ? {
+                                                name: '',
+                                                address: departureCustomAddress.address,
+                                                time: searchDetail.start_time,
+                                                province: departureCustomAddress.province,
+                                                district: departureCustomAddress.district,
+                                                ward: departureCustomAddress.ward
+                                            } : {
+                                                name: departureTrip.trip_pickup.name,
+                                                time: departureTrip.trip_pickup.time,
+                                                address: departureTrip.trip_pickup.address,
+                                                province: departureTrip.trip_pickup.province.name,
+                                                district: departureTrip.trip_pickup.district.name,
+                                                ward: departureTrip.trip_pickup.ward.name
+                                            },
+                                            trip_drop: useDepartureDropAddress ? {
+                                                name: '',
+                                                address: departureDropAddress.address,
+                                                time: searchDetail.end_time,
+                                                province: departureDropAddress.province,
+                                                district: departureDropAddress.district,
+                                                ward: departureDropAddress.ward
+                                            } : {
+                                                name: departureTrip.trip_drop.name,
+                                                time: departureTrip.trip_drop.time,
+                                                address: departureTrip.trip_drop.address,
+                                                province: departureTrip.trip_drop.province.name,
+                                                district: departureTrip.trip_drop.district.name,
+                                                ward: departureTrip.trip_drop.ward.name
+                                            }
                                         }
                                     ]
                                 }
