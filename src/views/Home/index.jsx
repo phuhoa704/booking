@@ -249,7 +249,7 @@ const Home = () => {
                             <div className="w-full overflow-x-auto scroll-horizontal pb-2">
                                 <div className="flex gap-4 w-max">
                                     {c.news.map(d => (
-                                        <div className="w-[300px] flex flex-col shadow-xl border border-[#d9d9d9] rounded cursor-pointer" key={`${c.id}_${d.id}`} onClick={() => {
+                                        <div className="w-[300px] flex flex-col bg-white shadow-xl border border-[#d9d9d9] rounded cursor-pointer" key={`${c.id}_${d.id}`} onClick={() => {
                                             dispatch(getDetailNews(d.id));
                                             navigate(`/news/${d.slug}`);
                                         }}>
@@ -274,7 +274,7 @@ const Home = () => {
                         </Swiper>
                     </section>
                     <Flatforms />
-                    <SocialMedia />
+                    {/* <SocialMedia /> */}
                     <BusStations />
                 </div>
             </div>

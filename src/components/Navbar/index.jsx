@@ -100,7 +100,7 @@ const Navbar = () => {
                 showStatus={showProfileUpdation}
                 outlet={<ProfileUpdation />}
             />
-            <div className="w-full bg-transparent xl:bg-primary absolute xl:relative z-10 py-4 px-3.5 flex justify-between items-center" style={{ backgroundColor: background ? background : '#2474E5', color: text ? text : '#fff'}}>
+            <div className="w-full bg-transparent xl:bg-primary absolute xl:relative z-10 py-4 px-3.5 flex justify-between items-center">
                 <div className="flex gap-4">
                     <Link to="/" style={{ backgroundImage: `url(${API_STORE}${siteLogo ? siteLogo : logo})` }} className='w-[148px] h-10 bg-center bg-no-repeat bg-contain'>
                         {/* <img src={logo} alt="" /> */}
@@ -138,10 +138,10 @@ const Navbar = () => {
                         </button>
                         <div className={`absolute z-10 w-72 bg-white rounded p-2.5 right-0 mt-2.5 ${showHotline ? 'block' : 'hidden'}`}>
                             <div className='flex flex-col text-sm'>
-                                <div className="">
+                                <div className="text-black">
                                     <a href={`mailto:${email}`} className='text-primary'>{email}</a> - Để đặt vé qua email
                                 </div>
-                                <div className="">
+                                <div className="text-black">
                                     <a href={`tel:${phone}`} className='text-primary'>{phone}</a> - Để đặt vé qua điện thoại
                                 </div>
                             </div>

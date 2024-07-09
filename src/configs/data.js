@@ -63,15 +63,6 @@ export const footerSuggestions = [
         ]
     },
     {
-        id: 2, title: 'Xe Limousine', items: [
-            { id: '2.1', title: 'Xe Limousine đi Đà Lạt từ Sài Gòn' },
-            { id: '2.2', title: 'Xe Limousine đi Vũng Tàu từ Sài Gòn' },
-            { id: '2.3', title: 'Xe Limousine đi Nha Trang từ Sài Gòn' },
-            { id: '2.4', title: 'Xe Limousine đi Hải Phòng từ Hà Nội' },
-            { id: '2.5', title: 'Xe Limousine đi Hạ Long từ Hà Nội' },
-        ]
-    },
-    {
         id: 3, title: 'Tin tức', items: [
             { id: '3.1', title: 'Xe giường nằm Limousine – đỉnh cao mới của ngành xe khách' },
             { id: '3.2', title: 'Xe limousine đi Vũng Tàu: Tổng hợp top 6 xe chất lượng cao' },

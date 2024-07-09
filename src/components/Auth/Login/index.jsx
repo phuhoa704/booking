@@ -51,14 +51,14 @@ const LoginForm = (Props) => {
                             <div className="col-span-3">
                                 <button type="submit" className="w-full border border-[#d9d9d9] text-base py-2.5 hover:text-primary hover:border-primary">Tiếp tục</button>
                             </div>
-                            <div className="col-span-full relative flex py-5 items-center">
+                            {/* <div className="col-span-full relative flex py-5 items-center">
                                 <div className="flex-grow border-t border-gray-400"></div>
                                 <span className="flex-shrink mx-4 text-gray-400">hoặc</span>
                                 <div className="flex-grow border-t border-gray-400"></div>
                             </div>
                             <div className="col-span-full">
                                 <button type="button" className="w-full bg-primary text-white text-base py-2.5">Đăng nhập với Google</button>
-                            </div>
+                            </div> */}
                             <span className="col-span-full">Bạn chưa có tài khoản? <button type="button" className="text-primary" onClick={() => {
                                 handleChangeState('signup');
                             }}>Đăng ký</button></span>

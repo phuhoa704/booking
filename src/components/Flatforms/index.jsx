@@ -3,7 +3,7 @@ const Flatforms = () => {
         <section className="my-4">
             <p className="font-semibold text-base xl:text-2xl text-[#3d3d3b] py-2.5">Nền tảng kết nối người dùng và nhà xe</p>
             <div className="grid grid-cols-4 gap-2">
-                <div className="col-span-full xl:col-span-1 p-2.5 flex gap-2.5 border border-[#d9d9d9] rounded">
+                <div className="col-span-full xl:col-span-1 p-2.5 flex gap-2.5 bg-white border border-[#d9d9d9] rounded">
                     <div className="flex items-start justify-center">
                         <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clipPath="url(#clip0_14502_43096)">
@@ -23,7 +23,7 @@ const Flatforms = () => {
                         <p className="text-sm text-[#858585]">5000+ tuyến đường trên toàn quốc, chủ động và đa dạng lựa chọn.</p>
                     </div>
                 </div>
-                <div className="col-span-full xl:col-span-1 p-2.5 flex gap-2.5 border border-[#d9d9d9] rounded">
+                <div className="col-span-full xl:col-span-1 p-2.5 flex gap-2.5 bg-white border border-[#d9d9d9] rounded">
                     <div className="flex items-start justify-center">
                         <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clipPath="url(#clip0_14502_43106)">
@@ -42,7 +42,7 @@ const Flatforms = () => {
                         <p className="text-sm text-[#858585]">Đặt vé chỉ với 60s. Chọn xe yêu thích cực nhanh và thuận tiện.</p>
                     </div>
                 </div>
-                <div className="col-span-full xl:col-span-1 p-2.5 flex gap-2.5 border border-[#d9d9d9] rounded">
+                <div className="col-span-full xl:col-span-1 p-2.5 flex gap-2.5 bg-white border border-[#d9d9d9] rounded">
                     <div className="flex items-start justify-center">
                         <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clipPath="url(#clip0_14502_43114)">
@@ -61,7 +61,7 @@ const Flatforms = () => {
                         <p className="text-sm text-[#858585]">Hoàn ngay 150% nếu không có vé, mang đến hành trình trọn vẹn.</p>
                     </div>
                 </div>
-                <div className="col-span-full xl:col-span-1 p-2.5 flex gap-2.5 border border-[#d9d9d9] rounded">
+                <div className="col-span-full xl:col-span-1 p-2.5 flex gap-2.5 bg-white border border-[#d9d9d9] rounded">
                     <div className="flex items-start justify-center">
                         <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <g clipPath="url(#clip0_14502_43126)">

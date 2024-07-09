@@ -17,7 +17,7 @@ import Search from "./views/Search";
 import Confirmation from "./views/Confirmation";
 import Payment from "./views/Payment";
 import Result from "./views/Result";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { TOKEN } from "./configs/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { profile } from "./redux/actions/Auth";
@@ -31,10 +31,13 @@ import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { getSettings } from "./redux/actions/Settings";
 import { getRoutes } from "./redux/actions/Routes";
+import { SETTINGS } from "./configs/constants";
 
 function App() {
   const dispatch = useDispatch();
+  const [background, setBackground] = useState('');
   const { loading } = useSelector(state => state.loading);
+  const { settings } = useSelector(state => state.settings);
   useEffect(() => {
     const token = window.localStorage.getItem(TOKEN);
     if(token) {
@@ -46,8 +49,15 @@ function App() {
     dispatch(getSettings([]));
     dispatch(getRoutes([]));
   },[])
+  useEffect(() => {
+    if(settings.length > 0) {
+        //background
+        const background = settings.find(s => s.key === SETTINGS.BACKGROUND);
+        setBackground(background ? background.value : '');
+    }
+}, [settings])
   return (
-    <div className='App'>
+    <div className='App' style={{ backgroundColor: background }}>
       {loading && <Loading />}
       <Navbar />
       <Routes>

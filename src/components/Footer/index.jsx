@@ -18,6 +18,7 @@ const Footer = () => {
     const navigate = useNavigate();
     const { routes } = useSelector(state => state.routes);
     const { settings } = useSelector(state => state.settings);
+    const { listNews } = useSelector(state => state.news);
     const [address, setAddress] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
@@ -25,7 +26,7 @@ const Footer = () => {
     const [zl, setZl] = useState('')
     const [siteName, setSiteName] = useState('');
     useEffect(() => {
-        if(settings.length > 0) {
+        if (settings.length > 0) {
             //address
             let finder = settings.find(s => s.key === SETTINGS.ADDRESS);
             setAddress(finder ? finder.value : '');
@@ -51,7 +52,7 @@ const Footer = () => {
             <div className="w-full bg-[#f2f2f2]">
                 <div className="w-9/12 py-8 m-auto">
                     <div className="grid grid-cols-5 gap-4">
-                        <div className="col-span-full xl:col-span-1">
+                        <div className="col-span-full xl:col-span-2">
                             <p className="font-semibold text-xl my-1.5">Tuyến đường</p>
                             <div className="grid grid-cols-1 gap-2.5">
                                 {routes.map(fsi => (
@@ -66,23 +67,19 @@ const Footer = () => {
                                                 route_id: fsi.id
                                             }
                                         });
-                                    }}>{fsi.name}</div>
+                                    }}>Tuyến đường {fsi.name}</div>
+                                ))}
+                            </div>
+                        </div>
+                        <div className="col-span-full xl:col-span-3">
+                            <p className="font-semibold text-xl my-1.5">Tin tức</p>
+                            <div className="grid grid-cols-1 gap-2.5">
+                                {listNews.map(fsi => (
+                                    <div className="col-span-full font-semibold text-sm cursor-pointer" key={fsi.id} onClick={() => navigate(`/news/${fsi.slug}`)}>{fsi.name}</div>
                                 ))}
                             </div>
                         </div>
                         {footerSuggestions.map(fs => {
-                            if (fs.id === 2 || fs.id === 3) {
-                                return (
-                                    <div className="col-span-full xl:col-span-2" key={fs.id}>
-                                        <p className="font-semibold text-xl my-1.5">{fs.title}</p>
-                                        <div className="grid grid-cols-1 gap-2.5">
-                                            {fs.items.map(fsi => (
-                                                <div className="col-span-full font-semibold text-sm cursor-pointer" key={fsi.id}>{fsi.title}</div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )
-                            }
                             if (fs.id === 5) {
                                 return (
                                     <div className="col-span-full xl:col-span-4" key={fs.id}>
@@ -109,7 +106,7 @@ const Footer = () => {
                             }
                         })}
                     </div>
-                    <div className="grid grid-cols-4 gap-4 mt-6">
+                    {/* <div className="grid grid-cols-4 gap-4 mt-6">
                         <div className="col-span-full xl:col-span-1">
                             <p className="font-semibold text-xl my-1.5">Hỗ trợ</p>
                             <div className="grid grid-cols-1 gap-2 5">
@@ -126,7 +123,7 @@ const Footer = () => {
                                 ))}
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
             <div className="w-full bg-white">
@@ -136,11 +133,11 @@ const Footer = () => {
                     <p className="text-[#767676] text-sm">Số điện thoại: {phone}</p>
                     <p className="text-[#767676] text-sm">Email: {email}</p>
                     <a className="flex items-center justify-center cursor-pointer">
-                        <img src={facebook} alt="" className="w-8 h-8"/>
+                        <img src={facebook} alt="" className="w-8 h-8" />
                         <span className="text-[#767676] text-sm">{fb}</span>
                     </a>
                     <a className="flex items-center justify-center cursor-pointer">
-                        <img src={zalo} alt="" className="w-8 h-8"/>
+                        <img src={zalo} alt="" className="w-8 h-8" />
                         <span className="text-[#767676] text-sm">{zl}</span>
                     </a>
                 </div>
