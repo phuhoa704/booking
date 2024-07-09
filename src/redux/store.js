@@ -9,6 +9,7 @@ import routes from './slices/Routes';
 import comments from './slices/Comments';
 import settings from './slices/Settings';
 import address from './slices/Address';
+import pages from './slices/Pages';
 
 export const store = configureStore({
     reducer: {
@@ -21,7 +22,8 @@ export const store = configureStore({
         routes,
         comments,
         settings,
-        address
+        address,
+        pages
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(),
     devTools: process.env.NODE_ENV !== 'production',

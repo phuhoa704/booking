@@ -38,6 +38,7 @@ const Home = () => {
     const [firstPlace, setFirstPlace] = useState(null);
     const [secondPlace, setSecondPlace] = useState(null);
     const [text, setText] = useState('');
+    const [banner, setBanner] = useState('');
     const swiperParams = {
         slidesPerView: 2,
         pagination: {
@@ -70,11 +71,14 @@ const Home = () => {
             //text
             const text = settings.find(s => s.key === SETTINGS.COLOR);
             setText(text ? text.value : '');
+            //banner
+            const banner = settings.find(s => s.key === SETTINGS.SITEBANNER);
+            setBanner(banner ? banner.value : '');
         }
     }, [settings])
     return (
         <>
-            <section className='w-full bg-center bg-cover flex justify-center items-start xl:items-center relative h-smallContainer xl:h-largeContainer pt-16 xl:pt-0' style={{ backgroundImage: `url(${background})` }}>
+            <section className='w-full bg-center bg-cover flex justify-center items-start xl:items-center relative h-smallContainer xl:h-largeContainer pt-16 xl:pt-0' style={{ backgroundImage: `url(${API_STORE}${banner})` }}>
                 <div className="w-full xl:w-8/12 px-2 xl:px-0 text-center">
                     <p className='text-xl xl:text-3xl font-semibold my-4' style={{ color: text ? text : '#fff' }}>Hagiangbusticket - Cam kết hoàn 150% nếu nhà xe không giữ chỗ</p>
                     <div className="w-full bg-white rounded-lg shadow-secondary">

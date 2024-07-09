@@ -9,6 +9,7 @@ export const ROUTER = {
     PAYMENT: '/payment',
     RESULT: '/result',
     NEWS: '/news/:news_slug',
+    PAGES: '/pages/:page_slug',
     //USER ROUTES
     INFO: 'info',
     PASSWORD: 'change-password',

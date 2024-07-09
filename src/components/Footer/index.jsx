@@ -1,30 +1,29 @@
 import { footerSuggestions, footerSupport, footerAbout } from "../../configs/data";
-import cert1 from '../../assets/cert/Desktop_Cert_1.png';
-import cert2 from '../../assets/cert/Desktop_Cert_2.png';
-import cert3 from '../../assets/cert/Desktop_Cert_3.png';
-import partner from '../../assets/payment_partner/payment_partner_desktop.png';
-import qrcode from '../../assets/download/download_app_qr.png';
-import appstore from '../../assets/download/download-app-store.png';
-import chplay from '../../assets/download/download-gg-play.png';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ROUTER } from "../../configs/router";
 import { useEffect, useState } from "react";
 import { SETTINGS } from "../../configs/constants";
 import facebook from '../../assets/icons/facebook.png';
 import zalo from '../../assets/icons/zalo.png';
+import { getPageList } from "../../redux/actions/Pages";
 
 const Footer = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
     const { routes } = useSelector(state => state.routes);
     const { settings } = useSelector(state => state.settings);
     const { listNews } = useSelector(state => state.news);
+    const { pages } = useSelector(state => state.pages);
     const [address, setAddress] = useState('')
     const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('')
     const [fb, setFb] = useState('')
     const [zl, setZl] = useState('')
     const [siteName, setSiteName] = useState('');
+    useEffect(() => {
+        dispatch(getPageList([]))
+    }, [])
     useEffect(() => {
         if (settings.length > 0) {
             //address
@@ -79,51 +78,19 @@ const Footer = () => {
                                 ))}
                             </div>
                         </div>
-                        {footerSuggestions.map(fs => {
-                            if (fs.id === 5) {
-                                return (
-                                    <div className="col-span-full xl:col-span-4" key={fs.id}>
-                                        <p className="font-semibold text-xl my-1.5">{fs.title}</p>
-                                        <div className="grid grid-cols-4 gap-2.5">
-                                            {fs.items.map(fsi => (
-                                                <div className="col-span-2 xl:col-span-1 font-semibold text-sm cursor-pointer" key={fsi.id}>{fsi.title}</div>
-                                            ))}
-                                        </div>
+                        <div className="grid grid-cols-4 gap-4 col-span-full">
+                            {pages.map(p => (
+                                <div className="col-span-full xl:col-span-1" key={p.id}>
+                                    <p className="font-semibold text-xl my-1.5">{p.name}</p>
+                                    <div className="grid grid-cols-1 gap-2.5">
+                                        {p.pages.map(fsi => (
+                                            <div className="col-span-full font-semibold text-sm cursor-pointer" onClick={() => navigate(`/pages/${fsi.slug}`)} key={fsi.id}>{fsi.title}</div>
+                                        ))}
                                     </div>
-                                )
-                            }
-                            if (fs.id === 4) {
-                                return (
-                                    <div className="col-span-full xl:col-span-1" key={fs.id}>
-                                        <p className="font-semibold text-xl my-1.5">{fs.title}</p>
-                                        <div className="grid grid-cols-1 gap-2.5">
-                                            {fs.items.map(fsi => (
-                                                <div className="col-span-full font-semibold text-sm cursor-pointer" key={fsi.id}>{fsi.title}</div>
-                                            ))}
-                                        </div>
-                                    </div>
-                                )
-                            }
-                        })}
+                                </div>
+                            ))}
+                        </div>
                     </div>
-                    {/* <div className="grid grid-cols-4 gap-4 mt-6">
-                        <div className="col-span-full xl:col-span-1">
-                            <p className="font-semibold text-xl my-1.5">Hỗ trợ</p>
-                            <div className="grid grid-cols-1 gap-2 5">
-                                {footerSupport.map(fs => (
-                                    <div className="col-span-full font-semibold text-sm cursor-pointer" key={fs.id}>{fs.title}</div>
-                                ))}
-                            </div>
-                        </div>
-                        <div className="col-span-full xl:col-span-1">
-                            <p className="font-semibold text-xl my-1.5">Về chúng tôi</p>
-                            <div className="grid grid-cols-1 gap-2 5">
-                                {footerAbout.map(fs => (
-                                    <div className="col-span-full font-semibold text-sm cursor-pointer" key={fs.id}>{fs.title}</div>
-                                ))}
-                            </div>
-                        </div>
-                    </div> */}
                 </div>
             </div>
             <div className="w-full bg-white">

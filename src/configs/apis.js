@@ -40,4 +40,7 @@ export const ENDPOINTS = {
     //SETTINGS
     SETTINGSLIST: '/settings',
     SETTINGDETAIL: '/settings/detail', //${key}
+    //PAGES
+    PAGES: '/pages/categories',
+    PAGESDETAIL: '/pages/detail' //${slug}
 }

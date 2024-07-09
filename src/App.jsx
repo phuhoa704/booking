@@ -32,6 +32,7 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import { getSettings } from "./redux/actions/Settings";
 import { getRoutes } from "./redux/actions/Routes";
 import { SETTINGS } from "./configs/constants";
+import PageDetail from "./views/PageDetail";
 
 function App() {
   const dispatch = useDispatch();
@@ -79,6 +80,7 @@ function App() {
         <Route path={ROUTER.PAYMENT} element={<Payment />}/>
         <Route path={ROUTER.RESULT} element={<Result />}/>
         <Route path={ROUTER.NEWS} element={<NewsDetail />}/>
+        <Route path={ROUTER.PAGES} element={<PageDetail />}/>
       </Routes>
     </div>
   )

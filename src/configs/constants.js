@@ -21,5 +21,6 @@ export const SETTINGS = {
     SITEURL: 'site_url',
     SITELOGO: 'site_logo',
     BACKGROUND: 'background_color',
-    COLOR: 'text_color'
+    COLOR: 'text_color',
+    SITEBANNER: 'site_banner'
 }
