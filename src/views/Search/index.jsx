@@ -151,12 +151,6 @@ const Search = () => {
                                 >
                                     <i className="fa-solid fa-bus"></i> Xe khách
                                 </div>
-                                <div
-                                    onClick={() => navigate(ROUTER.RENT)}
-                                    className={`px-3 py-2 mr-3 transition-all duration-300 ease-linear cursor-pointer text-sm xl:text-xl font-semibold ${(activeTab === 2) ? 'text-primary border-primary border-b-2' : ''}`}
-                                >
-                                    <i className="fa-solid fa-taxi"></i> Thuê xe
-                                </div>
                             </div>
                         </div>
                         <div className="grid grid-cols-5 gap-2.5 w-full relative border-t border-[#ddd] py-3.5 px-3 dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary">
