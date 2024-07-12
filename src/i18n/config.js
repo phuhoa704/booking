@@ -25,6 +25,7 @@ import {
   payment_en,
   result_en,
 } from "./locales/en";
+import Backend from "i18next-http-backend";
 import LanguageDetector from "i18next-browser-languagedetector";
 
 const defaultLanguage = "en";
@@ -56,21 +57,20 @@ export const resources = {
   },
 };
 
-i18n
-  .use(initReactI18next)
-  .use(LanguageDetector)
-  .init({
-    resources,
-    fallbackLng: defaultLanguage,
-    interpolation: {
-      escapeValue: false,
-    },
-  });
-
 export const Language = {
   en: "en",
   vi: "vi",
 };
+
+i18n
+  .use(Backend)
+  .use(LanguageDetector)
+  .use(initReactI18next)
+  .init({
+    resources,
+    fallbackLng: defaultLanguage,
+    supportedLngs: [Language.en, Language.vi],
+  });
 
 export const getLanguage = () => {
   return i18n.language || defaultLanguage;
