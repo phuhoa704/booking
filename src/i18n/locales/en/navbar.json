@@ -6,5 +6,12 @@
   "hotline": "Hotline 24/7",
   "book_by_email": "To book tickets via email",
   "book_by_phone": "To book tickets by phone",
-  "login": "Login"
+  "login": "Login",
+  "account_info": "Account information",
+  "regular_member": "Regular member",
+  "my_ticket": "My ticket",
+  "promotions": "Promotions",
+  "card_management": "Card management",
+  "trip_review": "Trip review",
+  "logout": "Logout"
 }

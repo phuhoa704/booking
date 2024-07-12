@@ -6,5 +6,12 @@
   "hotline": "Đường dây nóng 24/7",
   "book_by_email": "Để đặt vé qua email",
   "book_by_phone": "Để đặt vé qua điện thoại",
-  "login": "Đăng nhập"
+  "login": "Đăng nhập",
+  "account_info": "Thông tin tài khoản",
+  "regular_member": "Thành viên thường",
+  "my_ticket": "Vé của tôi",
+  "promotions": "Ưu đãi",
+  "card_management": "Quản lý thẻ",
+  "trip_review": "Nhận xét chuyến đi",
+  "logout": "Đăng xuất"
 }

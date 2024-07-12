@@ -37,53 +37,53 @@ const Navbar = () => {
   const { user } = useSelector((state) => state.auth);
   const { settings } = useSelector((state) => state.settings);
   //
-  const [userDropdown] = useState([
+  const userDropdown = [
     {
       id: 1,
-      name: "Thông tin tài khoản",
+      name: tNavbar("account_info"),
       icon: <i className="fa-regular fa-user"></i>,
       onClick: () => navigate(`${ROUTER.USER}/${ROUTER.INFO}`),
     },
     {
       id: 2,
-      name: "Thành viên thường",
+      name: tNavbar("regular_member"),
       icon: <i className="fa-solid fa-tags"></i>,
       onClick: () => navigate(`${ROUTER.USER}/${ROUTER.MEMBER}`),
     },
     {
       id: 3,
-      name: "Vé của tôi",
+      name: tNavbar("my_ticket"),
       icon: <i className="fa-solid fa-ticket"></i>,
       onClick: () => navigate(`${ROUTER.USER}/${ROUTER.MYTICKET}`),
     },
     {
       id: 4,
-      name: "Ưu đãi",
+      name: tNavbar("promotions"),
       icon: <i className="fa-solid fa-gift"></i>,
       onClick: () => navigate(`${ROUTER.USER}/${ROUTER.PREFERENTIAL}`),
     },
     {
       id: 5,
-      name: "Quản lý thẻ",
+      name: tNavbar("card_management"),
       icon: <i className="fa-solid fa-credit-card"></i>,
       onClick: () => navigate(`${ROUTER.USER}/${ROUTER.CREDITS}`),
     },
     {
       id: 6,
-      name: "Nhận xét chuyến đi",
+      name: tNavbar("trip_review"),
       icon: <i className="fa-solid fa-square-pen"></i>,
       onClick: () => navigate(`${ROUTER.USER}/${ROUTER.EVALUATION}`),
     },
     {
       id: 7,
-      name: "Đăng xuất",
+      name: tNavbar("logout"),
       icon: <i className="fa-solid fa-right-from-bracket"></i>,
       onClick: () => {
         dispatch(logout());
         navigate(ROUTER.HOME);
       },
     },
-  ]);
+  ];
 
   const currentLanguage = i18n.language;
 
@@ -272,7 +272,7 @@ const Navbar = () => {
                 className="absolute bottom-0 w-44 z-20 bg-white translate-x-[-90px] xl:translate-x-[-135px] translate-y-[240px] rounded shadow-lg p-2"
                 style={{ display: dropdown ? "block" : "none" }}
               >
-                <ul className="text-sm">
+                <ul className="text-sm capitalize">
                   {userDropdown.map((u) => (
                     <li
                       key={u.id}
