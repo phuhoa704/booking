@@ -1,0 +1,22 @@
+{
+  "payment_method": "Phương thức thanh toán",
+  "qr_transfer_title": "QR Chuyển khoản/Ví điện tử",
+  "qr_transfer_description": "An toàn và tiện lợi",
+  "qr_transfer_details": "Không cần nhập thông tin. Xác nhận thanh toán tức thì, nhanh chóng và ít sai sót.",
+  "cash_payment_title": "Thanh toán tại nhà xe/khi lên xe",
+  "cash_payment_description": "Bạn có thể thanh toán cho tài xế khi lên xe.",
+  "contact_info": "Thông tin liên hệ",
+  "passenger": "Hành khách",
+  "phone_number": "Số điện thoại",
+  "total_amount": "Tổng tiền",
+  "ticket_price": "Giá vé",
+  "trip_info_title": "Thông tin chuyến đi",
+  "trip_info_updating": "Đang cập nhật",
+  "trip_info_details": "Chi tiết",
+  "booking_confirmation_title": "Xác nhận đặt vé",
+  "booking_confirmation_message": "Bạn sẽ sớm nhận được biển số xe, số điện thoại tài xế và dễ dàng thay đổi điểm đón trả sau khi đặt.",
+  "agreement_message": "Bằng việc nhấn nút Tiếp tục, bạn đồng ý với",
+  "payment_privacy_policy": "Chính sách bảo mật thanh toán",
+  "terms_and_conditions": "Quy chế",
+  "updating": "Đang cập nhật"
+}

@@ -1,0 +1,10 @@
+export { default as home_en } from "./home.json";
+export { default as footer_en } from "./footer.json";
+export { default as ticket_en } from "./ticket.json";
+export { default as user_info_en } from "./user_info.json";
+export { default as rent_en } from "./rent.json";
+export { default as confirmation_en } from "./confirmation.json";
+export { default as navbar_en } from "./navbar.json";
+export { default as search_en } from "./search.json";
+export { default as payment_en } from "./payment.json";
+export { default as result_en } from "./result.json";

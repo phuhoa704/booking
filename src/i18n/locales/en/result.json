@@ -1,0 +1,19 @@
+{
+  "booking_successful": "Đặt chỗ thành công",
+  "ticket_info_sent": "Chúng tôi đã gửi thông tin vé đến SĐT",
+  "and_email": "và email",
+  "please_check_carefully": "bạn hãy kiểm tra thật kỹ nhé !",
+  "code": "Mã",
+  "full_name": "Họ và tên",
+  "phone_number": "Số điện thoại",
+  "booking_date": "Ngày đặt",
+  "total_amount": "Tổng tiền",
+  "route": "Tuyến đường",
+  "price": "Giá tiền",
+  "pickup_point": "Điểm đón",
+  "dropoff_point": "Điểm trả",
+  "homepage": "Trang chủ",
+  "updating": "Đang cập nhật",
+  "number_of_seats": "Số ghế",
+  "vehicle_type": "Loại xe"
+}

@@ -1,0 +1,19 @@
+{
+  "booking_successful": "Booking Successful",
+  "ticket_info_sent": "We have sent the ticket information to your phone number",
+  "and_email": "and email",
+  "please_check_carefully": "please check carefully!",
+  "code": "Code",
+  "full_name": "Full Name",
+  "phone_number": "Phone Number",
+  "booking_date": "Booking Date",
+  "total_amount": "Total Amount",
+  "route": "Route",
+  "price": "Price",
+  "pickup_point": "Pickup Point",
+  "dropoff_point": "Drop-off Point",
+  "homepage": "Homepage",
+  "updating": "Updating",
+  "number_of_seats": "Number of seats",
+  "vehicle_type": "Vehicle type"
+}

@@ -1,0 +1,22 @@
+{
+  "payment_method": "Payment Method",
+  "qr_transfer_title": "QR Transfer/E-wallet",
+  "qr_transfer_description": "Safe and convenient",
+  "qr_transfer_details": "No need to enter information. Instant payment confirmation, fast and with fewer errors.",
+  "cash_payment_title": "Pay at the bus station/when boarding",
+  "cash_payment_description": "You can pay the driver when boarding the vehicle.",
+  "contact_info": "Contact Information",
+  "passenger": "Passenger",
+  "phone_number": "Phone Number",
+  "total_amount": "Total Amount",
+  "ticket_price": "Ticket Price",
+  "trip_info_title": "Trip Information",
+  "trip_info_updating": "Updating",
+  "trip_info_details": "Details",
+  "booking_confirmation_title": "Booking Confirmation",
+  "booking_confirmation_message": "You will soon receive the vehicle's license plate, driver's phone number, and can easily change pick-up and drop-off points after booking.",
+  "agreement_message": "By clicking Continue, you agree to the",
+  "payment_privacy_policy": "Payment Privacy Policy",
+  "terms_and_conditions": "Terms and Conditions",
+  "updating": "Updating"
+}
