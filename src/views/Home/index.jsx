@@ -92,13 +92,13 @@ const Home = () => {
       >
         <div className="w-full xl:w-8/12 px-2 xl:px-0 text-center">
           <p
-            className="text-xl xl:text-3xl font-semibold my-4"
+            className="text-base xl:text-3xl font-semibold my-4"
             style={{ color: text ? text : "#fff" }}
           >
             {tHome("title")}
           </p>
           <div className="w-full bg-white rounded-lg shadow-secondary">
-            <div className="flex justify-center py-3">
+            <div className="flex justify-center">
               <div className="flex pt-1.5 md:pt-0 xl:pt-3">
                 <div
                   onClick={() => setActiveTab(1)}

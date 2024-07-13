@@ -39,7 +39,7 @@ export default {
       },
       height: {
         largeContainer: 'calc(90vh - 180px)',
-        smallContainer: 'calc(85vh - 180px)',
+        smallContainer: 'calc(100vh - 180px)',
         rentPageContainer: 'calc(100vh - 72px)'
       },
       width: {
