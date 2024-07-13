@@ -29,6 +29,7 @@ import PopularRoad from "../../components/PopularRoad";
 import { SETTINGS } from "../../configs/constants";
 import { useTranslation } from "react-i18next";
 import { useLocalizedFields } from "../../hooks/useLocalizedFields";
+import { Toast } from "../../components/Alert/Toast";
 
 const Home = () => {
   const { t: tHome, i18n } = useTranslation("home");
@@ -193,42 +194,49 @@ const Home = () => {
                 <button
                   className="bg-[#ffd333] py-2.5 text-center w-full rounded"
                   onClick={() => {
-                    dispatch(
-                      saveSearchParams({
-                        page: 1,
-                        page_size: 10,
-                        departure_province_id: firstPlace
-                          ? firstPlace.value
-                          : "",
-                        return_province_id: secondPlace
-                          ? secondPlace.value
-                          : "",
-                        start_date: startDate
-                          ? moment(new Date(startDate)).format("YYYY-MM-DD")
-                          : "",
-                        end_date: endDate
-                          ? moment(new Date(endDate)).format("YYYY-MM-DD")
-                          : "",
-                        sort: "asc_time",
+                    if(startDate) {
+                      dispatch(
+                        saveSearchParams({
+                          page: 1,
+                          page_size: 10,
+                          departure_province_id: firstPlace
+                            ? firstPlace.value
+                            : "",
+                          return_province_id: secondPlace
+                            ? secondPlace.value
+                            : "",
+                          start_date: startDate
+                            ? moment(new Date(startDate)).format("YYYY-MM-DD")
+                            : "",
+                          end_date: endDate
+                            ? moment(new Date(endDate)).format("YYYY-MM-DD")
+                            : "",
+                          sort: "asc_time",
+                        })
+                      );
+                      navigate(ROUTER.SEARCH, {
+                        state: {
+                          departure_province_id: firstPlace
+                            ? firstPlace.value
+                            : "",
+                          return_province_id: secondPlace
+                            ? secondPlace.value
+                            : "",
+                          start_date: startDate
+                            ? moment(new Date(startDate)).format("YYYY-MM-DD")
+                            : "",
+                          end_date: endDate
+                            ? moment(new Date(endDate)).format("YYYY-MM-DD")
+                            : "",
+                          sort: "asc_time",
+                        },
+                      });
+                    } else {
+                      Toast.fire({
+                        title: 'Vui lòng chọn ngày bắt đầu',
+                        icon: 'error'
                       })
-                    );
-                    navigate(ROUTER.SEARCH, {
-                      state: {
-                        departure_province_id: firstPlace
-                          ? firstPlace.value
-                          : "",
-                        return_province_id: secondPlace
-                          ? secondPlace.value
-                          : "",
-                        start_date: startDate
-                          ? moment(new Date(startDate)).format("YYYY-MM-DD")
-                          : "",
-                        end_date: endDate
-                          ? moment(new Date(endDate)).format("YYYY-MM-DD")
-                          : "",
-                        sort: "asc_time",
-                      },
-                    });
+                    }
                   }}
                 >
                   <span className="font-semibold">{tHome("search")}</span>

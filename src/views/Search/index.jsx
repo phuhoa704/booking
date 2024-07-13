@@ -112,6 +112,7 @@ const Search = () => {
       );
     }
   }, [state]);
+  console.log({firstPlace, secondPlace});
   return (
     <>
       <Modal
@@ -152,11 +153,11 @@ const Search = () => {
                 onClick={() => setModalSearch(true)}
               >
                 <div className="font-semibold flex items-center gap-1.5">
-                  Hà Nội
+                  {firstPlace ? firstPlace.label : ''}
                   <FaLongArrowAltRight />
-                  Hải Phòng
+                  {secondPlace ? secondPlace.label : ''}
                 </div>
-                <div className="text-sm">CN, 01/06/2024</div>
+                <div className="text-sm">{state.start_date ? moment(new Date(state.start_date)).format("YYYY-MM-DD") : ''} - {state.end_date ? moment(new Date(state.end_date)).format("YYYY-MM-DD") : ''}</div>
               </div>
             </div>
             <div
